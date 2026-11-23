@@ -30,8 +30,9 @@ mkdir -p "$LOG_DIR"
 OUT_FILE="${LOG_DIR}/${TASK_SLUG}_output.md"
 META_FILE="${LOG_DIR}/${TASK_SLUG}_stdout.log"
 
-if [ "$(realpath "$PROMPT_FILE")" != "$(realpath -m "${LOG_DIR}/${TASK_SLUG}_prompt.md" 2>/dev/null || echo "")" ]; then
-  cp "$PROMPT_FILE" "${LOG_DIR}/${TASK_SLUG}_prompt.md"
+DEST_PROMPT="${LOG_DIR}/${TASK_SLUG}_prompt.md"
+if [ ! "$PROMPT_FILE" -ef "$DEST_PROMPT" ]; then
+  cp "$PROMPT_FILE" "$DEST_PROMPT"
 fi
 
 "$CODEX_BIN" exec \
