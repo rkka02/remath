@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
+codex_logs/ping_test.md
+*.aux
+*.log
+*.out
+*.toc
+.lake/
