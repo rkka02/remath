@@ -73,3 +73,8 @@
   - Reason: approaching an integer retains spectral **derivative** information, which is lost discontinuously at exact integer shift!
 - **Symmetry-Breaking Collapse**: Tilting one vertex of the square by $\varepsilon$ lifts all 4 two-sided invisible modes linearly off zero with exact initial singular-value slopes $169.53, 6.93, 6.93, 0.549$.
 - **Next**: Generate high-resolution visual gallery (`figures/`) and write both an accessible "오오!" non-specialist story (`docs/DISCOVERY_GUIDE_KR.md`) and a rigorous preprint-style mathematical paper (`docs/PAPER_LEONTIEV_INVISIBLE_LOADS.md`), updating `README.md` and committing everything cleanly.
+
+## 2026-11-23 — Phase 4 Visualization, Reports & Final Git Archive Complete
+- Generated and visually audited 4 high-resolution multi-panel figures (`experiments/generate_figures.py` $\to$ `figures/fig1..fig4_*.png`).
+- Wrote accessible Korean discovery report (`docs/DISCOVERY_STORY_KR.md`), formal English technical paper (`docs/PAPER_LEONTIEV_INVISIBLE_LOADS.md`), and updated `README.md`.
+- All 31 Lean 4.36.0 theorems verified (`0 sorry`, `0 warnings`, standard axioms only), all Python 65/80/100/132-digit probes passing, all 8 primary source PDFs preserved, and complete git history committed cleanly.
