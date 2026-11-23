@@ -1,5 +1,7 @@
 # ReMath: Excavating A. F. Leont'ev's *Series of Exponentials* (*Ряды экспонент*)
 
+> **Interactive Research Brief & Visual Archive**: [https://rkka02.github.io/studies/01-leontiev-invisible-loads/](https://rkka02.github.io/studies/01-leontiev-invisible-loads/)
+>
 > **Mathematical Archaeology & Original Discovery Repository**
 > Reviving A. F. Leont'ev's untranslated Soviet Ufa/Moscow theory of exponential series on convex polygons (1969–1987), bridging it to A. S. Fokas's modern Unified Transform Method, proving a universal classification of invisible physical loads and angle-dependent corner recovery laws, and machine-verifying the algebraic/minimax core in **Lean 4.36.0**.
 
