@@ -1,0 +1,1127 @@
+
+--- PAGE 1 ---
+arXiv:1209.1584v2  [math.AP]  10 Sep 2012
+The spectral Dirichlet-Neumann map for Laplace’s
+equation in a convex polygon
+Anthony Ashton
+DAMTP,
+University of Cambridge.
+E-mail: a.c.l.ashton@damtp.cam.ac.uk
+AMS classiﬁcation scheme numbers: 35J25, 30H99, 45Q05
+Abstract.
+We provide a new approach to studying the Dirichlet-Neumann map for
+Laplace’s equation on a convex polygon using Fokas’ uniﬁed method for boundary value
+problems. By exploiting the complex analytic structure inherent in the uniﬁed method,
+we provide new proofs of classical results using mainly complex analytic techniques.
+The analysis takes place in a Banach space of complex valued, analytic functions and
+the methodology is based on classical results from complex analysis. Our approach
+gives way to new numerical treatments of the underlying boundary value problem and
+the associated Dirichlet-Neumann map. Using these new results we provide a family
+of well-posed weak problems associated with the Dirichlet-Neumann map, and prove
+relevant coercivity estimates so that standard techniques can be applied.
+
+--- PAGE 2 ---
+The spectral Dirichlet-Neumann map for Laplace’s equation in a convex polygon
+2
+1. Introduction
+In the last twelve years there has been a rapid development of the so-called Fokas
+method for boundary value problems [13]. This method was initially developed for the
+study of boundary value problems associated with integrable nonlinear PDEs [9, 11, 12].
+Remarkably, the method has proved an extremely powerful tool in the study of linear
+boundary value problems [8, 10] and has oﬀered new avenues of pursuit in the numerical
+study of such problems [14, 15, 25, 26].
+The Fokas method can be informally considered as the Fourier analogue of the
+classical boundary integral methods [17, 19]. In the latter case, the analysis is done in
+the “physical” space – i.e. the space associated with the domain on which the boundary
+value problem is posed. In the Fokas approach the analysis is done in “spectral” space
+and the classical boundary integral equations are replaced with the global relation. Like
+the usual boundary integral equations from potential theory, the global relation gives a
+relationship between the known boundary data and the unknown boundary values for
+a given PDE. However, the form of the integral equation is very diﬀerent: the global
+relation has meromorphic dependence on a spectral parameter which plays the analogue
+of the wave number in Fourier analysis. The Dirichlet and Neumann terms that arise
+in boundary integral equations have spectral analogues that arise in the global relation.
+The fact that the spectral boundary data has meromorphic dependence on the spectral
+parameter allows for use of powerful tools from complex analysis and this salient feature
+is one of the core reasons behind the success of the Fokas method.
+Another major ingredient in the Fokas approach is the use of novel integral
+representations. By formulating and solving Riemann-Hilbert problems related to the
+underlying boundary value problem, Fokas has developed a means of representing the
+solution to many important problems. These integral representations are intimately
+related to the classical fundamental principle of Ehrenpreis and Palamodov [6, 20].
+A direct consequence of this highly abstract result is that any solution to a constant
+coeﬃcient PDE on a convex domain can be written as a superposition of exponential
+solutions. More concretely, if P = P(−i∂/∂x1, . . . , −i∂/∂xN) is a constant coeﬃcient
+diﬀerential operator and Pu = 0 in a convex domain in RN, then the fundamental
+principle states that u can be represented in the form
+u(x) =
+Z
+ZP
+c(x, λ)eiλ·xdµ(λ)
+where ZP =
+
+λ ∈CN : P(λ) = 0
+	
+and c(x, ·) is a polynomial in x such that c(x, λ)eiλ·x
+for λ ∈ZP solves Pu = 0.
+This theorem is highly abstract and non-constructive.
+The result states that there exists a measure dµ supported on ZP and a collection
+of exponential solutions c(λ, x)eiλ·x such that the representation holds.
+Fokas’ novel
+integral representations are realisations of this abstract result – providing an explicit
+expression that is precisely a superposition of exponential solutions.
+These integral
+representations must, of course, contain terms relating to the known boundary data.
+The novelty lies in the fact that these terms arise in the same form as they do in the
+
+--- PAGE 3 ---
+The spectral Dirichlet-Neumann map for Laplace’s equation in a convex polygon
+3
+global relation. This means there should be no need to go back and fourth between
+physical space and spectral space – it is suﬃcient to understand the global relation in
+spectral space and give the solution in terms of integrals of spectral functions by means
+of the novel integral representation.
+The implementation of the Fokas method has been largely formal in nature. One
+usually works on the assumption that a solution to the underlying problem exists and
+aims to construct it by analysing the global relation. This assumption can then be
+checked a posteriori. Recently more rigorous results have been obtained [2, 3, 4]. In
+this paper we continue to address rigorous aspects of the Fokas approach.
+We concern ourselves with the particular case of Laplace’s equation in a convex
+polygon.
+For Dirichlet data with square integrable tangential derivatives along the
+edges of Ω, we prove the following results (more precise versions of which can be found
+in Theorems 2, 3 and their corollaries)
+(I) The global relation deﬁnes a continuous linear map from the spectral Dirichlet
+Data to the spectral Neumann data.
+(II) The resulting physical Neumann data is square integrable along each edge.
+(III) The global relation gives rise to an inﬁnite family of well-posed weak problems
+that are easily approximated using standard Galerkin techniques.
+As a corollary to statements (I)–(III) we get a new proof of existence for the classical
+Dirichlet problem in a convex polygon for boundary data in H1(∂Ω) [27]. The statement
+in (II) is in accordance with the well known regularity of the Steklov-Poincare operator
+on Lipschitz domains [19]. In proving (III) we provide a basis from which the previous
+numerical studies [14, 15, 25, 26] can be made rigorous. The methods presented here
+can easily be adapted to deal with the Neumann boundary value problem. In this case
+similar statements (I)–(III) hold, but with the Dirichlet data being determined modulo
+constants.
+The approach we use is far removed from the classical methods boundary integral
+and more modern pseudodiﬀerential methods. The analysis takes place Banach space of
+complex analytic functions and the main ingredients in our proofs are complex analytic
+in nature, utilising the classical theorems of Liouville, Montel, Phragm´en and Lindel¨of.
+2. The Global Relation for Convex Polygons
+We work on a polygon Ω⊂R2 ≃C with vertices {zi}n
+i=1 and sides Γi = (zi, zi+1) with
+zn+1 = z1. We write αi = arg(zi+1 −zi) for the angle the side Γi makes with the positive
+real axis and ∆ij = αi −αj. Also set 2σi = |Γi| for the length of the side Γi.
+We are given real valued boundary data fi ∈H1(Γi) for i = 1, . . . , n, meaning
+that fi and its ﬁrst tangential derivative are square integrable along the edge Γi. We are
+interested in the Dirichlet-Neumann map associated with the classical Dirichlet problem
+∆q = 0
+in Ω,
+(1a)
+q = fi
+on Γi for i = 1, . . . , n.
+(1b)
+
+--- PAGE 4 ---
+The spectral Dirichlet-Neumann map for Laplace’s equation in a convex polygon
+4
+That is to say, we want to reconstruct the unknown Neumann boundary values from
+the known Dirichlet boundary data.
+In practical applications the more physically relevant quantity in (1) is the gradient
+ﬁeld, ∇q = (∂q/∂x, ∂q/∂y), or equivalently the complex derivative ∂q/∂z with z = x+iy.
+In [8] it was shown that any solution to (1a) has an integral representation
+∂q
+∂z = 1
+2π
+n
+X
+i=1
+Z
+ℓi
+eiλzρi(λ) dλ
+(2)
+where the spectral functions {ρi(λ)}n
+i=1 are deﬁned by
+ρi(λ) =
+Z
+Γi
+e−iλz′ ∂q
+∂z′ dz′
+(3)
+and the {ℓi}n
+i=1 are rays in the complex plane orientated out towards inﬁnity with
+arg(λ|ℓi) = −αi. The spectral functions satisfy the global relation
+n
+X
+i=1
+ρi(λ) = 0.
+(4)
+Note that the spectral functions (3) contain information about the known boundary
+data {fi}n
+i=1 and the unknown boundary values since ∂q/∂z′ involves derivatives in the
+tangential and normal directions along Γi. We can interpret (2) as a formal solution
+to (1) if we assume the spectral functions satisfy the global relation (4). Our aim is
+to solve (4) for the unknown parts of the spectral functions which contain information
+about the unknown normal derivatives.
+It was shown in [15] (c.f. [3, 4]) that on the assumption that the global relation
+(4) is satisﬁed, the integral representation (2) provides a solution to the boundary value
+problem (1). This is important from both the theoretical and practical point of view – it
+means that solving the global relation for the unknown parts of the spectral functions is
+equivalent to solving the boundary value problem (1). By describing the global relation
+(4) as a map between function spaces for the spectral functions, we are able to provide
+existence, uniqueness and stability results for the solution to the global relation. Perhaps
+more importantly, this gives a means for the practical numerical solution to the global
+relation for the unknown parts of the spectral functions.
+It will be convenient to have a local description of the edges Γi. Let us introduce
+the local parametrisations ψi : [−σi, σi] →Γi with
+ψi(τ) =
+1
+2σi
+h
+(σi + τ)zi+1 + (σi −τ)zi
+i
+≡mi + τeiαi
+where mi = 1
+2(zi + zi+1) is the mid-point of the side Γi. For a function f : Γi →C
+we write its pullback by ψi by ψ∗
+i (f)(τ) = f(ψ(τ)). Using this notation the spectral
+functions are written
+ρi(λ) = e−iλmi
+Z σi
+−σi
+eiαiψ∗
+i
+∂q
+∂z
+
+(τ)e−iλeiαiτ dτ.
+We note that
+∂q
+∂z
+
+Γi = 1
+2e−iαi
+∂q
+∂t + i ∂q
+∂n
+ 
+Γi
+
+--- PAGE 5 ---
+The spectral Dirichlet-Neumann map for Laplace’s equation in a convex polygon
+5
+where ∂/∂t and ∂/∂n denote the tangential and outward normal derivatives along Γi.
+Setting ϕt
+i = ψ∗
+i (∂q/∂t) and ϕn
+i = ψ∗
+i (∂q/∂n) we can write the spectral functions as
+ρi(λ) = e−iλmi
+2
+h
+ˆϕt
+i(eiαiλ) + i ˆϕn
+i (eiαiλ)
+i
+where we have deﬁned the Fourier transform
+F : ϕi 7→ˆϕi(λ) =
+Z σi
+−σi
+e−iλτϕi(τ) dτ.
+The global relation then takes the form
+n
+X
+i=1
+e−iλmih
+ˆϕn
+i (eiαiλ) −i ˆϕt
+i(eiαiλ)
+i
+= 0
+(5)
+which holds for all λ ∈C. It will be convenient to have a more symmetric form of the
+global relation. To this end, ﬁx some i ∈{1, . . . , n}. Multiply (5) by eiλmi and replace
+λ with λe−iαi. We ﬁnd
+h
+ˆϕn
+i (λ) −i ˆϕt
+i(λ)
+i
++
+X
+j̸=i
+eie−iαiλ(mi−mj)h
+ϕn
+j (e−i∆ijλ) −i ˆϕt
+j(e−i∆ijλ)
+i
+= 0,
+for each 1 ≤i ≤n. Set Φn = ( ˆϕn
+1, . . . , ˆϕn
+n)t, Φt = ( ˆϕt
+1, . . . , ˆϕt
+n)t and introduce the
+operator T = I + K, where I is the identity and K is the linear operator deﬁned by
+Φi(λ) 7→(KΦ)i(λ) =
+X
+j̸=i
+eie−iαi(mi−mj)λΦj(e−i∆ijλ),
+1 ≤i ≤n.
+(6)
+Then the global relation can be written succinctly as
+T(Φn −iΦt) = 0,
+λ ∈C.
+(7)
+Each of these n equations are equivalent to the original global relation (5). The vectors
+Φt(λ) and Φn(λ) contain the spectral boundary data, which in this case is just the
+Fourier transform of the original functions. In what follows we characterise spectral
+Dirichlet-Neumann map Φt 7→Φn deﬁned by (7).
+3. The Real and Complex Paley-Wiener Spaces
+Here we discuss the relevant function spaces that will be used in the sequel and cement
+some of our notation.
+The global relation for Laplace’s equation has been given in (7). The components
+{ ˆϕt
+i}n
+i=1 of the known vector Φt are are related to the derivatives of the Dirichlet data
+fi ∈H1(Γi), and we have ϕt
+i ∈L2[−σi, σi] for i = 1, . . . , n. The global relation contains
+the Fourier transform of this data. It is natural then to work with the classical Paley-
+Wiener spaces
+PW σi = FL2[−σi, σi],
+which contain the Fourier transforms of square integrable functions whose support is
+contained in the interval [−σi, σi]. The classical Paley-Wiener theorem states
+PW σi =
+n
+f : C →C entire,
+Z ∞
+−∞
+|f(x)|2 dx < ∞, |f(λ)| ≲ǫ eσi(|λ|+ǫ) ∀ǫ > 0
+o
+,
+
+--- PAGE 6 ---
+The spectral Dirichlet-Neumann map for Laplace’s equation in a convex polygon
+6
+i.e. the space PW σi consists of entire functions of exponential type σi whose restrictions
+to the real axis are square integrable. Paley-Wiener functions satisfy the important
+pointwise inequality
+|f(z0)| ≲∥f∥2eσ|z0|,
+f ∈PW σ.
+We will refer to this as the Paley-Wiener inequality. For a standard treatment of the
+Paley-Wiener spaces we refer the reader to [5, 18, 21, 24].
+It will be convenient to work with slightly modiﬁed versions of the Paley-Wiener
+space. In the general setting of the Paley-Wiener theorem the space L2[−σi, σi] refers
+to complex valued, square integrable functions. However, our data will be manifestly
+real. Hence forth we shall use L2
+R[−σi, σi] to denote the space of real valued, square
+integrable functions. We will then work on
+PW σi
+sym = FL2
+R[−σi, σi],
+where the subscript “sym” refers to symmetric. The reason for this is highlighted in the
+following simple lemma.
+Lemma 1. The space PW σi
+sym is a closed subspace of PW σi whose members obey the
+symmetry condition
+f(λ) = f ⋆(λ) ≡f(−λ)
+for all λ ∈C.
+Proof. That PW σi
+sym is closed in PW σi is clear. In addition, if f ∈FL2
+R[−σi, σi] then
+the symmetry condition is satisﬁed. Conversely, if f ∈PW σi and obeys the symmetry
+condition then
+0 = f(λ) −f(−λ) =
+Z σi
+−σi
+e−iλτ
+g(τ) −g(τ)
+
+dτ
+for some g ∈L2[−σi, σi].
+But then the Fourier inversion theorem implies that
+g ∈L2
+R[−σi, σi], so f ∈FL2
+R[−σi, σi].
+Remark 1. It is clear that the classical Paley-Wiener space can be decomposed as
+PW σi = PW σi
+sym ⊕PW σi
+asym
+where the latter space consists of Fourier transforms of imaginary valued, square
+integrable functions. The characterisation of this space is given by an anti-symmetry
+condition, where an extra minus sign appears.
+It is well-known [24, Ch. 6] that PW σi is a closed subspace of L2(R). It follows
+that PW σi is a Hilbert space when equipped with inner product
+(f1, f2) =
+Z ∞
+−∞
+f1(x)f2(x) dx.
+The same is true of PW σi
+sym with this inner-product. This means that one can treat
+PW σi
+sym as a closed subspace of L2(R) whose elements have an analytic extension to the
+
+--- PAGE 7 ---
+The spectral Dirichlet-Neumann map for Laplace’s equation in a convex polygon
+7
+entire complex plane which is of exponential type σi and obeys the necessary symmetry
+condition.
+We introduce the function space X = PW σ1 × · · · × PW σn with norm
+∥Φ∥X =
+ n
+X
+i=1
+Z ∞
+−∞
+|Φi(λ)|2 dλ
+!1/2
+≡
+ n
+X
+i=1
+∥Φi∥2
+2
+!1/2
+.
+where here and throughout ∥· ∥2 denotes the usual L2 norm on the real line. Using the
+decomposition PW σi = PW σi
+sym ⊕PW σi
+asym we may write X as
+X = Xsym ⊕Xasym.
+It will be convenient to regard Xsym as the “real part” of X, while Xasym is the “imaginary
+part”. Both are Banach spaces in their own right when equipped with the norm ∥· ∥X.
+Also set Y = L2(R−)×n with norm
+∥Φ∥Y =
+ n
+X
+i=1
+Z 0
+−∞
+|Φi(λ)|2 dλ
+!1/2
+≡
+ n
+X
+i=1
+∥Φi∥2
+2,−
+!1/2
+,
+where here and throughout ∥· ∥2,−denotes the usual L2 norm on the negative real axis.
+It is straightforward to show that ∥· ∥X and ∥· ∥Y are equivalent norms on Xsym and
+Xasym owning to the symmetry and anti-symmetry properties of the elements of the
+respective spaces. We note the isomorphism X ≃L2(∂Ω). Each of Xsym, Xasym and Y
+are Hilbert spaces when equipped with the appropriate inner product, but we shall only
+need their Banach space structure.
+We will often refer to the Fourier transform of an L2(R) function, and this is to
+be understood in the limit-in-the-mean sense [22]. If T : U →V is a continuous linear
+map between normed spaces we write T ∈L(U, V ). A norm-bounded subset S of a
+normed space U is one in which there is some constant C such that ∥u∥≤C for each
+u ∈S ⊂U.
+4. Some Functional-Analytic Results
+Here we prove some functional-analytic results for the Paley-Wiener spaces which will
+prove useful for the purposes of studying the spectral Dirichlet-Neumann map.
+Throughout this section X will denote an arbitrary measure space with positive
+measure µ. We use Lp(X , µ) with p ∈[1, ∞) to denote the Banach space of (equivalence
+classes of) complex valued measurable functions on X with norm
+f 7→
+Z
+X
+|f|p dµ
+1/p
+.
+The following theorem will be of particular importance when studying the continuity of
+the Dirichlet-Neumann map, but seems of interest in its own right.
+Theorem 1. Let T : PW σ →Lp(X , µ) be a continuous linear operator. Suppose also
+that T is also continuous with respect to the topology of point-wise convergence, i.e. if
+
+--- PAGE 8 ---
+The spectral Dirichlet-Neumann map for Laplace’s equation in a convex polygon
+8
+{fn}n≥1 is a sequence in PW σ and fn →f pointwise, then Tfn →Tf pointwise in
+Lp(X , µ). Then T has closed range.
+The proof of requires the following “pseudo-compactness” lemma which which will
+be of use throughout the paper.
+Lemma 2. Any norm-bounded sequence in PW σ contains a subsequence that converges
+pointwise and locally uniformly to an element of PW σ that obeys the same norm bound.
+Proof. Let {fn}n≥1 be norm bounded in PW σ. Then using the inequality Paley-Wiener
+inequality |f(z0)| ≤eσ|z0|∥f∥2 we deduce that the sequence {fn}n≥1 is locally uniformly
+bounded, i.e. for each compact K ⊂C we have supK |fn(z)| ≤CK for some constant
+CK. By Montel’s theorem, we can extract a convergent subsequence that converges
+pointwise, locally uniformly to some analytic function. Let {fnk}k≥1 be this subsequence
+so that for each compact K
+lim
+k→∞sup
+K
+|fnk(z) −f(z)| = 0
+for some analytic function f. We claim that f ∈X with the same norm bound. First,
+note that f is certainly of exponential type σ. Indeed, if we ﬁx R > 0 and choose k
+suﬃciently large so that |f(z) −fnk(z)| ≤1/R for |z| ≤R we have
+sup
+|z|≤R
+|f(z)| ≤sup
+|z|≤R
+|f(z) −fnk(z)| + sup
+|z|≤R
+|fnk(z)|
+≤1
+R + ∥fnk∥2eσ|z|
+≲eσ|z|
+where the ﬁnal constant is independent of R.
+The norm bound is an immediate
+consequence of Fatou’s lemma.
+Remark 2. One might examine the statement of this lemma and speciously reason that
+the Paley-Wiener spaces are Montel spaces, i.e a uniformly bounded subset of PW σ
+contains a convergent subsequence.
+This would be false because PW σ is a Banach
+space, and since the unit ball is not compact in an inﬁnite dimensional Banach space
+it cannot possibly be a Montel space. What we have shown is the following: given
+a bounded sequence {fm}m≥1 in PW σ, one can extract a subsequence {fmk}k≥1 that
+converges pointwise, locally uniformly to some f ∈PW σ. However, we have not shown
+that fmk →f in PW σ, i.e. ∥f −fmk∥2 →0, and in general this will not be the case.
+Indeed, if we consider the standard basis functions for PW σ
+fm(λ) =
+rσ
+π
+sin(σλ −πm)
+(σλ −πm)
+≡
+rσ
+π
+(−1)m sin(σλ)
+(σλ −πm)
+then it is clear that ∥fm∥2 = 1 but fm →0 pointwise and locally uniformly.
+Proof of Theorem 1. It is enough to prove that T maps norm-bounded, closed sets in
+PW σ to closed sets in Lp(X , µ) [1, p. 79]. Let Xδ be a closed, norm-bounded subset
+of PW σ with ∥f∥2 ≤δ for each f ∈Xδ. Set gn = Tfn for some sequence {fn}n≥1
+
+--- PAGE 9 ---
+The spectral Dirichlet-Neumann map for Laplace’s equation in a convex polygon
+9
+in Xδ and suppose gn →g in Lp(X , µ). Then it is well-known that one can extract a
+subsequence {gnk}k≥1 that converges pointwise almost µ-everywhere to g [23, Th. 3.12].
+Hence
+g(x) = lim
+k→∞(Tfnk) (x)
+almost µ-everywhere in X .
+The sequence {fnk}k≥1 is a norm-bounded sequence with each ∥fnk∥2 ≤δ. By Lemma 1,
+we can extract a subsequence {fnkl}l≥1 that converges pointwise (and locally uniformly)
+to some f ∈Xδ. Using the pointwise continuity of T we deduce
+g(x) = lim
+l→∞
+
+Tfnkl
+
+(x)
+= T
+
+lim
+l→∞fnkl
+
+(x) = (Tf)(x)
+almost µ-everywhere in X .
+So g = Tf in Lp(X , µ) for some f ∈Xδ. Hence the image each norm bounded closed
+set in PW σ is closed in Lp(X , µ), and we deduce that T must have closed range.
+5. The Spectral Dirichlet-Neumann Map
+Recall the global relation (7) is
+T(Φn −iΦt) = 0,
+λ ∈C
+where T = I + K, with K deﬁned in (6). We will need some properties of this operator.
+Lemma 3. We have T ∈L(X, Y ) and T is also continuous with respect to the topology
+of pointwise convergence.
+Proof. That T respects pointwise convergence is obvious. To prove the relevant estimate
+for the ﬁrst claim we use F −1F = I on L2(R) to write
+eie−iαi(mi−mj)λΦj(e−i∆ijλ) = 1
+2π
+Z σj
+−σj
+eie−iαi(mi−mj−τeiαj )λ ˆΦj(−τ) dτ.
+(8)
+Using the convexity of the domain Ωone sees that for j ̸= i, i ± 1
+ǫ < arg
+
+e−iαi(τeiαj + mj −mi)
+
+≤π −ǫ
+for some ǫ > 0. After an application of Cauchy-Schwarz and Parseval’s theorem we get
+estimates of the form
+eie−iαi(mi−mj)λΦj(e−i∆ijλ)
+ ≲eλ sin ǫ∥Φj∥2.
+So for λ ≤0 we have
+|(TΦ)i(λ)| ≲|Φi(λ)| +
+
+X
+j=i±1
+eie−iαi(mi−mj)λΦj(e−i∆ijλ)
+ + e−|λ| sin ǫ∥Φ∥X.
+The ∥· ∥2,−norm of the ﬁrst and last terms are clearly dominated by ∥Φ∥X, so we need
+only look at the remaining terms. Using the representation (8), these terms are, after an
+
+--- PAGE 10 ---
+The spectral Dirichlet-Neumann map for Laplace’s equation in a convex polygon
+10
+appropriate change of variables, the Laplace transform (along a ray) of an L2 function
+supported on [0, 2σj] for j = i ± 1. They have the generic form
+eiσjλ
+Z 2σj
+0
+e−|λ|wjτhj(τ) dτ,
+(λ ≤0)
+for appropriate hj and wj with Re wj > 0.
+It is well-known [16] that the Laplace
+transform deﬁnes a bounded linear map from L2(R+) to L2(R+). We deduce that the
+∥· ∥2,−norm of these terms are bounded by constant multiples of ∥Φj∥2 for j = i ± 1.
+Using Minkowski’s inequality we ﬁnd ∥(TΦ)i∥2,−≲i ∥Φ∥X. By applying these estimates
+to each of the n components of TΦ, we deduce that T ∈L(X, Y ).
+Remark 3. Obviously T ∈L(Xsym, Y ) and L(Xasym, Y ) also.
+Remark 4. In the context of the previous lemma, we should interpret the global relation
+(7) as describing a map from X to Y . In this case we should only really consider λ ∈R−.
+However, all the terms appearing in (7) are entire functions so we can make a unique
+analytic extension to the entire complex plane. We play fast and loose in this regard,
+making no distinction between TΦ deﬁned on R−and its analytic extension, say (TΦ)ext,
+deﬁned on the the entire complex plane with (TΦ)ext = TΦ on R−.
+In this current setting it is clear that the spectral Dirichlet-Neumann map Φt 7→Φn
+is determined by the null space of the operator T ∈L(X, Y ). We write N(T) for the
+null space. We arrive at the following problem:
+Given Φt ∈Xsym ﬁnd Φ ∈N(T) with Re Φ = Φt.
+The Neumann data is then Φn = Im Φ. We note the analogy between the operators
+T ↔¯∂, the latter being the ¯∂-derivative which annihilates complex analytic functions.
+The functions Φt and Φn playing the rˆoles of the real and imaginary parts of the analytic
+function. For each Φ ∈Xsym we set
+DN(Φ) = {Φ′ ∈Xsym : Φ + iΦ′ ∈N(T)}.
+This set will prove useful.
+Lemma 4. For each Φ ∈Xsym the set DN(Φ) is a singleton.
+Proof. First we prove that DN(Φ) contains no more than one element, and this is
+equivalent to showing that T is injective on Xsym. Let us assume TΦ = 0 for some
+Φ ∈Xsym. Since Φi ∈PW σi
+sym we know that e−iσiλΦi(λ) is bounded and analytic in the
+lower half plane, including along the rays arg λ = 0 and arg λ = π. Indeed, this follows
+from the the basic estimate
+|e−iσiλΦi(λ)| =
+
+Z σi
+−σi
+e−i(σi+τ)λ ˆΦi(−τ) dτ
+ ≲∥Φi∥2
+for λ in the lower half plane. Using the deﬁnition of T, we must have Φ = −KΦ. The
+ith component of this equation reads
+Φi(λ) = −1
+2π
+X
+j̸=i
+Z σj
+−σj
+eie−iαi(mi−mj−τeiαj )λ ˆΦj(−τ) dτ.
+
+--- PAGE 11 ---
+The spectral Dirichlet-Neumann map for Laplace’s equation in a convex polygon
+11
+Using the symmetry relation Φ(λ) = Φ⋆(λ) we deduce
+Φi(λ) = −1
+2π
+X
+j̸=i
+Z σj
+−σj
+eieiαi( ¯mi−¯mj−τe−iαj )λ ˆΦj(−τ) dτ.
+Multiplying this by e−iσiλ and using that zi = mi −σieiαi we ﬁnd
+e−iσiλΦi(λ)
+ =
+
+1
+2π
+X
+j̸=i
+Z σj
+−σj
+eieiαi(¯zi−¯mj−τe−iαj)λ ˆΦj(τ) dτ
+
+(9)
+=
+
+1
+2π
+X
+j̸=i
+Z σj
+−σj
+e−ie−iαi(zi−mj−τeiαj )¯λ ˆΦj(τ) dτ
+ .
+By convexity we have
+0 ≤arg (e−iαi(mj + τeiαj −zi)) ≤π −|αi −αi−1|,
+(10)
+so the right hand side (9) is bounded for −π ≤arg ¯λ ≤|αi −αi−1| −π, or equivalently
+π −|αi −αi−1| ≤arg λ ≤π.
+But since the left hand side of (9) is also bounded along the ray arg λ = 0, we can
+use Phragm´en-Lindel¨of to deduce that e−iσiλΦi(λ) is bounded in the upper half plane.
+Since we have already concluded that e−iσiλΦi(λ) is bounded in the lower half plane, it
+must be equal to a constant. This constant must be zero, however, since eiσiλ is not
+in PW σi
+sym. So there can be at most one element in DN(Φ). The fact that DN(Φ) is
+non-empty follows from Theorem 1 in [3] and its extensions.
+It is possible to prove that DN(Φ) is non-empty through a direct argument by
+considering the equation TΦ = Λ for Λ ∈Y and Φ ∈Xsym. In Lemma 6 below we
+show that T ∈L(Xsym, Y ) has closed range, so by Banach’s closed range theorem it is
+suﬃcient to prove that Λ = iTΨ ∈N(T∗)⊥for Ψ ∈Xsym, where T∗∈L(Y, Xsym) is the
+adjoint of T. For economy of presentation we leave out the straightforward argument.
+In light of the result in Lemma 4, we have a well-deﬁned map
+DN : Xsym →Xsym : Φ 7→DN(Φ).
+This is the spectral Dirichlet-Neumann map. We have the following important theorem.
+Theorem 2. The spectral Dirichlet-Neumann map DN deﬁnes a continuous linear map
+from Xsym to itself.
+We will need the following simple generalisation of Lemma 2.
+Lemma 5. Any norm-bounded sequence in Xsym contains a subsequence that converges
+pointwise and locally uniformly to an element of Xsym which obeys the same norm bound.
+Proof. Given a norm bounded sequence {Φm}m≥1 in Xsym, one ﬁrst applies the the result
+of Lemma 2 to the ﬁrst component of the sequence to get a subsequence {Φmk}k≥1 whose
+ﬁrst component has the desired property. With this subsequence, one then chooses a
+sub-subsequence for which the second component has the desired properties. Continuing
+inductively gives the required result.
+
+--- PAGE 12 ---
+The spectral Dirichlet-Neumann map for Laplace’s equation in a convex polygon
+12
+Lemma 6. The map T ∈L(Xsym, Y ) is bounded below, i.e. ∥TΦ∥Y ≳∥Φ∥X.
+Proof. We know that T ∈L(Xsym, Y ) and that T is continuous with respect to the
+topology of pointwise convergence. By a simple generalisation of Theorem 1 we ﬁnd
+that T has closed range. Paired with the fact that T is injective on Xsym, it follows‡
+that ∥TΦ∥Y ≳∥Φ∥X for Φ ∈Xsym.
+Proof of Theorem 2. Linearity is straightforward so we focus on continuity.
+Let us
+proceed by contradiction. Suppose that the map is not continuous, i.e. it is unbounded.
+Then there exists a sequence {Φm}m≥1 in Xsym such that ∥Φm∥X = 1 for each m but
+∥DN(Φm)∥X →∞. By deﬁnition we have
+T[DN(Φm)] = iT[Φm]
+for each m ≥1. Introduce the new sequences
+Ψm =
+DN(Φm)
+∥DN(Φm)∥X
+,
+Λm =
+Φm
+∥DN(Φm)∥X
+so ∥Ψm∥X = 1 for each m and ∥Λm∥X →0. By Lemma 3 we know that T : Xsym →Y
+is continuous so we deduce ∥TΨm∥Y →0. Lemma 6 gives
+1 = ∥Ψm∥X ≲∥TΨm∥Y →0
+which provides us with our contradiction.
+So there is some constant such that
+∥DN(Φ)∥X ≲∥Φ∥X for all Φ ∈Xsym.
+By multiplying the global relation by the imaginary unit i, essentially reversing the
+rˆoles of the real and imaginary parts of X, we obtain the following.
+Corollary 1. The map DN : Xsym →Xsym is a homeomorphism.
+6. Towards a New Numerical Approach
+Here we give a brief outline of how the previous theoretical results can be used to
+produce a new approach to the numerical study of the solutions to boundary value
+problems associated with Laplace’s equation on the interior of a convex polygon. In
+particular, we demonstrate that this approach provides a whole family of potential
+numerical schemes that can be used to solved the global relation to any required degree
+of accuracy. A more detailed numerical study will be pursued elsewhere.
+The natural starting point is to rephrase the global relation in terms of a weak
+variational problem. Given Φt ∈Xsym, is it enough to ﬁnd some Φ ∈Xsym such that
+T(Φ −iΦt)(λ) = 0,
+λ ∈D
+‡ Since R(T) ⊂Y is closed it is also a Banach space, so T : Xsym →R(T) is a bijection between
+Banach spaces. The relevant estimate now follows from Banach’s bounded inverse theorem.
+
+--- PAGE 13 ---
+The spectral Dirichlet-Neumann map for Laplace’s equation in a convex polygon
+13
+where D is a subset of C which contains an accumulation point. This follows from a
+simple analytic continuation argument. More generally, we could study the equations
+T(Φ −iΦt)i(λ) = 0,
+λ ∈Di,
+i = 1, . . . , n
+(11)
+where each Di ⊂C, 1 ≤i ≤n, contains an accumulation point. Motivated by these
+observations we seek to minimize the functional
+I[Φ] =
+n
+X
+i=1
+Z
+γi
+|T(Φ −iΦt)i(λ)|2 ds(λ)
+where γi, 1 ≤i ≤n, are curves in C and ds(λ) is the natural Lebesgue measure of arc-
+length on these curves. We impose that the curves γi are locally ﬁnite and semi-inﬁnite,
+and each eventually coincides with the negative real axis. If we deﬁne the bilinear and
+linear forms on Xsym by
+a(Φ, Ψ) = Re
+n
+X
+i=1
+Z
+γi
+(TΦ)i(λ)(TΨ)i(λ) ds(λ),
+ℓ(Ψ) = −Im
+n
+X
+i=1
+Z
+γi
+(TΦt)i(λ)(TΨ)i(λ) ds(λ),
+a standard calculus of variations argument leads us to the following weak form of (11).
+Lemma 7. Φ ∈Xsym is a minimizer for I[Φ] if and only if
+a(Φ, Ψ) = ℓ(Ψ)
+∀Ψ ∈Xsym.
+(12)
+Note that the linearity of ℓand bilinearity of a follow from the fact that Xsym is a real
+vector space. We need the following results to apply the standard machinery.
+Lemma 8. The bilinear form a : Xsym × Xsym is bounded and coercive
+(i) |a(Φ, Ψ)| ≲∥Φ∥X∥Ψ∥X,
+(ii) a(Φ, Φ) ≳∥Φ∥2
+X
+and ℓ∈X∗
+sym, i.e. |ℓ(Ψ)| ≲∥Ψ∥X.
+Proof. To show that a is bounded we ﬁrst apply Cauchy-Schwarz
+|a(Φ, Ψ)| ≤
+n
+X
+i=1
+Z
+γi
+|(TΦ)i(λ)||(TΨ)i(λ)| ds(λ)
+≤
+n
+X
+i=1
+Z
+γi
+|(TΦ)i(λ)|2 ds(λ)
+1/2 Z
+γi
+|(TΨ)i(λ)|2 ds(λ)
+1/2
+.
+It is now enough to show that for Φ ∈Xsym
+Z
+γi
+|(TΦ)i(λ)|2 ds(λ) ≲∥Φ∥2
+X,
+1 ≤i ≤n.
+
+--- PAGE 14 ---
+The spectral Dirichlet-Neumann map for Laplace’s equation in a convex polygon
+14
+Choose some R > 0 suﬃciently large so that outside the ball BR = {λ ∈C : |λ| < R}
+all of the contours {γi}n
+i=1 coincide with the negative real axis.
+We deal with the
+contributions from λ ∈γi ∩BR and λ ∈(−∞, −R) separately. We have
+|(TΦ)i(λ)|2 =
+Φi(λ) +
+X
+j̸=i
+eie−iαi(mi−mj)λΦj(e−i∆ijλ)
+
+2
+≲|Φi(λ)|2 +
+X
+j̸=i
+eie−iαi(mi−mj)λΦj(e−i∆ijλ)
+
+2
+.
+The supremum of these terms on γi ∩BR can be estimated using the standard Paley-
+Wiener inequality. Using the fact that the length of each γi contained in this region is
+ﬁnite, we arrive at
+Z
+γi∩BR
+|(TΦ)i(λ)|2ds(λ) ≲γ ∥Φ∥2
+X.
+The contribution from (−∞, −R) is easily estimated in terms of ∥Φ∥X by using the fact
+T ∈L(Xsym, Y ), so the claim in (i) is proven. For coercivity we note that if ∥Φ∥X = 1
+then it must be the case that
+n
+X
+i=1
+Z
+γi
+|(TΦ)i(λ)|2 ds(λ) ≳γ 1.
+(13)
+Indeed, if this were not true then there would one could construct a sequence {Φm}m≥1
+with ∥Φm∥X = 1 such that
+n
+X
+i=1
+Z
+γi
+|(TΦm)i(λ)|2 ds(λ) ≤1
+m.
+Passing to a subsequence if necessary, we have Φm →Φ′ locally uniformly for some
+Φ′ ∈Xsym for which a(Φ′, Φ′) = 0, i.e. (TΦ′)i(λ) = 0 for λ ∈γi. By analytic continuation
+it follows that (TΦ′)(λ) = 0 for λ ∈C, hence Φ′ = 0 by the injectivity of T on Xsym. We
+deduce that the sequence {Φm}m≥1 converges to zero locally uniformly. In particular,
+for the ﬁxed R > 0 used earlier and for any given ǫ > 0 we can take m suﬃciently large
+so that
+
+n
+X
+i=1
+Z
+γi∩BR
+−
+Z 0
+−R
+
+|(TΦm)i(λ)|2ds(λ)
+ < ǫ.
+So for m suﬃciently large we have the estimate
+a(Φm, Φm) ≥∥TΦm∥2
+Y −ǫ.
+By Lemma 6, there is some c > 0 such that ∥TΦ∥Y ≥
+√
+2c∥Φ∥X for all Φ ∈Xsym.
+Setting ǫ = c and choosing m suﬃciently large we ﬁnd
+a(Φm, Φm) ≥c.
+
+--- PAGE 15 ---
+The spectral Dirichlet-Neumann map for Laplace’s equation in a convex polygon
+15
+This contradicts our assumption that a(Φm, Φm) →0, so the estimate in (13) must hold.
+Coercivity (ii) follows directly from (13)
+a(Φ, Φ) = ∥Φ∥2
+X
+n
+X
+i=1
+Z
+γi
+|(T(Φ/∥Φ∥X))i(λ)|2 ds(λ) ≳γ ∥Φ∥2
+X.
+That ℓdeﬁnes a bounded linear map on Xsym follows from arguments similar to those
+used to prove estimate (i).
+An application of the Lax-Milgram lemma gives.
+Theorem 3. There is a unique solution in Xsym to the weak problem (12).
+Remark 5. The numerical implementation of the Fokas method has not, to date, used
+a weak approach. The standard approaches, e.g. [14, 15, 25, 26], have approximated
+the unknown boundary boundary data {ϕn}n
+i=1 using suitable basis functions {ϑm}∞
+m=1
+so that
+ϕn
+i (τ) ≈
+N
+X
+m=1
+cimϑm(τ)
+1 ≤i ≤n
+for some N ≫1. This is used to approximate the unknown spectral function Φn(λ).
+Using this approximation one evaluates the global relation (5) at a sequence of points in
+the complex plane to get linear problem for the unknown coeﬃcients {cim}. However,
+these results have been formal in nature – to this authors knowledge no proofs of
+convergence or stability have been given.
+To make rigorous these pointwise approaches it seems the semi-norm estimate
+∥TΦ∥D,∞≳D ∥Φ∥D,∞,
+Φ ∈Xsym,
+(14)
+for each open D ⊂C is most relevant, where ∥Φ∥D,∞= maxi supD |Φi(λ)|. To see this
+estimate ﬁrst note the following
+∥TΦ∥D,∞≳D ∥Φ∥D,∞,
+Φ ∈Xsym and ∥Φ∥X = 1.
+Indeed, if it were not true then one could take a sequence {Φm}m≥1 with ∥Φm∥D,∞=
+∥Φm∥X = 1 and ∥TΦm∥D,∞→0.
+Passing to a subsequence if necessary, we ﬁnd
+Φm →Φ locally uniformly with TΦ = 0 on D and on all of C by analytic continuation.
+Again using the injectivity of T on Xsym we deduce that Φm →0 locally uniformly,
+contradicting our assumption that ∥Φm∥D,∞= 1. So for any Φ ∈Xsym we have
+∥TΦ∥D,∞= ∥Φ∥X∥T(Φ/∥Φ∥X)∥D,∞≳D ∥Φ∥X∥(Φ/∥Φ∥X)∥D,∞= ∥Φ∥D,∞,
+which is the estimate in (14). We note that the open set D could be replaced with any
+set containing an accumulation point.
+Using the result of Theorem 3 we can now apply standard Galerkin techniques
+to solve a sequence of ﬁnite dimensional problems whose solution approximates the
+
+--- PAGE 16 ---
+The spectral Dirichlet-Neumann map for Laplace’s equation in a convex polygon
+16
+true solution to (12), the error in which is controlled by C´ea’s lemma [7]. A practical
+implementation of this can be achieved as follows. We write
+Φ(λ) =
+n
+X
+j=1
+ejΦj(λ),
+where {ej}n
+j=1 are the usual basis vectors on Rn. Since Φj ∈PW σj for 1 ≤j ≤n, we
+may approximate each by projecting onto the ﬁnite dimensional subspace consisting of
+the sample frequencies ≤N. So we write
+Φj(λ) ≈
+X
+|J|≤N
+ΦJ
+j ej
+J(λ),
+where ej
+J(λ) is the Jth basis function for PW σj, given explicitly by
+ej
+J(λ) = sin(σjλ −πJ)
+σjλ −πJ
+.
+The ﬁnite dimensional problems that approximate (12) are then
+n
+X
+j=1
+X
+|J|≤N
+ΦJ
+j a(ej ⊗ej
+J, ei ⊗ei
+I) = ℓ(ei ⊗ei
+I),
+1 ≤i ≤n, |I| ≤N.
+This constitutes a (2N + 1)n by (2N + 1)n linear system for the (2N + 1)n complex
+unknowns ΦJ
+j , however we are yet to take into account that Φj ∈PW
+σj
+sym. We must
+enforce that Φj(λ) = Φ⋆
+j(λ), so that Φj is restricted to the real part of PW σj.
+A
+straightforward computation reveals that this is equivalent to
+Φ−J
+j
+= ΦJ
+j .
+By writing ΦJ
+j = XJ
+j + iY J
+j for real numbers XJ
+j and Y J
+j and noting that the previous
+symmetry condition implies Y 0
+j = 0, we are left with a (2N + 1)n by (2N + 1)n linear
+system for the (2N + 1)n real unknowns
+X0
+j ,
+XJ
+j ,
+Y J
+j ,
+1 ≤j ≤n,
+1 ≤J ≤N.
+The coeﬃcients ΦJ
+j are then built up from the facts
+Y −J
+j
+= −Y J
+j
+and
+X−J
+j
+= XJ
+j .
+7. Conclusion
+We have shown that the global relation for Laplace’s equation in a convex polygon gives
+rise to a well-deﬁned spectral Dirichlet-Neumann map. This map is democratic, in the
+sense that the spectral boundary data Φt and Φn are treated at the same level (upto
+multiplication by i). The spectral Dirichlet-Neumann map describes a homeomorphism
+on Xsym.
+We treated the case in which the Dirichlet boundary data belonged to H1(∂Ω),
+but lower regularity can be assumed. If one deals with the more general Paley-Wiener
+spaces, consisting of entire functions of exponential type whose restriction to the real
+axis belongs to Lp(R) for some p ≥1, then more general results can be obtained. The
+
+--- PAGE 17 ---
+The spectral Dirichlet-Neumann map for Laplace’s equation in a convex polygon
+17
+relevant Paley-Wiener inequality in this case becomes |f(z0)| ≲eσ|z0|∥f∥p. It is most
+likely that these results will carry through into the limiting case where the Dirichlet
+boundary data belongs to L2(∂Ω).
+One would expect that the spectral Dirichlet-
+Neumann map can be extended to
+DN : FHs+1/2[−σ1, σ1] × · · · × FHs+1/2[−σn, σn]
+→FHs−1/2[−σ1, σ1] × · · · × FHs−1/2[−σn, σn],
+s ∈
+
+−1
+2, 1
+2
+
+so as to match the classical results for the Steklov-Poincare operator on Lipschitz
+domains [19]. Indeed, this is hinted at in the proof to Lemma 4 – uniqueness followed
+from the fact that eiλσi = F[δ−σi](λ) does not belong to PW σi = FL2[−σi, σi], i.e.
+δ−σi /∈L2 = H0. However, δ−σi ∈H−s for s > 1/2. These issues are discussed in [4].
+The weak formulations given in §6 give an inﬁnite family of problems that can be
+attacked with standard numerical procedures. Each of these problems depends on a
+choice of contours {γi}n
+i=1. The constants involved in the boundedness and coercivity of
+the relevant bilinear form will depend on this choice of contours, so it is natural to ask
+which choice of contours is best. This and other aspects of the numerical implementation
+of our results are a work in progress.
+We also provided a means, via (14), to make the existing numerical implementations
+of the Fokas method mathematically rigorous.
+The extension of these results to other constant coeﬃcient elliptic boundary value
+problems is possible with suitable adjustments, but this will be pursued elsewhere. We
+expect that similar results will hold for the Helmholtz and modiﬁed Helmholtz equations,
+with the proofs following in a similar fashion. We also expect similar results to hold for
+the more important exterior problems. For an indication of the necessary modiﬁcations,
+we refer the reader to [4] where some of these modiﬁcations are presented.
+Perhaps the most important thing to note is the possible extension of the methods
+produced here to higher dimensions.
+It was shown in [3] that the global relation
+characterises the generalised Dirichlet-Neumann map for linear elliptic PDEs in convex
+domains in any number of dimensions. However, doing meaningful analysis with the
+global relation in higher dimensions has proved diﬃcult, with little progress made
+over the last ﬁfteen years.
+The main arguments presented here can be carried over
+to the higher dimensional problems. In particular, they can be used for boundary value
+problems in three dimensions. That this is possible is closely related to the fact that
+the theorems of Montel, Paley and Wiener (-Schwartz) extend to the complex analysis
+of several variables.
+Acknowledgments
+The results presented have beneﬁted from useful discussions with Ralf Hiptmair (ETH
+Z¨urich), particularly the material in §6.
+The author is indebted to Thanasis Fokas
+(DAMTP) for his constant support and encouragement.
+
+--- PAGE 18 ---
+The spectral Dirichlet-Neumann map for Laplace’s equation in a convex polygon
+18
+References
+[1] Y.A. Abramovich & C.D. Aliprantis. An Invitation to Operator Theory, Amer. Math. Soc.,
+2002.
+[2] A.C.L. Ashton, 2010. Regularity theorems for Elliptic and Hypoelliptic Operators via the Global
+Relation. In J. Part. Diﬀ. Eq. 24(1): 83–96.
+[3] A.C.L. Ashton, 2012. On the Rigorous Foundations of the Fokas for Linear Elliptic PDEs. In
+Proc. Roy. Soc. A, 468(2141): 1325–1331.
+[4] A.C.L. Ashton & A.S. Fokas, 2012. Elliptic Boundary Value Problems in Convex Polygons
+with Distributional Boundary Data via the Uniﬁed Method. In preparation.
+[5] R.P. Boas Jr. Entire Functions, Academic Press, New York, 1954.
+[6] L. Ehrenpreis. Fourier Analysis in Several Complex Variables. Wiley-Interscience, New York,
+1970.
+[7] A. Ern & J.L. Guermond. Theory and Practice of Finite Elements, Spinger Verlag, 2004.
+[8] A.S. Fokas, 2001. Two–dimensional linear partial diﬀerential equations in a convex polygon. In
+Proc. Roy. Soc. A, 457(2006): 371–393.
+[9] A.S. Fokas, 2002. Integrable Nonlinear Evolution Equations on the Half-Line. In Comm. Math.
+Phys. 230(1): 1–39.
+[10] A.S. Fokas, 2004. Boundary-value problems for linear PDEs with variable coeﬃcients. In Proc.
+Roy. Soc. A 460(2044): 1131–1151.
+[11] A.S. Fokas et al. 2005. The Nonlinear Schr¨odinger Equation on the Half-Line. In Nonlinearity,
+18(4): 1771–1822.
+[12] A.S. Fokas, 2005. The Generalised Dirichlet-to-Neumann map for certain Nonlinear Evolution
+PDEs. In Comm. Pure Appl. Math. 58(5): 639–670.
+[13] A.S. Fokas. A Uniﬁed Approach to Boundary Value Problems, Society for Industrial and Applied
+Mathematics, 2008.
+[14] B. Fornberg & N. Flyer, 2011. A numerical implementation of Fokas boundary integral
+approach: Laplace’s equation on a polygonal domain. In Proc. Roy. Soc. A, 467(2134): 2983–
+3003.
+[15] S.R. Fulton et al. 2004. An analytical method for linear elliptic PDEs and its numerical
+implementation. In J. Comp. Appl. Math. 167(2): 465–483.
+[16] G.H. Hardy, 1929. Remarks in Addition to Dr. Widder’s Note on Inequalities. In J. London
+Math. Soc. 1(3): 199–202.
+[17] G.C. Hsiao & W.L. Wendland. Boundary Integral Equations, Springer Verlag, 2008.
+[18] B.Y. Levin. Lectures on Entire Functions, American Math. Soc., 1996.
+[19] W.C.H. McLean. Strongly Elliptic Systems and Boundary Integral Equations, Cambridge
+University Press, 2000.
+[20] V.P. Palamodov. Linear Diﬀerential Operators with Constant Coeﬃcients, Springer Verlag,
+1970.
+[21] R.E.A.C. Paley & N. Wiener. Fourier Transforms in the Complex Domain, American Math.
+Soc., 1934.
+[22] M. Reed & B. Simon. Methods of Modern Mathematical Physics, Vol. 1, Academic Press, 1980.
+[23] W. Rudin. Real and Complex Analysis, McGraw-Hill, Boston, 1987.
+[24] K. Seip. Interpolation and sampling in spaces of analytic functions, Amer. Math. Soc., 2004.
+[25] A.G. Sifalakis et al. 2008. The generalized Dirichlet–Neumann map for linear elliptic PDEs and
+its numerical implementation. In J. Comp. Appl. Math. 219(1): 9–34.
+[26] S.A. Smitherman et al. 2010. A spectral collocation method for the Laplace and modiﬁed Helmholtz
+equations in a convex polygon. In IMA J. Numer. Anal. 30(4): 1184–1205.
+[27] G. Verchota, 1984. Layer potentials and regularity for the Dirichlet problem for Laplace’s
+equation in Lipschitz domains. In J. Funct. Anal. 59(3): 572–611.
