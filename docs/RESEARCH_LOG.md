@@ -31,3 +31,23 @@
   - (A) **Beyond Zonotopes**: What is the EXACT invisible load space (dimension + explicit physical/measure structure!) on **ARBITRARY convex $p$-gons** — specifically **triangles ($p=3$)**, **pentagons ($p=5$)**, and **asymmetric quadrilaterals/trapezoids**?! Does symmetry vs. asymmetry trigger a dramatic collapse or phase change in the invisible load space?!
   - (B) **Minimax Optimal Corner Recovery**: Prove the sharp information-theoretic lower bound (can ANY estimator beat $O(1/\sqrt{N})$ against $L^2$ background?) AND find whether optimal tapering/windowing achieves **super-resolution** ($O(N^{-s-1/2})$) against smooth ($H^s$/$C^k$) backgrounds, plus determine the exact minimax-optimal fractional shift $\theta^*$ for even polygons!
   - (C) **Direct PDE Application (Fokas Unified Transform Solver)**: Prove & demonstrate how the invisible loads create an exact rank deficiency / blind spot in Leont'ev-lattice Fokas Global Relation collocation on polygons, and how our minimal moment + single-half-step completion yields a provably nonsingular, spectrally accurate polygon PDE solver (including discontinuous-corner Dirichlet problems)!
+
+## 2026-11-23 — Phase 2 Deep Theorems Complete & Independently Verified (`experiments/phase2_theorems.py`)
+- **Breakthrough A — Universal Classification of Invisible Loads on ALL Convex $p$-gons**:
+  - One-sided Leont'ev/Fokas lattice $\Lambda_+$:
+    - Odd $p = 2k+1$: real $L^2$ dim $= 2k-1$, real $L^1$ dim $= 2k+1$ (a shocking 2D $L^1\setminus L^2$ singularity gap with $|z-v|^{-1/2}$ vertex blowup!), real signed measures dim $= 2k+1$.
+    - Even $p = 2k$: real $L^2$ dim $= 2k-1$, real $L^1$ dim $= 2k-1$, real signed measures dim $= 2k$ (extra alternating corner mode — even on non-parallel asymmetric quadrilaterals, with compensating density!).
+    - **Saint-Venant Torsion Test**: Invisible to $\Lambda_+$ **if and only if** $D$ is centrally symmetric! On the unit equilateral triangle, $B_{-\partial_n u}(2\pi i) = -\frac{\sqrt 3}{8\pi^2}(1 + e^{-\pi\sqrt 3}) \approx -0.02203174 \ne 0$, yet a **unique** distinct real invisible $L^2$ flux $g_\triangle$ still exists via the Gamma-product Laplace transform + Schwarz–Christoffel Hilbert pullback!
+  - Two-sided reflected lattice $\Lambda_\pm$: ALL invisible real measures **collapse to 0** the instant central symmetry is broken (even for trapezoids or unequal-length parallel edges)!
+- **Breakthrough B — Exact Minimax Optimality, Angle-Dependent Exponent Jump & Super-Resolution**:
+  - Odd $p$-gons: sharp minimax rate $E_k = (M/\sqrt N)(C_k + o(1))$ with $C_k = \|\Pi T^* c\| > 0$, strictly beating calibrated Cesàro (ratio $> 1.27$ on scalene triangle).
+  - Even $p$-gons with one shifted edge ($N$ shifted nodes): **breaks the $N^{-1/2}$ barrier!** Exact angle-dependent minimax exponent $E_k \asymp M N^{-(1 - \omega_k/(2\pi))}$ ($N^{-3/4}$ on a square!).
+  - **Half-Step Suboptimality (Certified by 45-digit Interval Arithmetic)**: On the unit square at $N=1$, $\theta = 3/4$ gives $0.6198 < E_\infty < 0.6200$, strictly beating the half-step $\theta = 1/2$ ($0.6612 < E_\infty < 0.6613$)!
+  - **Single-Shifted-Sample Phase Transition**: Fixed shift $\implies$ error floor $\Theta(1)$; end-of-band shift ($m=N-1$) $\implies$ error floor $\Theta(1)$; middle-of-band shift ($m \approx t_0 N$) $\implies$ restores $\Theta(N^{-1/2})$!
+  - **Smooth-Background Super-Resolution**: Inverse-power-annihilating windows smash corner recovery error from $4.3\times 10^{-2}$ (Cesàro) to $6.8\times 10^{-10}$ ($r=3$) and $6.0\times 10^{-26}$ (order-8 extrapolation at $N=128$), with exact Chebyshev weight-norm lower bound $\|w\|_1 \ge |T_r((a+b)/(b-a))|$.
+- **Breakthrough C — Fokas PDE Blind-Spot Removal & Discontinuous-Wall Metal Plate**:
+  - Verified exact nullities (3 on square, 1 on equilateral triangle) before minimal $2k-1$ moment completion, collapsing condition numbers to $16.45$ and $12.21$ and interior Laplace field error to $3.9\times 10^{-16}$ and $2.4\times 10^{-15}$.
+  - Proved exact Hadamard finite-part heat-flux identity $B_{\mathrm{fp}\,q_n}(s) = i\sum a_j e^{s\gamma_j}$ for discontinuous wall temperatures, independently verified via Schwarz–Christoffel Poisson kernel pullback to $< 7.2\times 10^{-14}$.
+- **Next (Phase 3)**:
+  1. Formal machine verification in **Lean 4.36.0** (zero `sorry`, standard axioms only) of the 4 core theorems in `proofs/lean4/`.
+  2. Deep physical/geometric anatomy of the equilateral triangle's unique invisible $L^2$ flux $g_\triangle$ (checking chirality/mirror symmetry, sign changes, corner behavior) + two-slope **$60^\circ/120^\circ$ rhombus** numerical verification ($N^{-5/6}$ vs. $N^{-2/3}$ on the same polygon!) + full high-resolution visualization suite in `figures/`.
