@@ -78,3 +78,15 @@
 - Generated and visually audited 4 high-resolution multi-panel figures (`experiments/generate_figures.py` $\to$ `figures/fig1..fig4_*.png`).
 - Wrote accessible Korean discovery report (`docs/DISCOVERY_STORY_KR.md`), formal English technical paper (`docs/PAPER_LEONTIEV_INVISIBLE_LOADS.md`), and updated `README.md`.
 - All 31 Lean 4.36.0 theorems verified (`0 sorry`, `0 warnings`, standard axioms only), all Python 65/80/100/132-digit probes passing, all 8 primary source PDFs preserved, and complete git history committed cleanly.
+
+
+## 2026-11-23 — Phase 5 Non-Overlapping 3-PDF Publication Suite & Codex Astra Referee Audit Complete
+- **Three Self-Contained Non-Overlapping Publications Built (`papers/`)**:
+  1. **Paper 1 (English Preprint PDF, `amsart`)**: `papers/paper1_invisible_loads/paper1_invisible_loads.pdf` — *Invisible Boundary Loads on Convex Polygons: Leont'ev's Exponential Lattice, Balayage Anatomy, and Fokas's Global Relation* (3 dedicated figures `p1_fig1..3.png`).
+  2. **Paper 2 (English Preprint PDF, `amsart`)**: `papers/paper2_corner_recovery/paper2_corner_recovery.pdf` — *Minimax Recovery of Polygon Corner Charges from Bandlimited Leont'ev Frequencies: Parity, Angle-Dependent Exponents, and Super-Resolution* (3 dedicated figures `p2_fig1..3.png`).
+  3. **Expository Magazine Article (Korean PDF, `xeCJK` + `tcolorbox`)**: `papers/expository_kr/expository_leontiev_kr.pdf` — *다각형이 들을 수 없는 파동들: 소련 우파(Ufa)의 잊힌 지수급수 이론에서 발굴한 7가지 수학적 기적* (4 dedicated Korean-labeled figures `kr_fig1..4.png`).
+- **Rigorous Referee Audit by Codex (`gpt-6.2-astra`, `reasoning_effort=max`, `codex_logs/phase4_referee_output.md`)**:
+  - Audited all 3 manuscripts line-by-line against code and Lean proofs, confirming our Parallelogram Torsion Criterion, Table 1 dimensions, two-sided symmetry collapse, and $+i$ flux signs, while catching critical proof/formula bugs that were repaired in full:
+    - Fixed the formal Binet generating exponent in Paper 1 Theorem 5.2(1) (removing the spurious $1/(6m+3)$ divisor so mass $= 1$ and $e_3 = 6\zeta(4)/\pi$ match the exact computation), supplied the global Binet-remainder + Phragmén–Lindelöf + Liouville proof of $L_\triangle \equiv B_{\mu_{\mathrm{Y}}}$ and analytic positivity bound $h(r)/\sqrt r > 1.128$, and derived the $s L_\triangle, i s L_\triangle$ $x^{-1/2}$ sibling modes via spoke integration by parts in $r$.
+    - Replaced Paper 1 Theorem 3.2(3)'s $\operatorname{sinhc}$-multiplier sketch with an exact Hahn–Banach + Pólya–Valiron duality proof and verified Korobeinik's condition $Q_1$ in the $o(R)$ erasure theorem.
+    - Repaired Paper 2's dilation norm bound ($\sqrt{1+\varepsilon}$) and sign in Theorem 4.1, kept the vertex-discrepancy correction strictly inside the measured exponential row space in Theorem 5.1, added an explicit identifying edge-group design in Theorem 6.1, restricted the Hadamard finite-part formula in Theorem 7.1 to entire holomorphic tests, and unified all figure/caption normalizations and historical/bibliographic attributions (`Sedletskii1988`, `Leontev1974Polygon`, `DFPW2019`).
