@@ -51,3 +51,25 @@
 - **Next (Phase 3)**:
   1. Formal machine verification in **Lean 4.36.0** (zero `sorry`, standard axioms only) of the 4 core theorems in `proofs/lean4/`.
   2. Deep physical/geometric anatomy of the equilateral triangle's unique invisible $L^2$ flux $g_\triangle$ (checking chirality/mirror symmetry, sign changes, corner behavior) + two-slope **$60^\circ/120^\circ$ rhombus** numerical verification ($N^{-5/6}$ vs. $N^{-2/3}$ on the same polygon!) + full high-resolution visualization suite in `figures/`.
+
+## 2026-11-23 — Phase 3 Formal Lean 4 Verification & Geometric Anatomy Complete
+- **Lean 4.36.0 Machine Verification (`proofs/lean4/`)**:
+  - Independently rebuilt from scratch (`lake clean && lake build`) with **0 warnings, 0 `sorry`, 0 custom axioms**.
+  - **31 theorems** formally verified across 4 standalone modules (`PolygonParity.lean`, `FiniteMinimax.lean`, `SuperResolutionWindow.lean`, `TwoSidedSymmetry.lean`) + `Main.lean` axiom audit:
+    - `PolygonParity.Cycle.mod_index`: `[propext, Quot.sound]`
+    - All other 30 theorems: `[propext, Classical.choice, Quot.sound]` only!
+- **Equilateral Triangle's Unique Invisible $L^2$ Flux $g_\triangle$ Dissected (`experiments/phase3_anatomy_and_rhombus.py`, `experiments/data/phase3_triangle.npz`)**:
+  - **Surprise**: Contrary to a naive chirality guess, $g_\triangle$ is **strictly mirror-symmetric and strictly positive on every open edge** (midpoint value $0.43199552663931634$), vanishing at corners as $g_\triangle(x) = \sqrt{2/\pi}\,x^{1/2} + O(x^2)$ (numerical fitted exponent $0.4999999724$).
+  - **Physical & Analytic Discovery**: While the square's invisible flux is the harmonic balayage of **uniform 2D interior charge** (Saint-Venant torsion), the equilateral triangle's unique invisible flux is the **harmonic balayage (Poisson integral) of a strictly positive 1D probability measure supported ONLY on the 3-spoked Y-shaped median skeleton** (the three vertex-to-centroid segments, length $R = 1/\sqrt{3}$), with radial density $h(r) = \sqrt{r}\sum_{j\ge 0} a_j r^{3j}$ governed by Binet's log-Gamma kernel with Riemann zeta values $\zeta(4), \zeta(10), \zeta(16), \dots$ (independently verified to $3.80\times 10^{-50}$ via direct Cauchy–Laplace integral and $1.07\times 10^{-5}$ via 768-harmonic least-norm projection; $h(r)/\sqrt{r} > 1.128 > 0$ certified on $[0, 1/\sqrt{3}]$ via interval arithmetic!).
+  - Its two $L^1 \setminus L^2$ siblings have nonzero signed $x^{-1/2}$ singularities on both sides of every corner (fitted exponents $-0.50000$).
+- **Two-Slope $60^\circ / 120^\circ$ Rhombus Smoking Gun (`experiments/phase3_data.json`)**:
+  - 100-digit and 132-digit `mpmath` computations agreed at ALL 45 saved significant digits across $N \in \{2,4,6,8,12,16,20\}$.
+  - Fitted slopes on ONE polygon: **0.8429 & 0.8487** at sharp $60^\circ$ corners (theory $5/6 \approx 0.8333$) vs. **0.6527 & 0.6710** at blunt $120^\circ$ corners (theory $2/3 \approx 0.6667$).
+- **Global Shift-Optimality Paradox on Unit Square (`experiments/phase3_square_certificate.py`)**:
+  - Outward-rounded interval arithmetic certified over all $0 < \theta < 1$:
+    - $N = 1$: infimum as $\theta \uparrow 1$ ($0.60988$ vs. half-step $0.66125$)
+    - $N = 2$: infimum as $\theta \downarrow 0$ ($0.37348$ vs. half-step $0.40455$)
+    - $N = 4$: unique interior minimizer $\theta^* \approx 0.1132991167$ ($0.24216$ vs. half-step $0.24514$)
+  - Reason: approaching an integer retains spectral **derivative** information, which is lost discontinuously at exact integer shift!
+- **Symmetry-Breaking Collapse**: Tilting one vertex of the square by $\varepsilon$ lifts all 4 two-sided invisible modes linearly off zero with exact initial singular-value slopes $169.53, 6.93, 6.93, 0.549$.
+- **Next**: Generate high-resolution visual gallery (`figures/`) and write both an accessible "오오!" non-specialist story (`docs/DISCOVERY_GUIDE_KR.md`) and a rigorous preprint-style mathematical paper (`docs/PAPER_LEONTIEV_INVISIBLE_LOADS.md`), updating `README.md` and committing everything cleanly.

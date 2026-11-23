@@ -1,0 +1,7 @@
+name = "remath"
+version = "0.1.0"
+defaultTargets = ["ReMath"]
+
+[[lean_lib]]
+name = "ReMath"
+roots = ["PolygonParity", "FiniteMinimax", "SuperResolutionWindow", "TwoSidedSymmetry", "Main"]
