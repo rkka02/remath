@@ -1,0 +1,20 @@
+## 1. REMAINING OR NEW BLOCKING DEFECTS
+
+**REVISION REQUIRED.** Every named Round 4 counterexample now passes. Four numerical defects still prevent sign-off.
+
+1. **`half_period_cells` omits a true half-period angle.** At 75 digits and exact square phase \(\phi=1/2\), the true open tongue starts at \(1/2\). The routine returns \(1/2+2^{-252}\) as its open lower endpoint. A 420-digit chord-map replay confirms `True` at that exact, caller-representable angle, which falls outside every returned cell and uncertainty band. The omission also affects the accepted phase interval \([3/8,3/8+2^{-252}]\). At \(\theta=\pi/4-3/8-2^{-253}\), the two endpoint phases give `False` and `True`, yet the routine returns an empty uncertainty list. The event filter skips the region trimmed from the cell. [Square tongue formula](/Users/mw/Desktop/math/remath/studies/03-sobolev-wave-attractors/docs/phase1_regular.md:211) · [Event filter](/Users/mw/Desktop/math/remath/studies/03-sobolev-wave-attractors/experiments/phase1_regular.py:546)
+
+2. **Both strip helpers can return an incorrectly rounded scalar after seven refinements.** At 95 digits, set \(y=1/2+15\cdot2^{-320}\) as an exact `Fraction`. Equal slopes make `strip_coordinate(y, mp.pi, mp.pi)` exactly \(y/2\). Ties-to-even gives \(1/4+8\cdot2^{-320}\), but the function returns \(1/4+7\cdot2^{-320}\). There is also a simple exact-zero case. Starting at \(-1/3\) in the odd row with slope \(1/3\) reaches zero after one unit. `strip_position(-Fraction(1,3), mp.pi, Fraction(1,3))` returns \(5.5898447957\times10^{-6240}\). Both paths fall back to scalar arithmetic without endpoint agreement. [Coordinate fallback](/Users/mw/Desktop/math/remath/studies/03-sobolev-wave-attractors/experiments/phase1_measure.py:285) · [Position fallback](/Users/mw/Desktop/math/remath/studies/03-sobolev-wave-attractors/experiments/phase1_measure.py:214)
+
+3. **Lazy constants from a cloned context still lose precision.** With `c = mp.mp.clone()`, `c.dps = 15`, and the caller at 95 digits, `strip_coordinate(1, c.e, 3)` exceeds the correctly rounded \(3/(e+3)\) by \(1.32633\times10^{-17}\). I reproduced the precision loss with `c.phi` and `c.euler` as well. [Constant conversion](/Users/mw/Desktop/math/remath/studies/03-sobolev-wave-attractors/experiments/phase1_measure.py:67)
+
+4. **Both strip helpers reject a non-singleton interval with an unambiguous answer.** For \(y=[1/4,1/4+2^{-400}]\) and \(a=b=1\), every possible coordinate rounds to \(0.125\) and every possible exit position rounds to \(1.25\) at 95 digits. Both calls raise `NotImplementedError` when converting the stored interval endpoints. [Interval conversion](/Users/mw/Desktop/math/remath/studies/03-sobolev-wave-attractors/experiments/phase1_measure.py:77)
+
+## 2. FINAL SIGN-OFF SUMMARY
+
+| Audit item | Result |
+|---|---|
+| Round 4 polygon replays | The 75-digit interval of width \(2^{-251}\) raises `InsufficientResolution`. The requested square and pentagon probes lie in returned uncertainty bands. Independent chord-map checks confirmed membership at 480 and 520 digits, respectively. The \(10^{-200}\) square probe also passed at 950 digits. |
+| Round 4 strip replays | Both requested `mp.pi` calls match the rounding of both endpoints of independent 420-digit enclosures, with **0 ULP error**. The analogous default-context `mp.e`, `mp.phi`, and `mp.euler` checks also passed. |
+| Suite and CLI | **50/50 tests passed.** `phase1_regular.py --tongues` exited successfully and printed all nine polygon rows, including bracketed unresolved intervals. |
+| Publications and Lean | Round 4 acceptance stands for all three manuscripts, all ten figures, and the Lean 4.36.0 formalization covering 125 public theorems, including 40 principal results. Round 5 was a read-only numerical audit. [Round 4 report](/Users/mw/Desktop/math/remath/studies/03-sobolev-wave-attractors/codex_logs/phase4_referee_r4_output.md) |

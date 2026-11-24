@@ -1,0 +1,147 @@
+import Uncloakability
+import MultiplicityBounds
+import TiltedParity
+import CornerShavingAndTriangles
+
+set_option format.width 180
+
+-- Uncloakability. Main results.
+#print axioms Uncloakability.sharpHalfAmplitude
+#print axioms Uncloakability.finiteSharpHalfAmplitude
+#print axioms Uncloakability.dihedralTimeReversal
+#print axioms Uncloakability.dihedralIterates
+#print axioms Uncloakability.zeroTraceInvariance
+#print axioms Uncloakability.hexagonZeroTrace
+#print axioms Uncloakability.hexagonFixedPointAndContraction
+#print axioms Uncloakability.sharpGlobalAmplitude
+#print axioms Uncloakability.sharpCircuitAmplitude
+#print axioms Uncloakability.hexagonBasinDynamics
+
+-- Uncloakability. Supporting results.
+#print axioms Uncloakability.hexagonWallBounds
+#print axioms Uncloakability.hexagonLocalReturn
+#print axioms Uncloakability.hexagonPeriodicHeights
+#print axioms Uncloakability.sharpProfileData
+#print axioms Uncloakability.hexagonVerticalFibers
+#print axioms Uncloakability.hexagonBasinSigns
+#print axioms Uncloakability.hexagonBasinWeights
+
+-- MultiplicityBounds. Main results.
+#print axioms MultiplicityBounds.fixedPointFree_iff_odd
+#print axioms MultiplicityBounds.gap_fixed_labels
+#print axioms MultiplicityBounds.gap_pair_partition
+#print axioms MultiplicityBounds.attractor_vertex_bound
+#print axioms MultiplicityBounds.mixed_vertex_bound
+#print axioms MultiplicityBounds.four_chain_bound
+#print axioms MultiplicityBounds.central_cylinder_bound
+#print axioms MultiplicityBounds.localWallReturn
+#print axioms MultiplicityBounds.prescribedRateWall
+#print axioms MultiplicityBounds.centralOctagonAttractingRectangle
+
+-- MultiplicityBounds. Supporting results.
+#print axioms MultiplicityBounds.reflection_involution
+#print axioms MultiplicityBounds.mixed_quadrilateral
+#print axioms MultiplicityBounds.nontrivial_gap_hits_vertex
+#print axioms MultiplicityBounds.marked_gap_vertex_bound
+#print axioms MultiplicityBounds.affine_zero_unique
+#print axioms MultiplicityBounds.affine_two_zeros
+#print axioms MultiplicityBounds.affine_interior_root_iff
+#print axioms MultiplicityBounds.affine_root_count
+#print axioms MultiplicityBounds.hexagon_four_chain_witness
+#print axioms MultiplicityBounds.envelope_lines_injective
+#print axioms MultiplicityBounds.neutral_cell_all_heights
+#print axioms MultiplicityBounds.envelope_pieces_bound
+#print axioms MultiplicityBounds.neutral_cell_iff_both_signs
+#print axioms MultiplicityBounds.envelope_cell_interior_not_isolated
+#print axioms MultiplicityBounds.envelope_transition_bound
+#print axioms MultiplicityBounds.isolated_height_is_break
+#print axioms MultiplicityBounds.central_attractor_bound
+#print axioms MultiplicityBounds.rectangle_iff_two_active_signs
+#print axioms MultiplicityBounds.neutral_interval_has_repeated_line
+#print axioms MultiplicityBounds.signedWallCut_concave
+#print axioms MultiplicityBounds.prescribedRateGrowth
+#print axioms MultiplicityBounds.prescribedSlopeCrossing
+#print axioms MultiplicityBounds.SlopeFront.advance_geometry
+#print axioms MultiplicityBounds.SlopeFront.displacement_on_tail
+#print axioms MultiplicityBounds.SlopeFront.alternatingDisplacements
+#print axioms MultiplicityBounds.SlopeFront.advance_localRate
+#print axioms MultiplicityBounds.centralOctagonSymmetry
+#print axioms MultiplicityBounds.centralOctagonFaceRanges
+#print axioms MultiplicityBounds.centralOctagonEightDistinctVertices
+#print axioms MultiplicityBounds.centralOctagonStrips
+#print axioms MultiplicityBounds.centralOctagonExtremeIffVertex
+#print axioms MultiplicityBounds.centralOctagonNeutralCylinder
+#print axioms MultiplicityBounds.centralOctagonLocalReturn
+
+-- TiltedParity. Main results.
+#print axioms TiltedParity.even_boundary_winding
+#print axioms TiltedParity.odd_boundary_winding
+#print axioms TiltedParity.canonical_parity_table
+#print axioms TiltedParity.even_balanced_multiplier
+#print axioms TiltedParity.odd_balanced_multiplier
+#print axioms TiltedParity.canonical_physical_identity_iff
+#print axioms TiltedParity.canonical_regular_interior_iff
+#print axioms TiltedParity.extinction_interval
+#print axioms TiltedParity.extinction_threshold
+#print axioms TiltedParity.square_period_two_iff
+
+-- TiltedParity. Supporting results.
+#print axioms TiltedParity.reduced_winding_fraction
+#print axioms TiltedParity.word_product_formula
+#print axioms TiltedParity.word_product_cover
+#print axioms TiltedParity.canonical_attracting_multiplier
+#print axioms TiltedParity.canonical_physical_word
+#print axioms TiltedParity.even_section_mesh_identity
+#print axioms TiltedParity.odd_section_mesh_no_fixed_interval
+#print axioms TiltedParity.even_reduced_section_lift_identity
+#print axioms TiltedParity.odd_reduced_section_lift_no_fixed_interval
+#print axioms TiltedParity.one_reflected_point_per_gap
+#print axioms TiltedParity.interlaced_arc_discrepancy
+#print axioms TiltedParity.fixed_germ_discrepancy
+#print axioms TiltedParity.even_reduced_section_lift_from_orbits
+#print axioms TiltedParity.canonical_global_identity_iff
+#print axioms TiltedParity.regular_sink_of_crossing
+#print axioms TiltedParity.attracting_cell_iteration
+#print axioms TiltedParity.canonical_tongue_interior_sink
+#print axioms TiltedParity.regular_odd_fixed_has_crossing
+#print axioms TiltedParity.square_half_angle_threshold
+#print axioms TiltedParity.square_algebraic_endpoint
+#print axioms TiltedParity.square_extinction_angle_iff
+#print axioms TiltedParity.SquareEdge.chord_projections
+#print axioms TiltedParity.square_horizontal_return
+#print axioms TiltedParity.square_vertical_return
+#print axioms TiltedParity.zhang_temnov_cycles
+
+-- CornerShavingAndTriangles. Main results.
+#print axioms CornerShavingAndTriangles.triangle_common_extremum
+#print axioms CornerShavingAndTriangles.finite_affine_corner_kernel
+#print axioms CornerShavingAndTriangles.equal_weighted_shell_energy
+#print axioms CornerShavingAndTriangles.microscopic_separation
+#print axioms CornerShavingAndTriangles.at_most_one_bevel_visit
+#print axioms CornerShavingAndTriangles.bevel_return_multiplier
+#print axioms CornerShavingAndTriangles.period_three_midpoint_multiplier
+#print axioms CornerShavingAndTriangles.frequency_density_cancellation
+#print axioms CornerShavingAndTriangles.minimumMultiplier_lt_third
+#print axioms CornerShavingAndTriangles.regular_corner_fractions
+
+-- CornerShavingAndTriangles. Supporting results.
+#print axioms CornerShavingAndTriangles.characteristic_quadrilateral_extremum
+#print axioms CornerShavingAndTriangles.contraction_iterates
+#print axioms CornerShavingAndTriangles.contraction_kernel_at_corner
+#print axioms CornerShavingAndTriangles.finite_affine_local_contraction
+#print axioms CornerShavingAndTriangles.bounded_shell_energy_vanishes
+#print axioms CornerShavingAndTriangles.plateau_deficit_bounds
+#print axioms CornerShavingAndTriangles.block_displacement_error
+#print axioms CornerShavingAndTriangles.equal_leg_multiplier
+#print axioms CornerShavingAndTriangles.projectiveVertexGrid
+#print axioms CornerShavingAndTriangles.unitGridDistance_add_int
+#print axioms CornerShavingAndTriangles.unitGridDistance_half_shift
+#print axioms CornerShavingAndTriangles.unitGridDistance_is_min
+#print axioms CornerShavingAndTriangles.vertexGridDistance_is_min
+#print axioms CornerShavingAndTriangles.axisGridDistances_odd
+#print axioms CornerShavingAndTriangles.axisGridDistances_two_mod_four
+#print axioms CornerShavingAndTriangles.axisGridDistances_four_dvd
+#print axioms CornerShavingAndTriangles.cornerAngularFraction_odd
+#print axioms CornerShavingAndTriangles.cornerAngularFraction_two_mod_four
+#print axioms CornerShavingAndTriangles.cornerAngularFraction_four_dvd
+#print axioms CornerShavingAndTriangles.minimumMultiplier_strictMono

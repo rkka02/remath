@@ -1,0 +1,555 @@
+INTERNAL WAVES IN AQUARIUMS
+WITH CHARACTERISTIC CORNERS
+
+arXiv:2402.01896v2 [math.AP] 13 Apr 2024
+
+ZHENHAO LI
+Abstract. We give a precise microlocal description of the singular profile that
+forms in the long-time propagation of internal waves in an effectively two-dimensional
+aquarium. We allow domains with corners, such as polygons appearing in the experimental set ups of Maas et al. [MBSL97]. This extends the previous work of
+Dyatlov–Wang–Zworski [DWZ21], which considered domains with smooth boundary. We show that in addition to singularities that correspond to attractors in the
+underlying classical dynamics, milder singularities propagate out of the corners as
+well.
+
+1. Introduction
+Let Ω ⊂ R2 = {x = (x1 , x2 ) | xj ∈ R} be an open, bounded, and simply-connected
+domain with Lipschitz and piecewise-smooth boundary. We consider a model of internal waves in the domain Ω that describes the evolution of the stream function u of
+a stable-stratified fluid under time-periodic forcing with profile f ∈ Cc∞ (Ω; R). It is
+given by the following Poincaré problem:
+(∂t2 ∆ + ∂x22 )u = f (x) cos λt,
+
+u|t=0 = ∂t u|t=0 = 0,
+
+u|∂Ω = 0,
+
+(1.1)
+
+where λ ∈ (0, 1) and ∆ := ∂x21 + ∂x22 . The equation models small perturbations of
+a stable-stratified, invicid, hydrostatic, and nonrotating two-dimensional Boussinesq
+fluid. Because the fluid is nonrotating, there exists a stream function u which is related
+to fluid velocity by v = (∂x2 u, −∂x1 u). See for instance Dauxois et al. [DJOV18] for a
+recent review of the equation in the physics literature.
+In this paper, we study the limiting profile of the solution u to the internal waves
+equation (1.1). This expands upon the work of Dyatlov–Wang–Zworski in [DWZ21]
+by allowing corners in the domain Ω. Mathematically, the corners introduce new
+singularities and change the microlocal structure of the singularities in the limiting
+profile. Moreover, the physical experiments conducted with fluids in a tank are always
+done in domains with corners. The results of this paper explain how the mathematical
+model exhibits strong singularities along the periodic orbit and mild singularities that
+stem from the corners as observed in the experiments. See Figure 1.
+To understand the evolution of the solution to (1.1), it is helpful to rearrange the
+fourth-order equation to the form of an evolution problem. If Ω has Lipschitz boundary,
+1
+
+2
+
+ZHENHAO LI
+
+Figure 1. The experiment of Hazewinkel et al. [HTMD10] in which the
+long-time behavior of a stable-stratified fluid in an oscillating trapezoidal
+tank is observed. We see the strongest singularities along a parallelogram
+(which is the attractor of the dynamics) but also milder singularities
+stemming from the corners, which could be explained by the results of
+this paper.
+−1
+then the Dirichlet Laplacian has an inverse ∆−1
+(Ω) → H01 (Ω). Therefore, we
+Ω : H
+can rewrite (1.1) as
+
+(∂t2 + P )w = f cos λt,
+
+w|t=0 = ∂t w|t=0 = 0,
+
+f ∈ Cc∞ (Ω; R),
+
+u = ∆−1
+Ω w,
+
+(1.2)
+
+where the operator P is given by
+−1
+P := ∂x22 ∆−1
+(Ω) → H −1 (Ω).
+Ω : H
+
+(1.3)
+
+Since Ω has Lipschitz and piecewise-smooth boundary, P is non-negative, bounded,
+self-adjoint, and Spec(P ) = [0, 1] on the Hilbert space H −1 (Ω) with the inner product
+−1
+⟨u, w⟩H −1 (Ω) := ⟨∇∆−1
+Ω u, ∇∆Ω w⟩L2 (Ω) .
+
+See Ralston [Ral73, §3] for details. Therefore, the evolution problem (1.2) can be
+solved using the functional calculus of P by
+w(t) = Re(eiλt Wt,λ (P )f ) where
+√
+Z t
+X 1 − e−it (λ ± √z)
+sin(s z) −iλs
+√
+√ √
+e
+ds =
+.
+Wt,λ (z) =
+z
+2
+z( z ± λ)
+0
+±
+
+(1.4)
+
+In fact, it is easy to see that we have the distributional limit
+Wt,λ (z) → (z − λ2 + i0)−1
+
+as t → ∞
+
+∈
+
+Dz′ ((0, ∞)).
+
+Therefore, the focus of this paper will be study the spectrum of P near λ2 . In particular,
+we will establish a limiting absorption principle for P near λ2 in Theorem 2, and use
+this to deduce the following main result using Stone’s formula. Under reasonable
+
+INTERNAL WAVES IN AQUARIUMS WITH CHARACTERISTIC CORNERS
+
+3
+
+geometric and dynamical assumptions, we can understand the long-time behavior of
+the solution u to the internal waves equation (1.1) via the following decomposition.
+Theorem 1. Assume that Ω ⊂ R2 has straight characteristic corners with respect to
+λ ∈ (0, 1) and satisfies the Morse–Smale condition (see Definitions 1.3) . Then the
+solution to the internal waves equation (1.1) can be decomposed as
+
+u(t) = Re eiλt u+ + r(t) + e(t)
+(1.5)
+where
+
+2
+−1
+u+ := ∆−1
+Ω (P − λ + i0) f,
+
+(1.6)
+
+with (P − λ2 + i0)−1 defined in Theorem 2 below, and
+∥r(t)∥H01 (Ω) ≤ C
+
+for all
+
+t ≥ 0,
+
+1
+
+e(t) → 0 in H̄ 2 −β (Ω)
+
+for any β > 0.
+While this decomposition looks similar to [DWZ21, Theorem 1], the structure of
+u+ is very different due to the corners. The precise microlocal description of u+ will
+be given in Theorem 2. Physically, Theorem 1 means that up to a small error and a
+term uniformly bounded in energy space H01 for all times, the limiting solution to the
+internal waves equation is given by Re(eiλt u+ ).
+√
+If the characteristic ratio defined in Definition 1.2 satisfies | log α(λ, κ)| ≤ 3π for
+every corner κ, then u+ is bounded in energy space away from the attractor of the
+underlying classical dynamics. Thus the singularities caused by the corners are much
+milder than the singularities caused by the underlying dynamics. In all experiments,
+the characteristic ratio condition is satisfied, which explains why we primarily see
+singularities forming along the attractor. If the characteristic ratio condition is not
+satisfied, we still have a characterization of the regularity of u+ , but it no longer lies in
+energy space away from the attractors (see Theorem 2). For a heuristic justification of
+why the corner leads to additional milder singularities, see the remark after Theorem 2.
+1.1. Assumptions on the domain. Throughout the paper, Ω ⊂ R2x1 ,x2 will always
+be an open, bounded, and simply-connected domain with Lipschitz and piecewisesmooth boundary. The rest of the assumptions are formulated in terms of the relevant
+underlying classical dynamics of the system. In view of (1.2), we wish to study operators of the form P − λ2 , which is the same as studying the second order differential
+operator
+P (λ) := (P − λ2 )∆Ω = (1 − λ2 )∂x22 − λ2 ∂x21 ,
+
+λ ∈ (0, 1).
+
+(1.7)
+
+For λ ∈ (0, 1), observe
+that P (λ) is the 1 + 1 wave operator with the “speed of light”
+√
+2
+given by c = λ/ 1 − λ . Furthermore, the light rays associated with P (λ) travel along
+
+4
+
+ZHENHAO LI
+
+b(x)
+
+(−, +)
+
+(−, −)
+
+γ − (x)
+`+
+
+=
+
+st
+
+con
+
+st
+
+−
+
+`
+
+=
+
+con
+
+γ + (x)
+(+, −)
+
+x
+
+(+, +)
+
+Figure 2. An example depicting a λ-simple domain with straight characteristic corners for some λ ∈ (0, 1) corresponding to the level sets ℓ± .
+The corner types defined in Definition 1.2 are labeled, as well as the
+involutions γ ± and the chess billiard map b.
+the level sets of the functions
+ℓ± (x, λ) := ±
+
+x1
+x2
++√
+.
+λ
+1 − λ2
+
+(1.8)
+
+Definition 1.1. Let λ ∈ (0, 1). We say that Ω is λ-simple with straight characteristic
+corners (or just λ-simple for short in the context of this paper) if:
+(1) each of the functions ℓ± (•, λ) : ∂Ω → R has a unique maximum and minimum,
+which are achieved at
+±
+x±
+max := arg maxx∈∂Ω ℓ (x, λ),
+±
+x±
+min := arg minx∈∂Ω ℓ (x, λ).
+
+(1.9)
+
+± ∓
+The four points must be distinct and ℓ± (x∓
+max ) ̸= ℓ (xmin ).
+±
+±
+(2) ∂Ω is smooth except possibly at x±
+max and xmin , and ℓ (x, λ) : ∂Ω → R has no
+±
+critical points except possibly at x±
+max and xmin .
+±
+(3) In the case that ∂Ω is smooth near x±
+max or xmin , they must be nondegenerate
+critical points of ℓ± (•, λ) : ∂Ω → R.
+±
+(4) In the case that ∂Ω is not smooth near κ ∈ {x±
+max , xmin }, ∂Ω admits a local
+parameterization in the form
+(
+κ + θv1 θ > 0,
+θ 7→
+κ − θv2 θ < 0
+
+for sufficiently small |θ| and linearly independent v1 , v2 ∈ R2 . Such points are
+called corners and will be denoted by the set K.
+
+INTERNAL WAVES IN AQUARIUMS WITH CHARACTERISTIC CORNERS
+
+5
+
+We believe that the results of this paper should still hold without (4). That is,
+the boundary need not be “straight” near the corners. However, assuming straight
+corners significantly simplifies the computations of the Schwartz kernel of the restricted
+boundary reduced operator in §4.5. With curved boundaries near the corner, these
+computations become bulkier and we need to consider lower order terms in the bcalculus, which the machinery in this paper can handle, but does not add mathematical
+insight. Experiments have also been conducted in domains with straight corners.
+The behavior of the internal waves equation near corners is very different from the
+behavior near other extrema of ℓ± on ∂Ω. It will be useful to further categorize the
+corners as follows.
+Definition 1.2. A characteristic corner κ ⊂ ∂Ω is a type-(µ, ν) corner for µ, ν ∈
+{+, −} if and only if
+for all x ∈ Ω.
+
+µ · ℓ−ν (x − κ, λ) ≥ 0
+
+In particular, near a type-(µ, ν) corner κ, there exists a neighborhood of U of κ and
+α± (λ, κ) > 0 such that
+U ∩ ∂Ω = {x ∈ R2 : ℓν (x, λ) = −α− (λ, κ)ℓ−ν (x, λ), µ · ℓν (x, λ) ∈ (−δ, 0]}
+
+∪ {x ∈ R2 : ℓν = α+ (λ, κ)ℓ−ν (x, λ), µ · ℓν (x, λ) ∈ [0, δ)} (1.10)
+
+for some small δ > 0. Furthermore, we define
+α(λ, κ) = ακ (λ) := α+ (λ, κ)/α− (λ, κ)
+as the characteristic ratio of the corner κ.
+See Figure 2 for a clear diagram of the corner types, since the signs in Definition 1.2
+above can be confusing. We will often omit the dependence on λ and/or κ in the
+notation for α(λ, κ) and α± (λ, κ) when the context is clear.
+Remarks. 1. The upshot of this definition is so that we can take advantage of some
+reflection symmetries. Let Ref 1 (x1 , x2 ) = (−x1 , x2 ) and Ref 2 (x1 , x2 ) = (x1 , −x2 ).
+Then
+• if κ is a type-(+, −) corner of Ω, then Ref 1 (x) is a type-(+, +) corner of Ref 1 (Ω).
+• if κ is a type-(−, −) corner of Ω, then Ref 2 (x) is a type-(+, +) corner of Ref 2 (Ω).
+• if κ is a type-(−, +) corner of Ω, then Ref 1 ◦ Ref 2 (x) is a type-(+, +) corner of
+Ref 1 ◦ Ref 2 (Ω).
+Furthermore, the characteristic ratio α(λ) as well as the α± (λ) parameters remain
+invariant under Ref j . Therefore, it generally suffices to study the local behavior near
+a type-(+, +) corner.
+
+ZHENHAO LI
+
+`−
+
+`+ = const
+
+6
+
+1
+slope = −α−
+
+`− = const
+
+1
+slope = α+
+
+`+
+(+, +)
+
+Figure 3. A diagram of a neighborhood of a type (+, +) corner in
+(ℓ+ , ℓ− ) coordinates. In this picture, the level sets of ℓ+ are vertical and
+the level sets of ℓ− are horizontal. The corner is fixed by γ − .
+2. In a neighborhood of a type-(µ, ν) corner κ, we also have the convenient choice of
+“blown-up” coordinates given by
+r = µ · ℓν (• − κ, λ),
+
+τ=
+
+ℓ−ν (• − κ, λ)
+,
+ℓν (• − κ, λ)
+
+(r, τ ) ∈ [0, δ)r × [−α− , α+ ]τ .
+
+(1.11)
+
+These are basically polar coordinates centered at a corner that resolves the singularity
+at the corner in some sense.
+Assume that Ω is λ-simple. Then there exist unique, continuous, and orientationreversing involutions γ ± (•, λ) = γλ± = γ ± : ∂Ω → ∂Ω that satisfy
+ℓ± (x) = ℓ± (γ ± (x)).
+
+(1.12)
+
+±
+Observe that γ ± fixes x±
+min and xmax and exchanges the two points at which level
+curves of ℓ± (•, λ) intersects the boundary. Now we can define the chess billiard map
+b(•, λ) = bλ = b : ∂Ω → ∂Ω by the composition
+
+b := γ + ◦ γ − .
+
+(1.13)
+
+b is a continuous orientation preserving homeomorphism. See Figure 2 for an example
+of γ ± and b.
+Denote the set of periodic points of b by
+Σλ := {x ∈ ∂Ω : bn (x) = x for some n ≥ 1}.
+
+(1.14)
+
+Definition 1.3. Let λ ∈ (0, 1). Then Ω is Morse–Smale with straight characteristic
+corners with respect to λ (or just Morse–Smale in the context of this paper) if
+(1) Ω is λ-simple (see Definition 1.1),
+(2) Σλ ̸= ∅ and Σλ ∩ K = ∅, which implies that b is smooth in a neighborhood of
+Σλ ,
+
+INTERNAL WAVES IN AQUARIUMS WITH CHARACTERISTIC CORNERS
+
+7
+
+{
+
+Oλ+
+
+{
+
+Oλ−
+
+{
+
+{
+
+Oλ−
+
+Oλ+
+
+Figure 4. Diagram of the trajectories coming out of the corner Oλ± .
+The arrows indicate the conormal directions contained in Λ− .
+(3) Σλ consists of hyperbolic periodic points, that is ∂x bn (x, λ) ̸= 1 for all x ∈ Σλ
+where n is the minimal period.
+Furthermore, we denote the attracting and repulsive periodic points by
+n
+Σ±
+λ = {x ∈ Σλ : ± log(∂x b (x, λ)) < 0}
+
+(1.15)
+
+respectively.
+We note that the above definition is a slight abuse of language, because what we
+really mean that the associated chess-billiard map bλ is Morse–Smale.
+1.2. Spectral result. Now we describe u+ from Theorem 1. To describe the singularities, we need to keep track of the trajectories coming out of the corners. Define
+Oλ+ :={x ∈ ∂Ω : x = bkλ (γλ+ (κ)), k ∈ N0 , κ is type-(±, +)}
+
+∪ {x ∈ ∂Ω : x = bkλ (κ), k ∈ N, κ is type-(±, −)},
+
+Oλ− :={x ∈ ∂Ω : x = b−k
+λ (κ), k ∈ N, κ is type-(±, +)}
+
+(1.16)
+
+−
+∪ {x ∈ ∂Ω : x = b−k
+λ (γλ κ), k ∈ N0 , κ is type-(±, −)}.
+
+Note that the limit points of Oλ± are precisely Σ±
+λ , and we emphasize that this means
+that for all sufficiently small δ > 0,
+Oλ± ∩ Σ∓
+λ (δ) = ∅.
+
+Furthermore, Oλ± \ Σ±
+λ (δ) is a finite set for all δ > 0.
+
+(1.17)
+
+We will describe the singularities of the solution to the internal waves equation (1.1)
+via their wavefront sets (see (3.12)), which is a subset of the cotangent bundle T ∗ Ω.
+
+8
+
+ZHENHAO LI
+
+Roughly speaking, the singularities will lie on the conormal bundle of the trajectories
+coming out of the corners and on the conormal bundle of the periodic cycle.
+For x ∈ ∂Ω, define
+
+±
+±
+Γ±
+λ (x) := {u ∈ Ω : ℓ (y, λ) = ℓ (x, λ)}.
+
+The periodic trajectory is given by
+
+[
+
+Γλ :=
+
+x∈Σ+
+λ
+
+−
+(Γ+
+λ (x) ∪ Γλ (x))
+
+(1.18)
+
+(1.19)
+
+The conormal bundle of Γ±
+λ (y) can be split into positive and negative frequencies
+using the orientation on ∂Ω. In particular, fix a positively-oriented b-parameterization
+x : S1 → ∂Ω. We define for µ ∈ {+, −} the positive and negative conormal bundles
+±
+±
+±
+Nµ∗ Γ±
+λ (x) := {(y, µτ ∂θ ℓ (x(θ))|θ=x−1 (x) dℓ (y, λ)) : y ∈ Γλ (x), τ > 0}.
+
+(1.20)
+
+Note that
+If K ̸= ∅, define
+
+∗ ± ±
+N±∗ Γ±
+λ (y) = N∓ Γλ (γλ (y)).
+
+Λ± (λ) :=
+
+[
+
+x∈Oλ+
+
+[
+
+N±∗ Γ−
+λ (x) ∪
+
+x∈Oλ−
+
+N∓∗ Γ+
+λ (x).
+
+(1.21)
+
+On the other hand, if K = ∅, put
+[
+[
+N±∗ Γ+
+N∓∗ Γ−
+Λ± (λ) =
+(x)
+∪
+λ
+λ (x),
+x∈Σ+
+λ
+
+x∈Σ−
+λ
+
+in which case the notation is the same as in [DWZ21]. Observe that Λ± (λ) does not
+intersect the conormal bundle of Γ±
+λ (κ) for any κ ∈ K. We separately define these
+special rays and denote them by
+[
+srλ = sr :=
+Γνλ (κ).
+(1.22)
+κ∈K,
+ν∈{+,−}
+
+The corresponding conormal bundle is then denoted by N ∗ (sr). Microlocally, the
+singularity of the limiting singular profile in the limiting absorption principle lives on
+the conormal bundle of sr as well as Λ± depending on if the spectrum is approached
+from the upper or lower half complex plane.
+Theorem 2. Let J ⊂ (0, 1) be such that Ω is Morse–Smale with respect to every
+λ ∈ J . Then the spectrum of P is absolutely continuous in J 2 = {λ2 : λ ∈ J }. The
+limits
+(P − λ2 ± i0)−1 f = lim (P − (λ ∓ iε)2 )f in D′ (Ω)
+(1.23)
+ε→0+
+
+exist and
+3
+
+(P − λ2 ± i0)−1 f ∈ H̄ − 2 − (Ω).
+
+(1.24)
+
+

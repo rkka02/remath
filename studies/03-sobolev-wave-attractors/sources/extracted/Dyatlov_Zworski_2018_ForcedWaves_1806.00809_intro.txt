@@ -1,0 +1,496 @@
+MICROLOCAL ANALYSIS OF FORCED WAVES
+SEMYON DYATLOV AND MACIEJ ZWORSKI
+
+Abstract. We use radial estimates for pseudodifferential operators to describe long
+time evolution of solutions to iut − P u = f where P is a self-adjoint 0th order
+pseudodifferential operator satisfying hyperbolic dynamical assumptions and where
+f is smooth. This is motivated by recent results of Colin de Verdière and SaintRaymond [CS18] concerning a microlocal model of internal waves in stratified fluids.
+
+1. Introduction
+Colin de Verdière and Saint-Raymond [CS18] recently found an interesting connection between modeling of internal waves in stratified fluids and spectral theory of zeroth
+order pseudodifferential operators on compact manifolds. In other problems of fluid
+mechanics relevance of such operators has been known for a long time, for instance in
+the work of Ralston [Ra73]. We refer to [CS18] for pointers to current physics literature
+on internal waves and for numerical and experimental illustrations.
+
+x1
+
+=π
+/
+
+=−
+π/
+
+2
+
+2
+
+Σ
+
+x1
+
+arXiv:1806.00809v4 [math.AP] 25 Apr 2019
+
+Dedicated to Richard Melrose on the occasion of his 70th birthday
+
+x2
+
+Tx2 1 ,x2
+
+x1
+
+Figure 1. On the left: the plot of the real part of u(50) for P =
+hDi−1 Dx2 + 2 cos x1 on T2 and f given by a smooth bump function
+centered at (−π/2, 0). We see the singularity formation on the line
+∗
+x1 = −π/2. On the right: Σ := κ(p−1 (0)) ⊂ ∂T T2 . The attracting Lagrangian, Λ+
+0 , comes from the highlighted circles. See §1.3 for a
+discussion of the examples shown in the figures.
+1
+
+2
+
+SEMYON DYATLOV AND MACIEJ ZWORSKI
+
+The purpose of this note is to show how the main result of [CS18] (see also [CdV18])
+follows from the now standard radial estimates for pseudodifferential operators. In particular, we avoid the use of Mourre theory, normal forms and Fourier integral operators
+and do not assume that the subprincipal symbols vanish. We also relax some geometric assumptions. The conclusions are formulated in terms of Lagrangian regularity in
+the sense of Hörmander [HöIII, §25.1]. We illustrate the results with numerical examples. There are many possibilities for refinements but we restrict ourselves to applying
+off-the-shelf results at this stage.
+Radial estimates were introduced by Melrose [Me94] for the study of asymptotically
+Euclidean scattering and have been developed further in various settings. We only
+mention some of the more relevant ones: scattering by zeroth order potentials (very
+close in spirit to the problems considered in [CS18]) by Hassell–Melrose–Vasy [HMV04],
+asymptotically hyperbolic scattering by Vasy [Va13] (see also [DyZw16, Chapter 5]
+and [Zw16]) and by Datchev–Dyatlov [DaDy13], in general relativity by Vasy [Va13],
+Dyatlov [Dy12] and Hintz–Vasy [HiVa16], and in hyperbolic dynamics by Dyatlov–
+Zworski [DyZw16]. Particularly useful here is the work of Haber–Vasy [HaVa15] which
+generalized some of the results of [HMV04]. A very general version of radial estimates
+is presented “textbook style” in [DyZw, §E.4].
+1.1. The main result. Motivated by internal waves in linearized fluids the authors
+of [CS18] considered long time behaviour of solutions to
+(i∂t − P )u(t) = f, u(0) = 0, f ∈ C ∞ (M ),
+P ∈ Ψ0 (M ), P = P ∗
+
+(1.1)
+
+where M is a closed surface and P satisfies dynamical assumptions presented in §1.2.
+By changing P to P − ω0 we can change f to the more physically relevant oscillatory
+forcing term, e−iω0 t f .
+Since the solution u(t) is given by
+Z t
+u(t) = −i
+e−isP f ds = P −1 (e−itP − 1)f,
+
+(1.2)
+
+0
+
+(where the operator P −1 (e−itP − 1) is well defined for all t using the spectral theorem),
+the properties of the spectrum of P play a crucial role in the description of the long
+time behaviour of u(t). Referring to §1.2 for the precise assumptions we state
+Theorem. Suppose that the operator P satisfies assumptions (1.5), (1.8) below and
+that 0 ∈
+/ Specpp (P ). Then, for any f ∈ C ∞ (M ), the solution to (1.1) satisfies
+u(t) = u∞ + b(t) + (t), kb(t)kL2 ≤ C, k(t)kH − 21 − → 0, t → ∞,
+
+(1.3)
+
+MICROLOCAL ANALYSIS OF FORCED WAVES
+1
+
+3
+
+1
+
+where (denoting by H − 2 − the intersection of the spaces H − 2 −ε over ε > 0)
+1
+
+−2−
+(M )
+u∞ ∈ I 0 (M ; Λ+
+0) ⊂ H
+
+(1.4)
+
+and I 0 (M ; Λ+
+0 ) is the space of Lagrangian distributions of order 0 (see §4.1) associated
+to the attracting Lagrangian Λ+
+0 defined in (1.9).
+The proof gives other results obtained in [CS18]. In particular, we see that in the
+neighbourhood of 0 the spectrum of P is absolutely continuous except for finitely many
+eigenvalues with smooth eigenfunctions – see §3.2.
+In the case of general Morse–Smale flows (allowing for fixed points), Colin de Verdière
+[CdV18, Theorem 4.3] used a hybrid of Mourre estimates (in particular their finer
+version given by Jensen–Mourre–Perry [JMP84]) and of the radial estimates [DyZw,
+§E.4] to obtain a version of (1.3) with an estimate on WF(u∞ ). At this stage the
+purely microlocal approach of this paper would only give k(t)kH − 32 − → 0.
+1.2. Assumptions on P . We assume that M is a compact surface without boundary
+and P ∈ Ψ0 (M ) is a 0th order pseudodifferential operator with principal symbol
+p ∈ S 0 (T ∗ M \ 0; R) which is homogeneous (of order 0) and has 0 as a regular value.
+We also assume that for some smooth density, dm(x), on M , P is self-adjoint:
+P ∈ Ψ0 (M ), P = P ∗ on L2 (M, dm(x)),
+p := σ(P ), p(x, tξ) = p(x, ξ), t > 0, dp|p−1 (0) 6= 0.
+
+(1.5)
+
+The homogeneity assumption on p can be removed as the results of [DyZw, §E.4] and
+[DyZw17] we use do not require it. That would however complicate the statement of
+the dynamical assumptions.
+∗
+
+We use the notation of [DyZw, §E.1.3], denoting by T M the fiber-radially compactified co-tangent bundle. Define the quotient map for the R+ action, (x, ξ) 7→ (x, tξ),
+t > 0,
+∗
+
+∗
+
+κ : T M \ 0 −→ ∂T M.
+
+(1.6)
+
+Denote by |ξ| the norm of a covector ξ ∈ Tx∗ M with respect to some fixed Riemannian
+metric on M . The rescaled Hamiltonian vector field |ξ|Hp commutes with the R+
+action and
+X := κ∗ (|ξ|Hp ) is tangent to Σ := κ(p−1 (0)).
+
+(1.7)
+
+Note that Σ is an orientable surface since it is defined by the equation p = 0 in the
+∗
+orientable 3-manifold ∂T M .
+We now recall the dynamical assumption made by Colin de Verdière and SaintRaymond [CS18]:
+The flow of X on Σ is a Morse–Smale flow with no fixed points.
+
+(1.8)
+
+4
+
+SEMYON DYATLOV AND MACIEJ ZWORSKI
+
+x1
+
+x1
+
+=π
+/
+
+=−
+π/
+
+2
+
+2
+
+Σ
+
+x2
+
+Tx2 1 ,x2
+
+x1
+
+Figure 2. On the left: the plot of the real part of u(50) for P given
+by (1.11) and f given by a smooth bump function centered at (−π/2, 0).
+We see the singularity formation on the line x1 = −π/2 and the slower
+formation of singularity at x1 = π/2. On the right: Σ := κ(p−1 (0)). The
+attracting Lagrangian Λ+
+0 comes from the highlighted circles.
+
+For the reader’s convenience we recall the definition of Morse–Smale flows generated
+by X on a surface Σ (see [NiZh99, Definition 5.1.1]):
+(1) X has a finite number of fixed points all of which are hyperbolic;
+(2) X has a finite number of hyperbolic limit cycles;
+(3) there are no separatrix connections between saddle fixed points;
+(4) every trajectory different from (1) and (2) has unique trajectories (1) or (2) as
+its α, ω-limit sets.
+As stressed in [CS18], Morse–Smale flows enjoy stability and genericity properties –
+see [NiZh99, Theorem 5.1.1]. At this stage, following [CS18], me make the strong
+assumption that there are no fixed points. By the Poincaré–Hopf Theorem that forces
+Σ to be a union of tori.
+Under the assumption (1.8), the flow of X on Σ has an attractor L+
+0 , which is a union
+of closed attracting curves. We define the following conic Lagrangian submanifold of
+T ∗ M \ 0 (see [HöIII, §21.2] and Lemma 2.1):
+−1
++
+Λ+
+0 := κ (L0 ).
+
+(1.9)
+
+MICROLOCAL ANALYSIS OF FORCED WAVES
+
+5
+
+1.3. Examples. We illustrate the result with two simple examples on M := T2 =
+S1 × S1 where S1 = R/(2πZ). Denote D := 1i ∂. Consider first
+P := hDi−1 Dx2 − 2 cos x1 , p = |ξ|−1 ξ2 − 2 cos x1 ,
+ξ1 ξ2
+ξ12
+∂
++
+∂x − 2(sin x1 )|ξ|∂ξ1 ,
+x
+|ξ|2 1 |ξ|2 2
+1
+Λ+
+0 = {(±π/2, x2 ; ξ1 , 0) : x2 ∈ S , ±ξ1 < 0}.
+
+|ξ|Hp = −
+
+(1.10)
+
+In this case κ(p−1 (0)) (with κ given in (1.6)) is a union of two tori which do not cover T2
+(and thus does not satisfy the assumptions of [CS18] but is covered by the treatment
+here, and in [CdV18]). See Figure 1 for the plot of Re u(t), t = 50 and for a schematic
+visualization of Σ = κ(p−1 (0)).
+Our result applies also to the closely related operator
+P := hDi−1 Dx2 − 21 cos x1 ,
+|ξ|Hp = −
+
+p = |ξ|−1 ξ2 − 21 cos x1 ,
+
+ξ1 ξ2
+ξ12
+∂
++
+∂x − 1 sin x1 |ξ|∂ξ1 .
+x
+|ξ|2 1 |ξ|2 2 2
+
+(1.11)
+
+The attracting Lagrangians are the same but the energy surface κ(p−1 (0)) consists of
+two tori covering T2 (and hence satisfying the assumptions of [CS18]) – see Figure 2.
+2. Geometric structure of attracting Lagrangians
+In this section we prove geometric properties of the attracting and repulsive Lagrangians for the flow et|ξ|Hp where p satisfies (1.8).
+2.1. Sink and source structure. Let Σ(ω) := κ(p−1 (ω)). If δ > 0 is sufficiently
+small then stability of Morse–Smale flows (and the stability of non-vanishing of X)
+shows that (1.8) is satisfied for Σ(ω), |ω| ≤ 2δ. Let L±
+ω ⊂ Σ(ω) be the attractive
+(+) and repulsive (−) hyperbolic cycles for the flow of X on Σ(ω). We first establish
+dynamical properties needed for the application of radial estimates in §3:
+−
+Lemma 2.1. L+
+ω is a radial sink and Lω a radial source for the Hamiltonian flow of
+|ξ|(p−ω) = |ξ|σ(P −ω) in the sense of [DyZw, Definition E.50]. The conic submanifolds
+−1
+±
+∗
+Λ±
+ω := κ (Lω ) ⊂ T M \ 0
+
+are Lagrangian.
+Remark. It is not true that L±
+ω are radial sinks/sources for the Hamiltonian flow of
+p − ω since [DyZw, Definition E.50] requires convergence of all nearby Hamiltonian
+trajectories, not just those on the characteristic set p−1 (ω). See Remark 3 following [DyZw, Definition E.50] for details. The singular behavior of |ξ| at ξ = 0 is
+irrelevant here since we are considering a neighbourhood of the fiber infinity.
+
+6
+
+SEMYON DYATLOV AND MACIEJ ZWORSKI
+
+−
+Proof. We consider the case of L+
+ω as that of Lω is similar. To simplify the formulas
++
+below we put ω := 0. To see that Λ0 is a Lagrangian submanifold we note that Hp and
++
+ξ∂ξ are tangent to Λ+
+0 and independent (since X does not vanish on L0 ). Denoting
+the symplectic form by σ, we have σ(Hp , ξ∂ξ ) = −dp(ξ∂ξ ) = 0, that is σ vanishes on
+the tangent space to Λ+
+0.
+
+We next show that L+
+0 is a radial sink. For simplicity assume that it consists of a
+single attractive closed trajectory of X of period T > 0, in particular eT X = I on L+
+0.
+Define the vector field
+Y := H|ξ|p
+which is homogeneous of order 0 on T ∗ M \ 0 and thus extends smoothly to the fiber∗
+radial compactification T M \ 0, see [DyZw, Proposition E.5]. We have Y = X on
+∗
+∗
+∂T M ∩ p−1 (0), thus L+
+0 ⊂ ∂T M is a closed trajectory of Y of period T .
+Fix arbitrary (x0 , ξ0 ) ∈ L+
+0 and define the linearized Poincaré map P induced by
+∗
+TY
+de (x0 , ξ0 ) on the quotient space T(x0 ,ξ0 ) (T M )/RY(x0 ,ξ0 ) . The adjoint map P ∗ acts
+∗
+∗
+(T M ) which annihilate Y(x0 ,ξ0 ) . To prove that L+
+on covectors in T(x
+0 is a radial
+0 ,ξ0 )
+sink it suffices to show that the spectral radius of P is strictly less than 1.
+∗
+
+∗
+
+Put ρ := |ξ|−1 which is a boundary defining function on T M , then Σ = ∂T M ∩
+−1
+p (0) is given by {p = 0, ρ = 0}. Since Y = X on Σ and L+
+0 is an attractive cycle
+for X on Σ, we have
+P|ker(dp)∩ker(dρ) = c1
+
+for some c1 ∈ R, |c1 | < 1.
+
+∗
+
+∗
+
+Since Y is tangent to ∂T M = ρ−1 (0), we have Y ρ = f2 ρ for some f2 ∈ C ∞ (T M \0; R).
+Recalling that Y = H|ξ|p we compute Y p = pH|ξ| p = −pHp (ρ−1 ) = f2 p. Denoting
+c2 := f2 (x0 , ξ0 ) we then have
+P ∗ (dp(x0 , ξ0 )) = c2 dp(x0 , ξ0 ),
+
+P ∗ (dρ(x0 , ξ0 )) = c2 dρ(x0 , ξ0 ).
+
+Thus P has eigenvalues c1 , c2 , c2 . On the other hand, eT Y preserves the symplectic
+∗
+density |σ ∧ σ| which has the form ρ−3 d vol for some density d vol on T M which is
+smooth up to the boundary. Taking the limit of this statement at (x0 , ξ0 ) we obtain
+det P = det deT Y (x0 , ξ0 ) = c32 . It follows that c1 = c2 and thus P has spectral radius
+|c1 | < 1 as needed.
+
+For future use we define the conic hypersurfaces in T ∗ M \ 0
+[
+Λ± :=
+Λ±
+ω.
+
+(2.1)
+
+|ω|<2δ
+
+2.2. Geometry of Lagrangian families. We next establish some facts about families of Lagrangian submanifolds which do not need the dynamical assumptions (1.8).
+Instead we assume that:
+
+MICROLOCAL ANALYSIS OF FORCED WAVES
+
+7
+
+• p : T ∗ M \ 0 → R is homogeneous of order 0;
+• Λ ⊂ T ∗ M \ 0 is a conic hypersurface;
+• dp|T Λ 6= 0 everywhere;
+• the Hamiltonian vector field Hp is tangent to Λ.
+Under these assumptions, the sets
+Λω := Λ ∩ p−1 (ω)
+are two-dimensional conic submanifolds of T ∗ M \0. Moreover, similarly to Lemma 2.1,
+each Λω is Lagrangian. Indeed, if G is a (local) defining function of Λ, namely G|Λ = 0
+and dG|Λ 6= 0, then Hp being tangent to Λ implies
+{p, G} = 0 on Λ.
+
+(2.2)
+
+Thus Hp , HG form a tangent frame on Λω and σ(Hp , HG ) = 0 on Λ, where σ denotes
+the symplectic form.
+Since ξ∂ξ is tangent to each Λω , for any choice of local defining function G of Λ we
+can write
+ξ∂ξ = ΦHp + ΘHG
+
+on Λ
+
+(2.3)
+
+for some functions Φ, Θ on Λ. Since the one-dimensional subbundle RHG ⊂ T Λ is
+invariantly defined we see that Φ ∈ C ∞ (Λ; R) does not depend on the choice of G.
+The function Φ is homogeneous of order 1. Indeed, we can choose G to be homogeneous of order 1 which implies that [ξ∂ξ , HG ] = 0; we also have [ξ∂ξ , Hp ] = −Hp . By
+taking the commutator of both sides of (2.3) with ξ∂ξ we see that ξ∂ξ Φ = Φ. Similarly
+we see that Θ is homogeneous of order 0.
+On the other hand, taking the commutators of both sides of (2.3) with Hp and HG
+and using the following consequence of (2.2),
+[Hp , HG ] = H{p,G} ∈ RHG
+
+on Λ,
+
+we get the following identities:
+Hp Φ ≡ 1,
+
+HG Φ ≡ 0 on Λ.
+
+(2.4)
+
+The function Φ is related to the ω-derivative of a generating function of Λω (see (4.3)):
+Lemma 2.2. Assume that Λω is locally given (in some coordinate system on M ) by
+Λω = {(x, ξ) : x = ∂ξ F (ω, ξ), ξ ∈ Γ0 },
+
+(2.5)
+
+where ξ 7→ F (ω, ξ) is a family of homogeneous functions of order 1 and Γ0 ⊂ R2 \ 0 is
+a cone. Then we have
+∂ω F (ω, ξ) = −Φ(∂ξ F (ω, ξ), ξ).
+
+(2.6)
+
+8
+
+SEMYON DYATLOV AND MACIEJ ZWORSKI
+
+Proof. Let G be a (local) defining function of Λ. Taking the ∂ξ -component of (2.3) at
+a point ζ := (∂ξ F (ω, ξ), ξ) ∈ Λ we have
+ξ = −Φ(ζ)∂x p(ζ) − Θ(ζ)∂x G(ζ).
+
+(2.7)
+
+On the other hand, differentiating in ω the identities
+p(∂ξ F (ω, ξ), ξ) = ω,
+
+G(∂ξ F (ω, ξ), ξ) = 0
+
+we get
+h∂x p(ζ), ∂ξ ∂ω F (ω, ξ)i = 1,
+
+h∂x G(ζ), ∂ξ ∂ω F (ω, ξ)i = 0.
+
+(2.8)
+
+Combining (2.7) and (2.8) we arrive at
+hξ, ∂ξ ∂ω F (ω, ξ)i = −Φ(ζ) = −Φ(∂ξ F (ω, ξ), ξ)
+which implies (2.6) since the function ξ 7→ ∂ω F (ω, ξ) is homogeneous of order 1.
+
+
+
+Now we specialize to the Lagrangian families used in this paper. We start with a
+sign condition on Φ which will be used in §5:
+Lemma 2.3. Suppose that for Λ = Λ+ or Λ = Λ− , with Λ± given in (2.1) we define
+Φ± using (2.3). Then for some constant c > 0
+± Φ± (x, ξ) ≥ c|ξ| on Λ± .
+
+(2.9)
+
+Proof. We consider the case of Φ+ as the case of Φ− is handled by replacing p with
++
+−1
+−p. Recall from Lemma 2.1 that each L+
+ω = κ(Λ ∩ p (ω)) is a radial sink for the
+flow et|ξ|Hp . Take (x, ξ) ∈ Λ+ with |ξ| large. Then (with S ∗ M denoting the cosphere
+bundle with respect to any fixed metric on M )
+e−tHp (x, ξ) ∈ S ∗ M
+
+for some t > 0,
+
+t ∼ |ξ|.
+
+(2.10)
+
+Recall from (2.4) that Hp Φ+ = 1 on Λ+ . Thus
+Φ+ (x, ξ) = Φ+ (e−tHp (x, ξ)) + t ≥ c|ξ| − C.
+It follows that Φ+ (x, ξ) ≥ c|ξ| for large |ξ|; since Φ+ is homogeneous of order 1, this
+inequality then holds on the entire Λ+ .
+
+We next construct adapted global defining functions of Λ± used in §4.2:
+Lemma 2.4. Let Λ± be defined in (2.1). Then there exist G± ∈ C ∞ (T ∗ M \ 0; R) such
+that:
+(1) G± are homogeneous of order 1;
+(2) G± |Λ± = 0 and dG± |Λ± 6= 0;
+(3) Hp G± = a± G± in a neighborhood of Λ± , where a± ∈ C ∞ (T ∗ M \ 0; R) are
+homogeneous of order −1 and a± |Λ± = 0.
+
+

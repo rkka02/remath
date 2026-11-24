@@ -1,0 +1,7 @@
+name = "sobolev_attractors"
+version = "0.1.0"
+defaultTargets = ["SobolevAttractors"]
+
+[[lean_lib]]
+name = "SobolevAttractors"
+roots = ["Uncloakability", "MultiplicityBounds", "TiltedParity", "CornerShavingAndTriangles", "Main"]

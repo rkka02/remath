@@ -1,0 +1,234 @@
+## 1. Executive Audit Verdict
+
+**REQUIRES FIXES — 3 critical findings, 17 moderate findings, and 4 minor findings.**
+
+I audited the 17 Phase 1 notes and 20 Phase 1 Python programs read-only. The three critical findings are reproducible: an obsolete solver reports the wrong stationary phase, a purported exact certificate excludes the true rational answer on a valid input, and a historical replication transposes the two mixed payoffs. The last error conceals an architecture reversal already present in Volkonskii’s 1965 example.
+
+**All five headline packages retain a defensible theorem.** The constant-hare equivalent, both fair-corner constants, the weak-reward reversal, and the quorum optimizer survive as stated in their detailed notes. The architecture prefactor needs its direct-route hypothesis in the pitch. The unequal-memory optimizer survives for both tactics, with a lower-limiting-cost formulation in the unresolved negative-correlation region for B. One fair-endpoint proof sentence needs correction.
+
+The counts include defects in the proposed panel wording, source descriptions, and executable probes. Repeated occurrences of the same defect share one finding. No project files were modified.
+
+## 2. Itemized Findings by Target
+
+### Target 1 — Architecture hierarchy, prefactor, and weak rewards
+
+- **C1 · The legacy stationary solver produces a false phase with a small residual.** In the independent game \((R,P,T,S)=(.8,.7,.9,.2)\) at \(n=28\), the deep scout returns \(\pi(CC)=0.4551232366\) with residual \(1.47\times10^{-15}\). Nonnegative state elimination gives \(0.0000114642470767462\). The legacy fit even prints an odds slope of \(+109.35916\) against the true \(-0.30830136\). It solves a nearly singular system in binary64, measures the residual before clipping, then clips negative entries and renormalizes. Replace the stationary routine used by both scouts, or withdraw their probability and slope outputs. The main scouting note already uses the replacement calculation. [Deep solver and fit](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_scout_deep.py:67) · [Quick solver](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_scout_quick.py:89) · [Corrected numerical account](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_scouting.md:35)
+- **M1 · Positive correlation alone does not give the proposed prefactor throughout the K phase diagram.** Take \((P,R,T,S)=(.60,.61,.62,.50)\), \(\kappa_P=1\). For K, the direct cost is \(J=\log 7\), while the mixed route costs \(\log(108/19)<J\). Using \(H_R-J\) gives even the wrong exponential rate. State \(J<H_P+H_T-H_S\) for K and for all-positive-drift L/B. This holds automatically on the strict-PD critical curve \(J=H_R\), including raw \(\kappa_P=1\) for K. The separate L/B theorem for \(S\le1/2<P\) covers every fixed \(0<\kappa_P<1\). The detailed manuscript has these distinctions. [Direct-route hypothesis](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_architectures.md:147) · [Two-core extension](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_architectures.md:183)
+- **M2 · The scouting summary drops decisive feedback-support conditions.** With equal L memories \(n=4\), payoffs \((.8,.6,.9,.2)\), and \((\kappa_R,\kappa_P)=(0,1)\), each oriented mixed profile has stationary mass \(0.0145542824514\). Reduction to a single birth–death chain requires deterministic L, equal memories, and synchronized feedback at both homogeneous profiles. Even synchronized CC can have a single first exit when entered at unequal depths. The weak-reward summary also needs its full-support qualifier. At its very same \((.45,.20,.95,.10)\) payoffs, setting both correlations to one gives the L limit \((6/7,0,0,1/7)\). The detailed weak-reward theorem correctly excludes this law. [Synchronization wording](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_scouting.md:33) · [Weak-reward wording](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_scouting.md:48) · [Full hypotheses](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_weak_rewards.md:3)
+- **M3 · Some transition-building helpers silently simulate a different chain.** On the motivating independent game at depth one, the old dense oracle accepts `kind="K"` and returns the L answer \(15/103\). The K answer is \(27/227\). It also accepts infeasible correlations, while the old SciPy builders clamp them. At \(R=.8,\kappa_R=-1\), the requested double-loss probability would be \(-.12\). The replacement solver validates these inputs, but its lower-level `game_rows(1,2,…,lump=True)` still constructs seven states from eight labeled states although exchange symmetry is unavailable. Validate the tactic, Fréchet bounds, and equal depths at the point of construction. The normal replacement entry point and the published explicitly transformed K check pass. [Dense oracle](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_mpmath_check.py:20) · [Legacy builder](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_scout_quick.py:36) · [Replacement builder](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_chain.py:129)
+- **M4 · “Krinskii’s D” needs a dated boundary convention.** The implementation matches Tsetlin’s 1963 survey: reward jumps to full depth and a shallow penalty flips to the other **shallow** action. Krinskii’s 1964 *Doklady* paper redraws uniformly among **all** actions and enters the selected action at **full** depth. At \(n=2\), a shallow loss under the study rule goes surely to the other shallow state. The 1964 rule gives two possible deep states. The 1966 paper allows different action-entry conventions in its single-environment analysis. Cite the study tactic as the survey’s D variant. Transferring its two-player threshold to the 1964 kernel would require another proof. The 1964 *Doklady* scan was checked separately from the local 1966 extract. [Study’s transition table](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_architectures.md:14) · [Tsetlin 1963, §2](https://www.mathnet.ru/eng/rm6373) · [Krinskii 1964, pp. 1312–13](https://www.mathnet.ru/links/924d02763b1538399a9c006b249049ab/dan29756.pdf) · [Krinskii 1966, §§2–3, 6](https://www.mathnet.ru/eng/ppi1933)
+
+### Target 2 — Optimal correlation and interface splitting
+
+- **M5 · The uniform \(O(n)\) return claim at \(S=1/2\) is false.** From deepest fair cooperation, the probability of reaching the weak edge by \(Bn\) tends to zero for every fixed \(B\). The exact mean time to switch from deepest depth \(n\), with acceptance probability \(u\) at a weak loss, is \(n(n-1)+2n/u\). Use \(O(n^2)\) blocks, require one accepted weak loss, and truncate at \(n^4\). The discarded probability is \(e^{-\Omega(n^2)}\). This repairs line 177 for all fixed \(u\in(0,1]\) and preserves the stationary exponent. The same note already supplies the repair at line 103. [Incorrect general-\(u\) sentence](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_interface.md:177) · [Fair-endpoint argument](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_interface.md:103)
+- **M6 · Existence of a global B rate at every negative correlation is stronger than the proof.** For \(S<1/2\), sufficiently negative correlation, and an active randomized shallow boundary, the manuscript gives bounds and strict selection. It leaves part of the exact B exponent open. Define the optimized quantity globally as \(\underline V=\liminf -n_2^{-1}\log\Pr(\text{successful excursion})\). The unique optimizer and minimum are exact for this quantity, and the ordinary limit exists near and at the optimizer. The detailed theorem acknowledges this qualification. Carry it into the headline. [Optimizer definition](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_optimal_correlation.md:5) · [Unresolved B region and explicit separation](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_negative_krylov.md:29) · [Summary wording](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_scouting.md:97)
+- **M7 · The aspect-ratio program reports endpoints of an empty cooperative set.** At \(\kappa=-.60\) it returns \(0.05985885758\), and at \(-.65\) it returns \(-1.57583389\). The admissible domain is \(\gamma\ge1\). In both cases every admissible ratio defects. Return an empty-set indicator when the strict cooperative set is empty, or label the result as an extrapolated algebraic root. The published grid avoids this defect. [Aspect-ratio routine](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_aspect.py:22)
+- **Minor 1 · A fixed-ratio limit is labeled a finite critical memory.** The old scout prints \(10\gamma_c\) as a critical \(n_1\) with \(n_2=10\), and its grid skips \(n_1=11\). The limit theorem requires both memories to grow. Label the printed value as a scaling prediction and use the actual fixed-opponent values for the finite comparison. [Original print and grid](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_scout_deep.py:156) · [Corrected finite experiment](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_memory.md:7)
+
+### Target 3 — Quadrant escape and the fair corner
+
+- **M8 · The rate evaluator loses relative accuracy on valid nearly fair or nearly diagonal inputs.** At \(p=(1-10^{-95})/2,\kappa=0,\gamma=2\), the default precision gives \(3.16227766\times10^{-96}\). The correct rate is \(1.62277660\times10^{-96}\). At \(p=1/3,\kappa=0,\gamma=1+10^{-90}\), it gives zero for a positive rate of about \(9.375\times10^{-182}\). Preserve the exact difference \(\gamma-1\) and use an adaptive working precision or a cancellation-free small-drift expansion. The analytic radical and the published finite-rectangle enclosures pass. [Rate evaluation](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_quadrant.py:52) · [Working precision](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_quadrant.py:255)
+- **Minor 2 · The fair-corner program can print 55 digits after computing with 30.** With `--digits 30`, the excess digits of \(C_L\) are already wrong. Cap the displayed precision or increase the internal precision. The default values and the digits quoted in the manuscript reproduce. [Accepted precision and output](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_fair_corner.py:80)
+
+### Target 4 — Constant-hare Stag Hunt
+
+**No defect found in the headline theorem, its uniform peak equivalent, or its three requested rational certificates.** Both directional transmission corrections agree exactly. The depth-16 example is a verified local peak, and existence of a finite global peak follows from the theorem. The note correctly stops short of identifying 16 as the global maximizer for that particular game. [Flux and transmission proof](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_reversal.md:212) · [Peak and finite certificates](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_reversal.md:478)
+
+### Target 5 — Partial common fund, threshold inversion, and memory incentives
+
+- **C2 · The general rational certificate can exclude the exact stationary probability.** Set \(m=n=1\), \((R,P,T,S)=(.41,.34,.43,.15)\), and \(\kappa_R=\kappa_P=2/7\). Rational four-state balance gives \(\pi(CC)=176946/689125\). At the standard 75 digits, `rational_payoff_bounds` returns a **lower** bound exceeding this value by exactly \((208323/137825)\,10^{-76}>0\). The routine converts already-rounded `Decimal` transition weights back to `Fraction`. The trial potential may be approximate, but the final residual must use the original rational kernel. Rebuild those rows directly from the input fractions. The eight published memory certificates use terminating transition weights and pass independently, including the \((11,10)\) comparison. [Certificate construction](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_memory.py:84) · [Conversion that loses exactness](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_chain.py:149) · [Exactness claim](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_memory.md:177)
+- **M9 · The common-signal example is missing \(R<1\).** Its hypothesis \(R>P>1/2\) admits \(R=1\), where \(H_n(R)\) divides by zero. The deepest all-C state is then the sole closed class and the stationary DD mass is zero already at finite \(n\). Add \(R<1\) to the displayed finite-odds formula and give the absorbing endpoint separately. [Pooling note, homogeneous-signal example](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_pooling.md:352)
+- **M10 · The old placement benchmark has the wrong Nash welfare.** For one site of capacity \(1\) and eleven of capacity \(3/20\), \(1/6>3/20>1/7\). Exactly six players occupy the rich site and six occupy distinct small sites. Nash welfare is \(19/120\), optimal welfare is \(53/240\), and the relative gain is \(39.47\%\). Replace the old \(0.1458\) and \(51\%\) labels. The Phase 1 pooling note has the corrected result. [Erroneous benchmark](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_mpmath_check.py:194) · [Occupancy proof](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_pooling.md:273)
+- **M11 · The old fund probe misstates what happens at the Nash threshold.** For \((.80,.70,.95,.35)\), CC becomes a Nash equilibrium at \(\alpha=1/2\). DD remains a strict equilibrium all the way to full pooling because \(S_\alpha\le.65<.70\). Replace “Nash flips” with “CC first becomes a Nash equilibrium.” The blind stationary threshold \(0.797191385916507\ldots\) is correct. [Original output](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_scout_quick.py:224) · [Corrected theorem](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_fund_boundary.md:25)
+
+### Target 6 — Novelty and priority
+
+- **C3 · The Volkonskii replication transposes \(T\) and \(S\), concealing a historical architecture split.** On printed pp. 46–47 the first index is the focal player’s action. With \(C=1,D=0\), the published penalties give \((R,P,T,S)=(.85,.65,.90,.60)\), a strict Prisoner’s Dilemma. The script uses \((.85,.65,.60,.90)\). In the order \(DD,\text{mixed},CC\), Volkonskii’s D weight bases are \((.060,.0525,.049)\). His L formula gives \((2/17,21/221,98/507)\). **D selects DD and L selects CC in the original example.** The L log-odds slope is \(\log(833/507)>0\). At depth 40, an independent solve gives \(\pi_L(CC)=.99999990724\) and \(\pi_D(CC)=.00010236787\). Correct the tuple and credit the historical weights. The printed remark about an analogous linear result cannot mean the same selected profile for these same numbers. The study’s weak-reward example reverses this historical ordering. [Transposed tuple](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_scout_deep.py:137) · [Archived index convention](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/sources/extracted/Volkonskii_1965_PPI_1_AsymptoticAutomataGame_rus.txt:790) · [Volkonskii’s printed example](https://www.mathnet.ru/links/613a797544c70233bc7e7d23443ac46e/ppi735.pdf#page=12)
+- **M12 · The catalogue’s strict one-half biconditional is false.** With two distinct reward probabilities \(1/2\) and \(1/4\), the L action weights are \(2n\) and \(2(1-3^{-n})\). The better action has limiting probability one. With equal rewards, payoff optimality is automatic. For interior two-action rewards, include the fair boundary for distinct rewards and handle equal rewards separately. Tsetlin’s \(p_i\) in the 1961 paper denotes a **penalty** probability. [Catalogue claim](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/sources/PRIMARY_SOURCES.md:11) · [Original notation](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/sources/extracted/Tsetlin_1961_AT_22_AutomataRandomMedia_rus.txt:169)
+- **M13 · The “Tsetlin harmonic mean” simulation uses a different signal law and tactic.** It simulates L with independent realized outcomes. At the \((.8,.2)\) cell both players can win with probability .16. Tsetlin’s §6 uses B and complementary realized outcomes. Its harmonic-mean conclusion also has a sign hypothesis on the payoff rows or columns. The script’s ordinary mixed-strategy row win value is \(24/35\), while its comment gives approximately \(5/7\). Implement the historical game for a replication, or relabel this one as zero-sum in expectation and correct the benchmark. [Probe](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_scout_quick.py:206) · [Original theorem and sign conditions](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/sources/extracted/Tsetlin_1963_UMN_18_FiniteAutomataBehavior_rus.txt:1744)
+- **M14 · The historical gap statements are too broad.** Tsetlin already had an optimal finite memory in an exogenously switching environment. Volkonskii stated independent positive-drift L/D profile weights up to constants, omitting the full-game comparison proof. Krinskii studied unequal memories. Gelfand–Pyatetskii-Shapiro–Tsetlin introduced the full fund, and Ginzburg–Krylov–Tsetlin’s placement crossover was a finite simulation table. Pittel’s exact result assumes a common realized signal and a specified feedback curve. Gurvich later disproved general placement and common-fund assertions. Also, Granmo explicitly discusses the Goore game, and Tung–Kleinrock had an independent depth-one result. Replace the blanket history with these model-specific comparisons. Volkonskii’s §7 has a further **original-source erratum**: its printed weight ratio gives \(R\to\infty\) **below** \(a_c=\log_2(\rho_-/\rho_+)/(1-H(r))\) and \(R\to0\) **above** it, the reverse of the next two printed lines. At \(\nu=a_cn+O(1)\) the factor \(\nu^{-1/2}\) tips the ratio to zero. [Catalogue gap statements](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/sources/PRIMARY_SOURCES.md:84) · [Volkonskii, printed p. 48](https://www.mathnet.ru/links/613a797544c70233bc7e7d23443ac46e/ppi735.pdf#page=13) · [Gelfand et al.](https://www.mathnet.ru/eng/dan28648) · [Ginzburg et al.](https://www.mathnet.ru/eng/at11654) · [Pittel](https://www.mathnet.ru/eng/ppi752) · [Gurvich](https://www.mathnet.ru/eng/at7793) · [Tung–Kleinrock](https://doi.org/10.1109/71.494637) · [Granmo](https://arxiv.org/abs/1804.01508)
+- **M15 · The algebraic correlation formula has a close prior occurrence.** Dębicki–Ji–Rolski, equation (5) and Theorem 2.1, give \((1+\mu_1/\mu_2)/2\) for Brownian componentwise ruin with equal capitals and unequal drifts. Their rate reaches a plateau. The study proves a **unique** minimizer for unequal Bernoulli memory barriers in an action-changing game, together with curvature and interface splitting. Those are the claims to attribute to this study. [Study optimizer](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_optimal_correlation.md:7) · [Dębicki–Ji–Rolski, equation (5) and Theorem 2.1](https://arxiv.org/pdf/1906.09347#page=4)
+- **M16 · The powers and the hard endpoint constant have antecedents.** Kobayashi–Miyazawa obtain powers including \(0,-1/2,-3/2\) for reflected-walk tails. Pan–Borovkov obtain the inverse-square-root factor for a free walk entering a distant orthant at one time. Ignatiouk-Robert studies Green functions with killing on return to the origin. The study has moving upper barriers and interior increments preserving \(X-Y\bmod2\). Evans–Pugh’s squared-Catalan generating function gives \(D_0=16/\pi-4\) directly at \(z=1/16\). Credit these results and the classical Jacobi identity. The specified stopped event, phase boundaries, and hard/soft elliptic equivalent remain distinct claims. [Study’s comparison](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_mixing.md:15) · [Kobayashi–Miyazawa](https://arxiv.org/abs/1201.3167) · [Pan–Borovkov](https://arxiv.org/abs/1708.09605) · [Ignatiouk-Robert](https://arxiv.org/abs/2311.06652) · [Evans–Pugh, Lemma 8.6](https://arxiv.org/pdf/1404.1877#page=27) · [Jacobi Fourier series](https://dlmf.nist.gov/22.11.E2)
+- **M17 · The static fund threshold and critical population scale need separate attribution.** For \(\alpha<1\), pooled incentives are proportional to \(u_i+\beta\sum_j u_j\), with \(\beta=\alpha/[N(1-\alpha)]\). Apt–Schäfer’s linear public-good result gives the study’s static threshold \((c-v)/[c(1-1/N)]\) under this change of variables. A finite quorum equilibrium can also be welfare-inferior: at \(N=5\) the two-person quorum gives .73 and all-D gives .80. The stationary optimum and its finite-size displacement remain separate. For the volunteer theorem, \(\sqrt N\) critical extinction scaling already occurs in logistic and SIS models, including synchronous-generation work. The stationary regenerative welfare loss is the specific result to pitch. [Static benchmark](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_fund_boundary.md:5) · [Palfrey–Rosenthal](https://doi.org/10.1016/0047-2727(84)90023-9) · [Apt–Schäfer, §4.6](https://arxiv.org/abs/1105.2432) · [Dolgoarshinnykh–Lalley](https://arxiv.org/abs/math/0512252) · [Lalley](https://arxiv.org/abs/0709.1039) · [Foxall](https://arxiv.org/abs/1805.08339)
+- **Minor 3 · The 2023 Tsetlin Machine paper has the wrong authors in the catalogue.** The authors are Belaid, Sharma, Jiao, Granmo, Andersen, and Yazidi. Its convergence theorem concerns probabilistic concept learning. [Catalogue entry](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/sources/PRIMARY_SOURCES.md:78) · [Original paper](https://arxiv.org/abs/2310.02005)
+- **Minor 4 · Several old run descriptions do not match the experiments.** The “50-digit” loop requests 45 digits. The symmetry-reduced probe advertises depth 20 or 22 and stops at 18. The quick slope labeled 16–20 uses 18–22. The deep scout advertises a fifth Gur experiment and invokes four probes. Generate those labels from the actual parameters and correct the inventory. [Precision and depth labels](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_mpmath_check.py:75) · [Slope labels](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_scout_quick.py:151) · [Probe inventory](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/experiments/phase1_scout_deep.py:289)
+
+## 3. Confirmed Verified Claims
+
+### 1. Architecture hierarchy and critical selection
+
+**Historical transitions and Krylov thinning.** The 1963 survey and Krylov’s original graph and central balance equations support the implemented L, B, K and survey-D updates. A weak B loss redraws from both actions, including the current action. Krylov’s private coin acts on every penalty. Independent enumeration of the external outcomes and private coins agreed with all 1,216 labeled transition rows tested. For unequal reward marginals \(p_1,p_2\), the exact transformation is
+\[
+p_i'=(1+p_i)/2,\qquad \operatorname{Cov}'=\operatorname{Cov}/4,\qquad
+\kappa'_{12}=\kappa_{12}\sqrt{\frac{p_1p_2}{(1+p_1)(1+p_2)}}.
+\]
+Thus the scalar multiplier \(p/(1+p)\) holds on symmetric profiles, and independent mixed profiles stay independent. Krylov’s original uses penalty probabilities and numbers its shallow states \(n,2n\). [Transition table and transformation](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_architectures.md:16) · [Krylov’s original, p. 1227](https://www.mathnet.ru/eng/at12262)
+
+**Thresholds and signs.** With \(p=P,\ q=1-p,\ l=1-\kappa\), I obtain
+\[
+ F_L=F_B=\frac{p^2+\kappa pq}{p^2+q^2+2\kappa pq},\qquad
+ F_D=p+lpq,\qquad F_K=\frac{2p}{1+p^2+\kappa pq},
+\]
+\[
+ F_D-F_L=\frac{2lpq^2(1-lp)}{1-2lpq},\qquad
+ F_K-F_D=\frac{pq(1-lp)(1-lq)}{1+p-lpq}.
+\]
+Both differences are positive for \(1/2<p<1\) and \(0\le\kappa<1\). At \(\kappa=1\), \(F_L=F_B=F_D=p\) and \(F_K=2p/(1+p)\). At \(\kappa=0\), the three distinct thresholds are \(p^2/(p^2+q^2),\,2p-p^2,\,2p/(1+p^2)\). At \(p=1/2\) their algebraic values are \(1/2,(3-\kappa)/4,4/(5+\kappa)\), wherever defined. At \(\kappa=-1\) the L expression is \(0/0\). For full-support fair DD and \(R>1/2\), the separate L/B proof gives \(-n^{-1}\log(1-\pi_n(CC))\to h_R\). [Thresholds](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_architectures.md:53) · [Fair-punishment theorem](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_weak_rewards.md:150)
+
+**Trace, bridge, and independence.** Eliminating the mixed state from the three-state trace gives equation (3) exactly. For equation (5), put \(\theta=J/2\). In the backward representation, after the first crossing the remaining weights are \(e^{-\theta L}\) for \(L\ge0\) and \(e^{(H_P-\theta)L}\) for \(L<0\). Both sums converge because \(0<\theta<H_P\). The span-two ladder displacement has nonzero variance and an \(O(N^{-1/2})\) uniform point bound. For the matching confined bridge there are \(\Theta(\sqrt n)\) admissible times of the correct parity, each with endpoint mass \(\Theta(n^{-1})\). Fixed end buffers leave a positive fraction inside all four walls. The events are disjoint first crossings. This gives the claimed \(n^{-1/2}\), including on K’s critical curve at raw correlation one. For raw \(S\le1/2<P\), the two-core L/B trace works through the neutral endpoint with \(O(n^2)\) mixed return blocks. [Trace identity](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_architectures.md:73) · [Backward maxima and bridge](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_architectures.md:156) · [Two-core transfer](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_architectures.md:185)
+
+At independent DD and mixed feedback, reversal of the product walk gives a bounded-factor lower bound. The strict \(T>P\) gap controls the completion through a mixed profile. The odds are \(\Theta(e^{n(H_R-V)})\), with \(V=\min(2H_P,H_P+H_T-H_S)\) when all effective drifts are positive and \(V=2H_P\) for L/B when \(S\le1/2<P\). Critical equality gives coexistence in the stated sense: both homogeneous masses are bounded below. The independent positive-drift tree costs \(W_C=p+\min(t,p+s),\,W_D=r+\min(s,r+t),\,W_M=r+p\) also check. [Independent-shock bounds](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_architectures.md:198) · [Tree derivation](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_social_game.md:9)
+
+**Reset endpoints and weak reversal.** Write \(q_x=1-x\), \(c=\Pr(--\mid DD)\). Survey-D odds have base \(\max(c,q_Pq_T/q_S)/q_R\) for all feasible homogeneous laws. At \(c=0\), the leading coefficient is \(1\) for \(\kappa_R<1\) and \(2T/(1-q_Rq_T)\) for \(\kappa_R=1\). The mixed-to-DD equivalent is \(2(q_P/q_S)^n\). At maximal anticorrelation, \(R=2P\) is an attainable transition only for \(P<1/2\). For \(P\ge1/2\) every admissible \(R\) selects DD there. In the independent weak example the shallow opponent’s cooperative frequency is \(u=3/7\), the drift correction is \(b=15/14\), and the residual drift is \(\mu=3/70>0\). Exchange symmetry gives the L/B limit \((0,3/14,3/14,4/7)\). The D and K thresholds are \(9/25\) and \(5/13\), both below \(R=9/20\), giving \((1,0,0,0)\). The full-support \(T+S=1\) uniform-depth limit, \(\Theta(1/n)\) CC mass there, and critical-window density proportional to \(e^{4au x/\sigma^2}\) also survive. [Reset theorem and coefficients](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_anticorrelated_reset.md:66) · [Weak-reward theorem](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_weak_rewards.md:9) · [Critical window](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_weak_rewards.md:107)
+
+### 2. Unique correlation and interface splitting
+
+Put \(h=\log(P/(1-P)),\ r=\log(R/(1-R)),\ \delta=2P-1\). The long coordinate alone costs at least \(\gamma h\). At the tilt \((h,0)\), the two mean velocities are \(\delta\) and \(\delta(2\kappa-1)\). Their ratio matches the target exactly at
+\[
+\kappa_*=\frac{1+1/\gamma}{2}.
+\]
+The tilted straight path attains the marginal lower bound there. All of the strictness cases survive:
+
+| Correlation | Why the cost exceeds \(\gamma h\) |
+|---|---|
+| Feasible \(\kappa\le0\), including independence and the lower endpoint | \(M(h,h)=1+\kappa P(1-P)(e^h-e^{-h})^2\le1\). The two last-departure orders give at least \((\gamma+1)h\). |
+| \(0<\kappa<1/2\) | \(M_t(h,0)<0\), so a small positive second tilt improves the bound. |
+| \(\kappa=1/2\) | \(s'(0)=0,\ s''(0)=-1/\delta\). A small positive second tilt still improves the objective. |
+| \(1/2<\kappa<\kappa_*\) | The objective derivative is \(1-\gamma(2\kappa-1)>0\). |
+| \(\kappa_*<\kappa<1\) | The derivative is negative and a negative second tilt is feasible. The mixed and randomized return constraints are strictly slack at \((h,0)\). |
+| \(\kappa=1\) | The cost is \(h+(\gamma-1)s_{I,u}\) with \(s_{I,u}>h\). |
+
+Writing \(w=2\kappa-1\) gives
+\[
+s'(0)=-w,\quad D_2=(1-w)(1+w\delta^2),\quad s''(0)=-D_2/\delta.
+\]
+Maximizing the local quadratic gives exactly
+\[
+ C_\gamma=\frac{2\gamma\delta}{(1-1/\gamma)(1+\delta^2/\gamma)},\qquad
+ \kappa_\pm=\kappa_*\pm\sqrt{\frac{r-\gamma h}{C_\gamma}}+O(r-\gamma h).
+\]
+The supremum for strict exponential cooperation is \(r/h\). At the tip the theorem gives exponential balance. The limiting stationary mass there is a separate question. [Strictness and curvature](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_optimal_correlation.md:15) · [Barrier valid across action switches](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_negative_krylov.md:67)
+
+For the interface, independent derivation gives \(g_C=uz_C/[1-(1-u)z_C]\), \(\Phi_u=(1-u)+ug_C\), and \(\mathcal R_u=B_D/z_D+A_D\Phi_u(z_C)\). In particular \(\Phi_1(z)=z\) and \(\Phi_{1/2}(z)=1/(2-z)\). The finite test function’s C-side interpolation \(c_n+(1-c_n)h_n\) has boundary ratio \(\rho=(z_D-1+u)/u\) when \(c_n=(\rho-h_n(1))/(1-h_n(1))\). The weak-D multiplier is then exactly \(z_D\). The C half is superharmonic, and \(\mathcal R'_u(s_I)>0\) at strict truncation. The claimed separation is
+\[
+ 1.15386227926998=V_B<\log(39/11)=1.26566637333128<V_L=1.38348782377732
+\]
+to the displayed precision. [Finite test function](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_interface.md:140) · [Return transform and separation](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_interface.md:197)
+
+The six \((120,40)\) stationary values reproduce with **\(\kappa_R=0\)**:
+
+| \(\kappa_P\) | L, \(\pi(CC)\) | B, \(\pi(CC)\) |
+|---:|---:|---:|
+| \(0\) | \(1.1243824689470\,10^{-6}\) | \(1.2019409018877\,10^{-6}\) |
+| \(2/3\) | \(0.517847044030906\) | \(0.605023741909940\) |
+| \(1\) | \(4.6895728330092\,10^{-22}\) | \(5.2111750650393\,10^{-12}\) |
+
+Setting **both** correlations to \(2/3\) changes the middle row to \(0.563799087635426\) and \(0.616779253523916\). The stationary example therefore needs the CC-correlation label even though the optimizer depends only on the DD correlation. [Finite example](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_optimal_correlation.md:53)
+
+### 3. Quadrant trichotomy and fair-corner constants
+
+For the hard stopped event, take \(1/2<p<1,\ -q/p<\kappa<1,\ m=\gamma n+O(1)\), and \(h=\log(p/q)\). The bounded rounding error matters for a fixed-ray \(\Theta\) equivalent. The four rows are correct.
+
+| Regime | \(E\) | \(\beta\) |
+|---|---|---:|
+| \(\kappa\ge1/2\), or \(g>\gamma\) where defined | \(H(\gamma,1)\) | \(-1/2\) |
+| \(0<g\le\gamma\) | \(\gamma h+t_*\) | \(0\) |
+| \(g=0\) | \(\gamma h+t_*\) | \(-1/2\) |
+| \(g<0\) | \(\gamma h+H(0,1)\) | \(-3/2\) |
+
+With \(\delta=2p-1\),
+\[
+ \lambda=1-2\kappa,\quad t_*=\log\frac{1+\delta\lambda}{1-\delta\lambda},\quad
+ g=\frac{1+(1-\delta^2)\lambda-\lambda^2}{\lambda(1-\delta^2\lambda^2)},\quad
+ \lambda_0=\frac{1-\delta^2+\sqrt{(1-\delta^2)^2+4}}2,\quad
+ \kappa_0=\frac{1-\lambda_0}{2}.
+\]
+For the radical, setting \(u=s+t,v=s-t,z=2b\cosh v\) gives
+\(z^2-4b^2=e[(1-z)^2-4ad]\), \(e=(|x-y|/(x+y))^2\). Its admissible root, the plus sign in the logarithm for \(u\), and \(H=((x+y)u+|x-y|v)/2\) all agree with the manuscript. Conditional on **both** endpoint sums, the horizontal signs are exchangeable. The ceiling fraction is exactly \(2(\ell+1)/(j+\ell+2)\) on the reachable parity. The two-endpoint reflected binomial ratio in equation (3) gives the matching lower bound. For bounded \(\ell\) this supplies the extra \(n^{-1}\) in the pinned regime. The hard independence equivalent is
+\[
+ h_{m,n}\sim (q/p)^{m+n}
+ \frac{(1-q/p)^2}{\sum_{j\ge0}\operatorname{Cat}_j^2(pq)^{2j}} .
+\]
+All seven published rows reproduced at \(n=20,40,80\). At the lower Fréchet endpoint the hard corner is unreachable. At perfect correlation it is unreachable for unequal hard barriers, and at equal barriers its probability is \(q(e^h-1)/(e^{nh}-1)\). [Table and radical](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_quadrant.md:24) · [Ballot identities](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_quadrant.md:192) · [Catalan equivalent](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_quadrant.md:402)
+
+The soft boundary threshold is \(t_\gamma=-\log2\), with power zero already at equality. Its additional phase exists precisely under the stated root condition \((4p-5b)(q-5b)=16(pq-b)^2\). At \(p=.7,\kappa=181/189\), the velocities are \(23/75,1/6\) and \(\gamma_B=46/25\). At \((120,40)\) the frozen B and L committors are respectively \(1.011315102135736\,10^{-61}\) and \(2.113900767970604\,10^{-64}\). At perfect synchrony, the soft equivalent is \((p-q)(q/p)^m2^{-(m-n)}\). These are per-excursion corner probabilities. [Soft phase boundary](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_random_boundary.md:24) · [Finite rational enclosures](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_random_boundary.md:190)
+
+**Every requested fair-corner factor checks.** Inverting the killed two-point trace gives \(h=G_{oc}/(G_{oo}G_{cc}-G_{oc}^2)\) exactly. Folding at \(-1/2\) gives a one-coordinate return probability asymptotic to \(\sqrt{2/(\pi j)}\). The product is \(2/(\pi j)\), and summing to time \(n^2\) gives \(G_{oo}\sim(4/\pi)\log n\). The independent endpoint evaluations are
+\[
+ D_0=\frac4\pi\int_0^\pi\frac{\sin^2 t}{1+\sin t}\,dt=\frac{16}{\pi}-4,\qquad
+ D_{1/4}=\frac{256}{\pi}\left(\frac{\log3}{20}-\frac{\pi}{80}\right)
+ =\frac{16}{5}\left(\frac{4\log3}{\pi}-1\right).
+\]
+Each soft endpoint convolution contributes \(1/(1-2w)\). Thus \(n^2G_{oc}\to I(\gamma)/(1-2w)^2\), where
+\[
+ I(\gamma)=2\pi\sum_{j\ge0}\frac{(-1)^j(2j+1)}{\cosh((2j+1)\pi\gamma/2)}
+ =\frac{4kk'K(k)^2}{\pi},\qquad K(k')/K(k)=\gamma .
+\]
+At \(\gamma=1\) the coefficients of \(1/(n^2\log n)\) are exactly
+\[
+ C_L=\frac{\Gamma(1/4)^4}{128(4-\pi)}=1.57260953586626\ldots,\qquad
+ C_B=\frac{5\Gamma(1/4)^4}{128(4\log3-\pi)}=5.38744691613049\ldots .
+\]
+The fair theorem only needs \(m/n\to\gamma\) finite. Exact small-rectangle solves and the quoted \(n=160,1024\) values agree. [Green entries and both integrals](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_fair_corner.md:25) · [Spectral transfer and soft factors](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_fair_corner.md:46)
+
+The companion infinite-workload results also survive: the four fixed-correlation tail equivalents, the \(\sqrt n\,\kappa\) Gaussian window, the \(n(1-\kappa)\) Poisson window, the independent first-switch tie constant, and the synchronized L game’s total-variation profile and gap under its stated hypotheses. The fair frozen power at nonzero interior correlation remains open. [Workload laws](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_mixing.md:17) · [Windows and switching times](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_mixing.md:79) · [Synchronized full-chain theorem](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_mixing.md:121)
+
+### 4. Constant-hare equivalent, peak, and certificates
+
+For equal-memory L, fresh independent feedback, \(P=T\), and \(1/2\le S<P<R<1\), write \(\rho_x=(1-x)/x\) and \(G_n=\sum_{j=0}^{n-1}(S/(1-S))^j\). The exact reference fluxes are
+\[
+ F=u^2-(u-f)^2=f^2\left(\frac{2G_n}{1-S}-1\right),\quad
+ F_C=2f_C-f_C^2,\quad
+ f_C=\frac{(2R-1)\rho_R^n}{1-\rho_R^n}.
+\]
+Reversal gives \(\nu_D(z)d_n\sim F(1-\rho_P)\) and \(\nu_C(w)c_n\sim F_C(1-\rho_R)\). The infinite ladder gives
+\[
+ h_C=\frac{1-\rho_R}{1-\rho_R\rho_P},\qquad h_D=\rho_P h_C.
+\]
+Consequently the two directed transmission multipliers are **identical**:
+\[
+ (1-\rho_P)h_C=(1-\rho_R)(1-h_D)
+ =\frac{(1-\rho_P)(1-\rho_R)}{1-\rho_R\rho_P}.
+\]
+Conditional corner occupations cancel the remaining reference masses. This proves
+\[
+ U_n\sim F/F_C\sim\frac{(2P-1)^2}{(1-S)(2R-1)}
+ G_n\left(\frac{\rho_P^2}{\rho_R}\right)^n .
+\]
+For \(S<1/2\) the general result is a two-sided order bound. The stronger equivalent uses the diverging resident depth at a typical crossing when \(S\ge1/2\). [Exact fluxes](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_reversal.md:83) · [Backward factors](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_reversal.md:212) · [Time normalization](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_reversal.md:257)
+
+At \(S=1/2\), compact uniformity in \(R\) permits optimization over integers. With \(\delta=-\log(\rho_P^2/\rho_R)\) and \(R\uparrow R_c=P^2/(P^2+(1-P)^2)\), the unique maximum of \(xe^{-x}\) gives \(\delta n_*\to1\) for every maximizing depth and \(1-\max_n\pi_n(CC)\sim e\delta/K(R_c,P,1/2)\). An independent exact labeled-chain calculation gives
+\[
+ \pi_1(CC)=3328/9233,\qquad
+ \pi_2(CC)=58905001984/110489411359,\qquad
+ \lfloor10^{12}\pi_{10}(CC)\rfloor=809934794001.
+\]
+In particular \(\pi_{10}(CC)>4/5\). The exponential passage laws, mixing equivalent, and six exact quarter-TV mixing times \(5,67,943,12628,172177,2401947\) also reproduce. [Uniformity argument](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_reversal.md:285) · [Mixing equivalent](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_reversal.md:339) · [Finite certificates](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_reversal.md:478)
+
+### 5. Quorum, volunteer game, redistribution, and memory
+
+**Quorum.** For the specified synchronous independent depth-one kernel, the conditional mean is
+\[
+ F_e(x)=x+\nu[e(1-2x)+cx(2\alpha-1-2\alpha x)] .
+\]
+The branch crossing \(A_e=[c\theta-e(1-2\theta)]/[2c\theta(1-\theta)]\) gives \(2/9\) and \(3/5\). The pivotal Nash threshold is \(43N/[60(N-1)]\) when feasible. The welfare limits at \(\alpha=0,2/3,1\) are \(.68,.79,.67\), and optimal welfare tends to \(.82\). Every maximizing share tends to \(A=3/5\). The fixed-share deficit is \(\Theta(1/\log N)\). Both \(\alpha_N^{\rm opt}-A\) and \(\min_\alpha\rho_N(\alpha)\) are \(\Theta(\sqrt{\log N/N})\), with positive displacement for sufficiently large \(N\). [Drift and thresholds](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_pooling.md:22) · [Finite-size theorem](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_pooling.md:76)
+
+The probability argument survives both proposed attacks. On the productive extension the sum of Bernoulli variances is of order \(N\), uniformly, so Berry–Esseen gives a fixed chance of a strict miss from the \(O(\sqrt N)\) count window. For the optimizer bound, tilt to mean \(\min(\mu,N\theta-2\sqrt N)\). The interval of radius \(\sqrt N\) lies strictly below the quota and has tilted probability at least \(3/4\). Undoing the tilt gives the stated exponential lower bound, including \(4\mid N\). The proof transfers the resulting **hitting probability** to stationary mass by a union bound over deterministic times. It never needs the distribution at a stopping time to be stationary. Independently calculated count chains reproduced all eight tabulated welfare comparisons. [Fixed-share argument](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_pooling.md:52) · [Tilt and stationary window](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_pooling.md:100)
+
+**Volunteer game.** At half pooling, the displayed functions satisfy \(F''(s)=-2N/[s(N+s^2)]\) and \(G''(s)=-(s+\sqrt N)^{-2}\). The conditional variance is comparable to \(k\), and the fourth central moment is \(O(k^2)\). The resulting one-step decreases are comparable to \(1\) and \(k/N\), respectively. Regeneration gives cycle length \(\Theta(\sqrt N)\), cumulative volunteer fraction \(\Theta(\log N)\), and stationary welfare loss \(\Theta((\log N)/\sqrt N)\). Every maximizing share tends to \(1/2\) for the stated perfect-success model and to zero for the specified fixed-positive-failure model. The two-site placement maximizers \(200-\sqrt{39769}\) for L and \(200-\sqrt{39849}\) for B also check. [Volunteer drift proof](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_pooling.md:183) · [Failure-probability distinction](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_pooling.md:215) · [Two-site formula](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_pooling.md:257)
+
+**Fund inversion and memory.** Both two-player examples have the CC-Nash threshold \(1/3\). The blind thresholds are \(0\) and \(1-(19-\sqrt{340})/1.5=0.6260592763905164\ldots\). The cascade crossing reduces to \((K-1)(P(1-P)+z^2)=(K+1)z\). In the fixed-opponent experiment, the tagged payoffs at \((10,10),(11,10),(12,10)\) are respectively \(.743962571531404,.746391275680356,.735637981028833\). Depth 11 maximizes both recorded quantities over **every integer from 4 through 34**. The fixed-opponent limiting payoff is \(435941/724450\). The fixed-opponent drift criterion, positive-drift Perron argument, and profitable adjacent upgrade for the stated example at every \(n\ge40\) also survive. [Two fund thresholds](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_fund_boundary.md:7) · [Fixed-opponent results](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_memory.md:7) · [Adjacent-upgrade proof](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_memory.md:103)
+
+For the specified \(N\ge3\) public good with one independent uniform **per action group** each round, both frozen-group advantages have sign \(h(N-2)/(N-1)-d\). Taking tagged memory to infinity first and peer memory second gives peer collective cooperation frequencies \(1,1/2,0\) below, at, and above the boundary. Above it, unanimous defection tends to one. The equality statement concerns all synchronized peers cooperating half the time. [Population law and order of limits](/Users/mw/Desktop/math/remath/studies/02-tsetlin-collective-automata/docs/phase1_memory.md:133)
+
+## 4. Pitch-Readiness Assessment
+
+| Package | Panel verdict | Defensible claim |
+|---|---|---|
+| **1. Architecture hierarchy** | **Ready with explicit scope and historical correction** | Three threshold values for four specified tactics, critical coexistence versus \(n^{-1/2}\) selection, and the independent weak-reward reversal. Name the survey-D boundary and credit the opposite L/D split in Volkonskii’s example. |
+| **2. Optimal imperfect correlation** | **Ready with the fair-return sentence repaired and the global rate qualified** | A unique DD correlation attains the long player’s marginal cost. Both correlation extremes can select DD while the interior optimum selects CC. The exact curvature and the strict B/L interface split strengthen the claim. Credit the Brownian threshold precedent. |
+| **3. Quadrant and fair corner** | **Ready for the stated stopped event** | The four regimes, the ballot mechanism for \(-3/2\), the soft-wall change of exponent, and the complete hard/soft fair-rectangle equivalent with its elliptic shape factor. Attribute the known powers, squared-Catalan identity, and Jacobi formula. |
+| **4. Constant-hare Stag Hunt** | **Ready as written** | Every fixed subcritical fair-solo game loses cooperation at infinite memory, yet its best finite-memory cooperation tends to one as \(R\uparrow R_c\). The optimum’s location, deficit, and stationary-odds coefficient are explicit. This is the cleanest lead result. |
+| **5. Partial common fund** | **Ready for the specified independent depth-one population** | Every optimal share tends to \(3/5\) from above, below the limiting pivotal Nash threshold \(43/60\). The fixed limiting share and the finite optimizer have provably different welfare-deficit orders. The two-player threshold inversion and the iterated-limit memory boundary also pass. |
+
+**Withhold the obsolete binary64 output, the general-purpose exactness claim for the current memory certificate routine, and the transposed historical replication from the panel materials.** The concrete antecedents above establish where priority must be credited. Worldwide priority for the remaining combined theorems is unverified.

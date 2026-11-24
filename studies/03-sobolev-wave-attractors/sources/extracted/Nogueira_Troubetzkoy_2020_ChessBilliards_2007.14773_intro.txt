@@ -1,0 +1,383 @@
+CHESS BILLIARDS
+
+arXiv:2007.14773v1 [math.DS] 29 Jul 2020
+
+ARNALDO NOGUEIRA AND SERGE TROUBETZKOY
+Abstract. We show the chess billiard map, which was introduced
+in [HM] in order to study a generalization of the n-Queens problem
+in chess, is a circle homeomorphism. We give a survey of some of
+the known results on circle homeomorphisms, and apply them to
+this map. We prove a number of new results which give answers
+to some of the open questions posed in [HM].
+
+1. Introduction
+The classical n-Queens problem asks in how many different ways n
+mutually non-attacking queens can be placed on an n × n chess board.
+In [HM] Hanusa and Manhankali studied a generalization of this problem, and they introduced a dynamical system which they describe as
+“reminiscent of billiards” to aid their study. We will call this dynamical system the chess billiard, and in this article we will study it from a
+purely dynamical point of view.
+The chess billiard is defined as follows, consider a convex planar
+domain P and fix a direction θ1 . Foliating the plane by lines in this
+direction yields an involution of T1 of the boundary ∂P as follows:
+each line intersects ∂P in either no point, one point, two points, or a
+segment. In the cases when the intersection is non-empty, we define
+respective the map T1 to be the identity, to exchange the two points, or
+to be the central symmetry of the segment about its center. The chess
+billiard map is then the convolution of two such involutions defined by
+a pair of directions (θ1 , θ2 ). The chess billiard map turns out to be a
+circle homeomorphism.
+The chess billiard map was already introduced in various other articles (without reference to chess), Arnold mentions this map as his
+motivation for the study of KAM theory [A]. The map was also studied in a special case by Khmelev [Kh] (see Section 4.4).
+Our article has two purposes. We first collect various well known
+results on circle homeomorphisms and apply them to the chess billiard
+map to deduce certain interesting results, in particular answering some
+Date: July 30, 2020.
+The project leading to this publication has received funding from Excellence Initiative of Aix-Marseille University - A*MIDEX and Excellence Laboratory Archimedes LabEx (ANR-11-LABX-0033), French "Investissements d’Avenir"
+programmes. The first author A.N. thanks the program CEFIPRA project No.
+5801-1/2017 for their support.
+1
+
+2
+
+ARNALDO NOGUEIRA AND SERGE TROUBETZKOY
+
+questions posted in [HM]. Then we go on to prove new results about the
+chess billiard. We prove some general results on periodic points, then
+we turn to the study of the chess billiard in a polygon. In particular
+we prove results about the chess billiard map in triangles, in centrally
+symmetric domains and in the square. Our results on the square are
+undoubtedly the most interesting of the article.
+The ultimate goal of the study of chess billiards is to understand for
+which convex domains and directions the rotation number is rational
+and for which it is irrational.
+1.1. Structure of the article. In Section 2 we give the formal definition of the chess billiard map and show that it is a circle homeomorphism (Proposition 1) and apply the theory of circle homeomorphisms,
+due to Poncaré and Denjoy to them (Corollary 2). Then in Section 3
+we go on to illustrate this by analyzing the easiest case, the chess billiard map in the circle. In Section 4 we give a necessary and sufficient
+condition for S to have a fixed point (Proposition 5), this allows us to
+understand fixed points in strictly convex domains (Corollary 6) and
+to show that the chess billiard map is purely periodic in an arbitrary
+triangle (Corollary 7). In this section we also show that in a strictly
+convex domain the rotation number of the chess billiard map achieves
+all values in [0, 1) (Theorem 10). In Section 5 we study the behavior of
+the chess billiard map in the square giving some elements of an answer
+to questions 7.5 and 7.6 of [HM]. We show that there exist directions
+for which the chess billiard map has no periodic orbit (Theorem 12)
+and that for an open dense set of directions (θ1 , θ2 ) the chess billiard
+has a periodic orbit (Theorem 13), however the set of directions which
+have neutral periodic orbits (i.e., are “treacheries” in the language of
+[HM]) is small (Proposition 17). We also give a necessary and sufficient
+condition for a vertex to be a periodic point (Proposition 15) and we
+give a sufficient condition for the existence of neutral periodic orbits
+(Proposition 16). Finally in the short Section 6 we study centrally
+symmetric domains. Our results give complete or partial answers to
+several questions raised in [HM].
+2. The chess billiard is a circle homeomorphism in disguise
+We begin by describing the chess billiard slightly more formally. Consider a strictly convex planar domain P , and a foliation of P by a family
+of nonoriented parallel lines (see Figure 1). The choice of families of
+lines is parametrized by θ ∈ [0, π), i.e., the projective line. In some of
+our arguments it will be convenient to parametrize θ by [0, 2π), this
+will be clear from the context. Since P is convex we can parametrize
+its boundary ∂P by arc length. Since P is strictly convex this foliation
+in direction θi induces a bijection Ti : ∂P → ∂P which is an orientation reversing homeomorphism with two fixed points. The boundary
+
+CHESS BILLIARDS
+
+3
+
+of a convex set is always rectifiable, throughout the article we will express Ti in the arc-length parametrization of ∂P , points in ∂P will be
+denoted x or y.
+x
+
+T1 x
+
+Figure 1. The circle foliated by a family of parallel
+lines, and the induced bijection.
+Let Q := ∂P × {1, 2} =: Q1 ∪ Q2 . We fix the same orientation on
+Q1 and Q2 .
+Consider a pair of directions (θ1 , θ2 ), and the associated bijections
+Ti : Qi → Qi . The pair (θ1 , θ2 ) as well as each of its components will
+be referred to as a direction. Let
+T = Tθ1 ,θ2 : Q → Q be defined by T (x, i) = (Ti (x), i + 1 (mod 2)).
+The map T is an orientation reversing homeomorphism. We define the
+chess billiard map
+S = Sθ1 ,θ2 : Q → Q by S := T 2 .
+The map T is an orientation reversing homeomorphism since it is the
+composition of an orientation preserving homeomorphism F (i) := i +
+1 (mod 2) with an orientation reversing homeomorphism Ti . From here
+on we will not write the mod 2 when referring to the two copies of Q.
+A degenerate case is when these two families coincide.
+The first proposition summarizes several immediate properties of the
+map S.
+Proposition 1. Consider a convex domain P and arbitrary θ1 , θ2 .
+(1) For each i ∈ {1, 2} the map S|Qi is an orientation preserving
+circle homeomorphism.
+(2) The sum of the rotation numbers of S|Q1 and of S|Q2 is 1.
+(3) The map S is not topologically mixing.
+Item (1) allows us to slightly misuse terminology and to refer to S
+as a circle homeomorphism. Item (2) allows us to slightly abuse the
+definition of rotation number and to refer to the rotation number ρ(S)
+of S.
+Proof. Item (1) is immediate since S is the composition of an orientation reversing homeomorphism T with itself. Item (2) follows immediately from the commutation relation F S n (x, i) = S −n F (x, i). Item
+
+4
+
+ARNALDO NOGUEIRA AND SERGE TROUBETZKOY
+
+(3) follows by the construction, T (Qi ) = T (Qi+1 ), and thus T is not
+topologically mixing.
+
+For completeness we give the definition of rotation number introduced by Poincaré. Consider the natural projection π : R → Qi , it
+provides a lift of S|Qi to a homeomorphism S̃ : R → R satisfying
+n
+S ◦ π = π ◦ S̃. Consider limn→∞ S̃ (x)−x
+, this limit always exists, and
+n
+its value does not depend on the point x nor on the lift, thus we call it
+the rotation number ρ(S) of S.
+If P is only convex, the exact same definition works in the case that
+the direction of each interval in ∂P is transverse to the two foliations;
+for example P is a convex polygon and neither of the two foliations is
+parallel to a side of P . In this case we will call the direction (θ1 , θ2 )
+exceptional if either θ1 or θ2 is parallel to a side of P . We can extend
+the definition to the exceptional case in the following way: we define
+Ti on any line segment in Qi to be the central symmetry with respect
+to the center of this segment (see Figure 2). Again, the map T is an
+orientation reversing homeomorphism.
+T1 x
+
+T1 y
+y
+
+x
+
+Figure 2. The square foliated by a family of parallel
+lines which are parallel to a side, and the induced bijection.
+Our chess billiard map is defined on all of Q, while the map in [HM]
+is defined on ∂P \ {the corners of P }; the definitions agree where they
+are both defined. Furthermore in [HM] the authors only consider points
+in Qi for which the direction θi points towards the interior of P , while
+we allow foliations tangent to an interval in ∂P .
+If P is not convex, then for certain directions we have orbits which
+graze the boundary, any possible definition of the dynamical system
+will lead to a discontinuous map (see Figure 3). None the less, we can
+define a piecewise continuous chess map, for example by defining the
+map by one sided continuity at these points (answering part of Question
+7.8 of [HM]). Such a definition leaves our nice framework, and thus in
+this article we will not consider such domains, although their study is
+certainly interesting. In the case of a non-convex polygon, the resulting
+
+CHESS BILLIARDS
+
+5
+
+Figure 3. Any possible definition of the dynamics at
+the marked points will lead to a discontinuous map.
+map is an affine interval exchange transformation, which have been
+studied for the last decade or so, see [BFG] and the references therein.
+The study of the dynamics of orientation preserving circle homeomorphisms was initiated by Poincaré and developed by Denjoy, Herman, and others. Some of the main results are summarized in the next
+corollary. For the definitions and proof of the corollary see for example
+[KH][Propositions 11.2.2 and 11.2.5, Theorem 11.2.9].
+Corollary 2. If the rotation number of the chess billiard map S is
+rational, in reduced form p/q, then S has a periodic orbit, and all periodic orbits of S have period q. If S has exactly one periodic orbit
+then every other point is heteroclinic under S q to two points on the
+periodic orbit. These points are different if the period is greater than
+1. If S has more than one periodic orbit, then each nonperiodic point
+is heteroclinic under S q to two points on different periodic orbits.
+Fix i ∈ {1, 2}. If the rotation number of S is irrational then a) the
+ω-limit set ω(x) is independent of x ∈ Qi and either ω(x) = Qi or it is
+a perfect and nowhere dense subset of Qi , and b) the map S is uniquely
+ergodic.
+This corollary immediately gives answers to several of the questions
+posed in [HM]:
+7.1, 7.2: if we interpret the words “predictable behavior” as having zero
+topological entropy then the answer is that the chess billiard
+is always predictable since circle homeomorphisms always have
+zero entropy.
+7.3: for any (polygonal) board the directions which have a periodic
+orbit are those for which the rotation number is rational.
+7.4: the map is ergodic if and only if its rotation number is irrational
+(and since it is then uniquely ergodic this does not depend on
+the starting point as asked in [HM]).
+7.13: all close points have the same behavior in the sense of the corollary.
+Questions 7.3 and 7.4 are quite general and the answers give quite a
+bit of information but are not definitive.
+
+6
+
+ARNALDO NOGUEIRA AND SERGE TROUBETZKOY
+
+3. The circle
+The simplest case of chess billiards is that of the circle.
+Proposition 3. For the circle, the map S|Q1 is the rotation of the
+circle by angle 2α where α = θ2 − θ1 (and S|Q2 is the rotation by angle
+2π − 2α).
+1
+Corollary 4. If θ2 −θ
+= p/q ∈ Q with p ≥ 0, q ≥ 1, pgcd(p, q) =
+π
+1, then all orbits are periodic with period q, otherwise the map S is
+minimal and uniquely ergodic with respect to the length measure.
+
+Proof. By rotational symmetry the behavior of the chess billiard map
+in the circle depends only on α := θ2 − θ1 . It is convenient to use
+complex coordinates, S1 = {z ∈ C : |z| = 1}. Suppose θ1 = π/2 then
+we have T1 (z) = z̄. To compute T2 (z) we rotate to make θ2 vertical,
+take the complex conjugate, and then rotate back: z → eiα z → eiα z →
+e−iα eiα z = e−i2α z̄. Thus
+S(z, 1) = (T2 ◦ T1 (z), 1) = (e−i2α z, 1) and
+S(z, 2) = (T1 ◦ T2 (z), 2) = (ei2α z, 2).
+
+There are 4 special points, the fixed points ±1 of T1 and the fixed
+points e±iθ2 of T2 . They play a special role in the case of rational
+rotation number, if απ = p/q with pgcd(p, q) = 1 and q even, then
+S p (±i) = ∓i and S p (±1) = ∓1 (orbits shown in red and blue in Figure
+4, while a generic orbit is shown in black), while if q is odd, then the
+orbit of ±1 arrives at ±eiθ2 and then returns to itself (orbits show in
+red and blue in Figure 5). The role of these orbits will be investigated
+in the general setting in Section 4.2.
+i = S 2 (i)
+
+T1 (x)
+
+i = S 2 (i)
+
+S(x)
+− 1 = S(1)
+
+1 = S 2 (1)
+x = S 2 (x)
+
+T1 (T (x))
+
+T1 (S 2 (x))
+
+S(x)
+− 1 = S(1)
+
+1 = S 2 (1)
+x = S 2 (x)
+
+T1 (x)
+
+−i = S(i)
+
+−i = S(i)
+
+Q1 , rotation number 1/2
+
+Q2 , rotation number 1/2
+
+Figure 4. α = π/2.
+
+CHESS BILLIARDS
+S(1)
+
+2
+S 2 (1) S (x) S 2 (1)
+
+S ( x) S(1)
+
+1 = S 3 (1)
+
+1 = S 3 (1)
+S 2 (x)
+
+x = S 3 (x)
+S 2 (1)
+
+7
+
+1 = S 3 (1)
+
+1 = S 3 (1)
+S(x)
+
+x = S 3 (x)
+
+S 2 (1)
+
+S(1)
+
+Q1 , rotation number 1/3
+
+S(1)
+
+Q2 , rotation number 2/3
+
+Figure 5. α = π/3.
+4. Periodic orbits
+4.1. Fixed points of S. If the two foliations coincide, then S is the
+identity map. Now assume that the two foliations do not coincide, i.e.,
+θ1 6= θ2 .
+If P is strictly convex then the map Ti fixes the point x if and only if
+a line of the foliation is a supporting line1 to Qi at x. In the case P is
+convex but not strictly convex the necessary and sufficient condition is
+more complicated. The point x is a fixed point if and only if either i)
+a line of the foliation is a supporting line to Qi at x, and x is isolated
+in this intersection; or ii) a line of the foliation is tangent to Qi in an
+interval, and x is the center point of this interval.
+If a point x ∈ ∂P is fixed by both T1 and T2 , then it is a fixed point
+of S and thus the rotation number of S|Qi is zero for i ∈ {1, 2}. The
+converse is also true. Suppose that x ∈ Q1 is not fixed by T1 , then since
+by assumption the two foliations are not parallel T1 (x) 6= x. Combining
+this with Corollary 2 we have shown
+Proposition 5. Suppose that θ1 6= θ2 . The map Sθ1 ,θ2 has a fixed point
+if and only if there is a point x ∈ ∂P such that the lines through x in
+these two directions are supporting lines at x. Moreover, each fixed
+point is semi stable, i.e., repelling, from one side, and attracting from
+the opposite side.
+Corollary 6. A C 1 strictly convex domain can not have any fixed point
+(unless θ1 = θ2 ).
+Corollary 7. If P is a triangle and θ1 , θ2 are arbitrary, then Sθ1 ,θ2 has
+a fixed point or a periodic point with period 2 or 3.
+Proof. If θ1 = θ2 then every point is fixed by S, thus we assume that
+they are not equal.
+1A supporting line L of a planar curve C is a line that contains at least one point
+
+of C, and C lies completely in one of the two closed half-planes defined by L.
+
+8
+
+ARNALDO NOGUEIRA AND SERGE TROUBETZKOY
+
+Next consider the case when (θ1 , θ2 ) is not exceptional. Consider the
+lines of the foliation in the direction θ1 which intersect P , the extremal
+ones are supporting lines which pass through two distinct vertices of
+P . The same holds for θ2 , since P has only three vertices there is a
+vertex for which both directions must have supporting lines, and thus
+a fixed point by Proposition 5.
+Turning to the case when (θ1 , θ2 ) is exceptional, we begin by treating
+the case when only one direction is parallel to a side, say θ1 , it is also a
+supporting line of the vertex opposite to this side. If θ2 is a supporting
+line of this vertex then again applying Propostion 5 we conclude that
+this vertex is fixed (see Figure 7). Otherwise θ2 is a supporting line of
+the two endpoints of the side parallel to θ1 ; these endpoints are fixed
+by T 2 and exchanged by T 1 , thus they are exchanged by S.
+θ2
+S(x)
+
+x = S 3 (x)
+
+S 2 (x)
+
+θ1
+
+Figure 6. Period 3 orbit in a triangle.
+Finally in the case when both directions are parallel to a side, the
+map S cyclically exchanges the vertices of the triangle (Figure 6).
+
+If P is a square and both foliation directions are in the same quadrant, then S has two fixed points, both semi-stable, (this is essentially
+contained in [HM], however they have not defined the dynamics at the
+two fixed points). More generally, any convex polygon or even any
+convex table with a corner has an open set of pairs of directions for
+which S has a fixed point. Examples of strictly convex domains and of
+convex polygons with exactly one fixed point exist (see Figure 7). This
+point is repelling on one side and attracting on the other side.
+
+Figure 7. A strictly convex domain and a triangle each
+having a single semi-attracting fixed point.
+
+4.2. Connections. We call an S-orbit segment starting and ending at
+fixed points of the maps Ti a connection. We can think of a connection
+
+

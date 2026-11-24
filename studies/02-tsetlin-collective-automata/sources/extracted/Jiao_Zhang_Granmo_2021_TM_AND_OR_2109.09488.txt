@@ -1,0 +1,2164 @@
+1
+
+On the Convergence of Tsetlin Machines for
+the AND and the OR Operators
+
+arXiv:2109.09488v2 [cs.LG] 2 Dec 2022
+
+Lei Jiao, Senior Member, IEEE, Xuan Zhang, Ole-Christoffer Granmo
+Abstract—The Tsetlin Machine (TM) is a novel machine learning algorithm based on propositional logic, which has obtained the
+state-of-the-art performance on several pattern recognition problems. In previous studies, the convergence properties of TM for 1-bit
+operation and XOR operation have been analyzed. To make the analyses on the basic digital operations complete, in this article, we
+analyze the convergence when input training samples follow AND and OR operators respectively. Our analyses reveal that the TM can
+converge almost surely to reproduce AND and OR operators, which are learnt from training data over an infinite time horizon.
+Specifically, by analysing the OR operator, we reveal the convergence property of TM when two sub-patterns can be jointly represented
+by one clause, which is quite distinct compared with the analysis of the XOR case. The analyses on AND and OR operators, together
+with the previously analysed 1-bit and XOR operations, complete the convergence analyses on basic operators in Boolean algebra.
+Index Terms—Tsetlin Automata, Propositional Logic, Tsetlin Machine, Convergence Analysis, OR Operator, AND Operator
+
+✦
+
+1
+
+I NTRODUCTION
+
+The Tsetlin Machine (TM) [1] organizes groups of Tsetlin
+Automata (TAs) [2] to collaboratively learn distinct patterns
+in training data. A TA, which is the core learning entity
+of TM, is a kind of learning automata that select their
+current actions based on past experiences learnt from the
+environment in order to obtain the maximum reward. The
+state of the art of the study in learning automate is presented
+in [3], [4]. In TM, each group of TAs builds a clause in
+propositional logic, which captures a specific sub-pattern.
+Specifically, a clause is a conjunction of literals, where a
+literal is a propositional input or its negation. Once distinct
+sub-patterns are learnt by a number of clauses, the overall
+pattern recognition task is completed by a voting scheme
+from the clauses.
+TMs possess two main advantages: transparent inference
+and hardware friendliness [1]. TMs provide transparent
+learning that shows how sub-patterns are composed in
+clauses, by including or excluding certain literals based
+on the feedback that they receive. Employing propositional
+logic for knowledge representation provides rules rather
+than a mathematical computation, which is advantageous
+compared with computation based approaches, such as
+deep learning. In fact, for the deep learning based models,
+such as attention mechanisms, the learning process itself
+remains inside a black-box neural network. In general, attention weights do not provide a meaningful explanation [5],
+[6]. Unlike neural networks, the propositional form of TMs,
+with non-monotone clauses, is human-interpretable [7].
+Computationally, TMs is composed by a set of finite-state
+automata that are in nature appropriate for hardware imple•
+
+•
+
+Lei Jiao and Ole-Christoffer Granmo are with the Centre for Artificial
+Intelligence Research, University of Agder, 4879, Grimstad, Norway.
+E-mail: lei.jiao@uia.no; ole.granmo@uia.no
+Xuan Zhang is with the Norwegian Research Centre (NORCE), 4879,
+Grimstad, Norway.
+E-mail: xuzh@norceresearch.no
+
+mentation [8]. Different from the comprehensive arithmetic
+operations required by most other AI algorithms, only increment and decrement operations are sufficient for a TA in
+TM to learn [2], which is indeed hardware friendly.
+There are many variations of TMs with two main architectures: the convolutional TM (CTM) [9] and the regression TM (RTM) [10], [11]. The TM, together with its
+variations, has been employed in several applications, such
+as word sense disambiguation [12], aspect-based sentiment
+analysis [13], novelty detection [14], text classification [15]
+with enhanced interpretability [16], and solving contextual
+bandit problems [17]. The CUDA version of TM [18] is also
+developed, which makes the TM notably more applicable
+by speeding up TM learning through a novel parallelization
+scheme, where each clause runs and learns independently in
+its own thread. The above studies indicate that TMs obtain
+better or competitive classification and regression accuracy
+compared with most of the state-of-the-art techniques. At
+the same time, the transparency of learning is maintained
+with smaller memory footprint and higher computational
+efficiency.
+For the convergence analysis of TM, the convergence
+properties of the 1-bit operator and the XOR operator have
+been analyzed in [19] and [20] respectively. In more details,
+the convergence for unary operators on one-bit data, i.e.,
+the IDENTITY- and the NOT operators, is analyzed in [19],
+where we first prove that the TM can converge almost surely
+to the intended pattern when the training data is noisefree. Thereafter, we analyze the effect of noise, establishing
+how the noise in the data and the granularity parameter
+of the TM, s, govern convergence [19]. Through the study
+of the 1-bit case, the functionalities of the hyper-parameter
+s for granularity of learning and the chain length of the
+TA are thoroughly revealed. The convergence property of
+XOR operator is studied in [20]. For XOR operator, there
+are two sub-patterns, namely (0, 1) and (1, 0), with nonlinear relationship. We first prove the convergence of a
+simple structure with two clauses, each of which has four
+
+2
+
+TAs with two states. Markov chain analysis is adopted for
+that proof. The analysis indicates that even that simple
+structure can guarantee the TM to learn the intended XOR
+logic almost surely. Thereafter, we study the convergence
+behavior of a more general case, where multiple clauses
+exist. Through the latter analysis, we reveal the crucial role
+the hyper-parameter T plays in TM, showing how this
+hyper-parameter balances the clauses to robustly capture
+distinct sub-patterns within one class.
+Paper Contributions. Based on the summary of the
+existing analytical work of TM, we understand that the
+convergence study of the basic logic operators is not complete. In this paper, we will fill in the gap and analyze
+the convergence of TM for AND and OR operators. This
+paper, together with [19] and [20], completes the study
+on the convergence analysis of all fundamental Boolean
+operators in TM, offering a conclusive convergence analysis
+and establishing a milestone of TM studies. Additionally,
+because the OR operator offers the possibility to jointly
+represent two sub-patterns by one clause, the convergence
+analysis of the OR operator is quite different compared with
+the XOR case, which adds new insights to the convergence
+nature of the TM.
+Paper Organization. The remaining of the paper is organized as follows. Section 2 briefly reviews the TM and
+specifies the training process. In Section 3, we present our
+analytical procedure and the main analytical results for the
+AND operator. Section 4 analyzes the convergence for the
+OR operator before we conclude the paper in Section 5.
+
+2
+
+B RIEF OVERVIEW OF THE TM
+
+To make the article self-contained, we present the basics of
+TM here in this section. Note that this section is technically
+identical to Section 2 of article [20]. Those who already are
+familiar with the concept and notations of TM can jump
+directly to Section 3.
+2.1 Review of Tsetlin Machines
+A TM that is to learn the characteristics of class i is formed
+by m teams of TAs. More specifically, the TM trains TAs to
+formulate m clauses (TA teams), Cji , j = 1, 2, ..., m, and to
+capture the sub-patterns that characterize the class i. The
+input of a TM is denoted by X = [x1 , x2 , . . . , xo ], xk ∈
+{0, 1}, k = 1, 2, . . . , o. Each TA team contains o pairs of TAs,
+i,j
+and thus a TA team Gji = {TAk′ |1 ≤ k ′ ≤ 2o} has 2o TAs.
+For a certain input variable xk , there is a pair of TAs that are
+i,j
+responsible for its role in the clause. The automaton TA2k−1
+is responsible for the original form of the input xk , whereas
+TAi,j
+2k addresses the negation of xk , i.e., ¬xk . Note that the
+original forms of the inputs and their negations are jointly
+referred to as literals.
+Each TA chooses one of two actions, i.e., it either “Includes” or “Excludes” its literal. Figure 1 illustrates the
+structure of a TA with two actions. When the TA is in
+any state on the left-hand side, i.e., 0 to N − 1, the action
+“Include” is selected. The action becomes “Exclude” when
+the TA is in a state on the right-hand side. The transitions
+among the states are triggered by a reward or a penalty
+that the TA receives from the environment, which, in this
+
+case, is determined by different types of feedback defined
+in the TM (to be explained later). Collectively, the outputs
+of the TA team take part in a conjunction, expressed by the
+conjunctive clause [19]:
+
+
+ 
+
+
+V
+V
+
+
+
+¬xk  ∧ 1
+for training,
+x ∧
+
+
+ k∈I i k
+¯i
+k∈
+I
+j
+j
+
+ 
+Cji (X) = 
+
+
+V
+V
+
+
+
+¬xk  ∨ 0 for testing.
+xk  ∧ 
+
+
+
+k∈I¯i
+k∈I i
+j
+
+j
+
+(1)
+In Eq. (1), Iji and I¯ji are the subsets of indexes for the
+literals that have been included in the clause. Iji contains
+the indexes of included original (non-negated) inputs, xk ,
+whereas I¯ji contains the indexes of included negated inputs,
+¬xk . The “0” and “1” in Eq. (1) make sure that Cji (X) also is
+defined when all the TAs choose to exclude their literals. As
+can be observed, during training, an “empty” clause outputs
+1, while it outputs 0 during testing and operation.
+Figure 2 illustrates the structure of a clause and its relationship to its literals. Here, for ease of notation in the analysis of the training procedure, let I(x) = x, I(¬x) = ¬x,
+and E(x) = E(¬x) = 1, with the latter meaning that an
+excluded literal does not contribute to the output.
+Multiple clauses, i.e., the TA teams in conjunctive form,
+are assembled into a complete TM. There are two architectures for clause assembling: Disjunctive Normal Form
+Architecture and Voting Architecture. In this study, we focus
+on the latter one, as shown in Figure 3. The voting consists
+of summing the outputs of the clauses:
+
+fP (C i (X)) =
+
+m
+X
+
+Cji (X).
+
+(2)
+
+j=1
+
+The output of the TM, in turn, is decided by the unit step
+function:
+(
+0 for fP (C i (X)) < T h
+i
+ŷ =
+,
+(3)
+1 for fP (C i (X)) ≥ T h
+where T h is a predefined threshold for classification. Note
+that for voting architecture, the TM can assign a polarity
+to each TA team [1]. For example, TA teams with odd
+indexes possess positive polarity, and they vote for class
+i. The remaining TA teams have negative polarity and vote
+against class i. The voting consists of summing the output
+of the clauses, according to polarity, and the threshold T h
+is configured as zero. In this study, for ease of analysis, we
+consider only positive polarity clauses. Nevertheless, this
+does not change the nature of TM learning.
+2.2 The Tsetlin Machine for Learning Patterns
+2.2.1 The Tsetlin Machine Game
+The training process is built on letting all the TAs
+take part in a decentralized game. Training data (X =
+[x1 , x2 , ..., xo ], y i ) is obtained from a data set S , distributed
+according to the probability distribution P (X, y i ). In the
+game, each TA is guided by Type I Feedback and Type II
+Feedback defined in Table 1 and Table 2, respectively. Type I
+Feedback is triggered when the training sample has a positive label, i.e., y i = 1, meaning that the sample belongs to
+
+3
+
+Action 1
+
+0
+
+....
+
+1
+
+Action 2
+
+N −2
+
+N −1
+
+N +1
+
+N
+
+....
+
+2N − 2
+
+2N − 1
+
+P enalty (P ) : →
+
+Reward (R) : 99K
+
+Fig. 1: A two-action Tsetlin automaton with 2N states [20].
+Inputs
+
+TA team
+
+TA decisions
+
+x1
+
+TAi,j
+1
+
+I(x1 ) or E(x1 )
+
+¬x1
+
+TAi,j
+2
+
+I(¬x1 ) or E(¬x1 )
+
+x2
+
+TAi,j
+3
+
+I(x2 ) or E(x2 )
+
+¬x2
+
+TAi,j
+4
+
+I(¬x2 ) or E(¬x2 )
+
+Literals
+
+Output
+
+x1
+
+x2
+
+xo
+
+TAi,j
+2o−1
+
+I(xo ) or E(xo )
+
+¬xo
+
+TAi,j
+2o
+
+I(¬xo ) or E(¬xo )
+
+Cji =
+
+2o
+V
+
+k′ =1
+
+
+
+i,j
+decision of TAk′
+
+xo
+
+Fig. 2: A TA team Gij consisting of 2o TAs [19]. Here I(x1 ) means “include x1 ” and E(x1 ) means “exclude x1 ”.
+
+TA team 1
+TA team 2
+
+C1i
+C2i
+
+Value of the clause Cji (X)
+Value of the Literal xk /¬xk
+
++
+
+Include Literal
+
++
+m
+P
+
+j=1
+
+TA team m − 1
+TA team m
+
+Cji
+
+i
+Cm−1
++
+i
+Cm
+
++
+
+Fig. 3: TM voting architecture [20].
+
+class i. When the training sample is labeled as not belonging
+to class i, i.e., y i = 0, Type II Feedback is utilized for generating responses. The parameter, s, controls the granularity
+of the clauses and a larger s encourages more literals to
+be included in each clause. A more detailed analysis on
+parameter s can be found in [19].
+To avoid the situation that a majority of the TA teams
+learn only a small subset of the sub-patterns in the training data, forming an incomplete representation, we use a
+parameter T as target for the summation fP . If the votes
+for a certain sub-pattern already reach a total of T or more,
+neither rewards nor penalties are provided to the TAs when
+
+Exclude Literal
+
+P (Reward)
+P (Inaction)
+P (Penalty)
+P (Reward)
+P (Inaction)
+P (Penalty)
+
+1
+
+0
+
+1
+
+0
+
+1
+
+0
+
+s−1
+s
+1
+s
+
+NA
+NA
+NA
+
+0
+
+0
+
+1
+s
+s−1
+s
+
+s−1
+s
+1
+s
+1
+s
+s−1
+s
+
+s−1
+s
+1
+s
+1
+s
+s−1
+s
+
+0
+
+0
+
+0
+
+0
+0
+
+1
+s
+s−1
+s
+
+TABLE 1: Type I Feedback — Feedback upon receiving a
+sample with label y = 1, for a single TA to decide whether
+to Include or Exclude a given literal xk /¬xk into Cji . NA
+means not applicable [1].
+Value of the clause Cji (X)
+Value of the Literal xk /¬xk
+P (Reward)
+Include Literal
+P (Inaction)
+P (Penalty)
+P (Reward)
+Exclude Literal
+P (Inaction)
+P (Penalty)
+
+1
+1
+0
+1.0
+0
+0
+1.0
+0
+
+0
+0
+NA
+NA
+NA
+0
+0
+1.0
+
+1
+0
+1.0
+0
+0
+1.0
+0
+
+0
+0
+1.0
+0
+0
+1.0
+0
+
+TABLE 2: Type II Feedback — Feedback upon receiving a
+sample with label y = 0, for a single TA to decide whether
+to Include or Exclude a given literal xk /¬xk into Cji . NA
+means not applicable [1].
+
+more training samples of this particular sub-pattern are
+
+4
+
+given. In this way, we can ensure that each specific subpattern can be captured by a limited number, i.e., T , of
+available clauses, allowing sparse sub-pattern representations among competing sub-patterns. In more details, the
+strategy works as follows:
+Generating Type I Feedback. If the output from the
+training sample X is y i = 1, we generate, in probability,
+Type I Feedback for each clause Cji ∈ C i , where C i is the
+set of clauses that are trained for class i. The probability of
+generating Type I Feedback is [1]:
+
+T − max(−T, min(T, fP (C i (X))))
+.
+(4)
+2T
+Generating Type II Feedback. If the output of the training sample X is y i = 0, we generate, again, in probability,
+Type II Feedback to each clause Cji ∈ C i . The probability is [1]:
+u1 =
+
+P
+
+i
+
+T + max(−T, min(T, f (C (X))))
+.
+(5)
+2T
+After Type I Feedback or Type II Feedback is generated for a clause, the individual TA within each clause is
+given reward/penalty/inaction according to the probability
+defined, and then the states of the corresponding TAs are
+updated.
+u2 =
+
+3 C ONVERGENCE A NALYSIS OF TM FOR THE
+AND O PERATOR
+In this section, we will prove the convergence of the AND
+operator. In this proof, we assume that the training samples
+do not have any noise, i.e.,
+
+P (y = 1|x1 = 1, x2 = 1) = 1,
+P (y = 0|x1 = 0, x2 = 1) = 1,
+P (y = 0|x1 = 1, x2 = 0) = 1,
+P (y = 0|x1 = 0, x2 = 0) = 1.
+
+To analyze the convergence of TM in the training process, we freeze the transition of the two TAs for the first bit
+of the input and study behavior of the second bit of input.
+Clearly, there are four possibilities for the first bit, x1 , as:
+•
+•
+•
+
+•
+
+In the next subsections, we will analyze the behavior of
+the TAs for the second bit with different input training samples, given the above four distinct cases of x1 , respectively.
+3.1 Case 1: Include ¬x1
+In this subsection, we assume that the TAs for first bit is
+frozen as TA1 = E and TA2 = I, and thus the overall
+joint action for the first bit is “¬x1 ”. In this case, we have 4
+situations to study, detailed below:
+1)
+
+2)
+
+3)
+
+(6)
+
+We also assume that in the training samples, the above four
+cases will appear with non-zero probability. This means that
+all of the four types of training samples will appear during
+the training process.
+Because the considered AND operator has only one pattern of input X that will trigger true output, we employ just
+one clause in this TM. Because the considered TM has only
+one clause, for ease of expression, we ignore the indices of
+the classes and the clauses in our notation in the remainder
+i,j
+of the proof. After simplification, TAk becomes TAk , and
+C11 becomes C . Since there are two input parameters, we
+configure 4 TAs, namely, TA1 , TA2 , TA3 , and TA4 . TA1 has
+two actions, i.e., including or excluding x1 . Similarly, TA2
+corresponds to including or excluding ¬x1 . TA3 and TA4
+determine the behavior of the x2 and ¬x2 , respectively.
+Clearly, there is only one pattern that will trigger the
+output y to be 1, i.e., x1 = 1, x2 = 1, which corresponds to
+the logic to both include x1 and x2 , and to both exclude ¬x1
+and ¬x2 after training. Therefore, once the TM can converge
+correctly to the intended operation, the actions of TA1 , TA2 ,
+TA3 , and TA4 should be1 I, E, I, and E.
+1. We use “I” and “E” as abbreviations for include and exclude
+respectively.
+
+Case 1: TA1 = E, TA2 = I, i.e., include ¬x1 .
+Case 2: TA1 = I, TA2 = E, i.e., include x1 .
+Case 3: TA1 = E, TA2 = E, i.e., exclude both x1 and
+¬x1 .
+Case 4: TA1 = I, TA2 = I, i.e., include both x1 and
+¬x1 .
+
+4)
+
+We study the transition of TA3 when it has “Include” as its current action, given different actions
+of TA4 (i.e., when the action of TA4 is frozen as
+“Include” or “Exclude”.).
+We study the transition of TA3 when it has “Exclude” as its current action, given different actions
+of TA4 (i.e., when the action of TA4 is frozen as
+“Include” or “Exclude”.).
+We study the transition of TA4 when it has “Include” as its current action, given different actions
+of TA3 (i.e., when the action of TA3 is frozen as
+“Include” or “Exclude”.).
+We study the transition of TA4 when it has “Exclude” as its current action, given different actions
+of TA3 (i.e., when the action of TA3 is frozen as
+“Include” or “Exclude”.).
+
+In what follows, we will go through, exhaustively, the
+four situations.
+3.1.1 Study TA3 with Action Include
+Here we study the transitions of TA3 when its current action
+is Include, given different actions of TA4 and input samples.
+For ease of expressions, the self-loops of the transitions
+are not depicted in the transition diagram. Clearly, this
+situation has 8 instances, depending on the variations of
+the training samples and the status of TA4 , where the first
+four correspond to the instances with TA4 = E while the
+last four represent the instances with TA4 = I.
+Now we study the first instance, with x1 = 1, x2 =
+1, y = 1, and TA4 = E. Clearly, this training sample will
+trigger Type I feedback because y = 1. Together with the
+current status of the other TAs, the clause is determined
+to be C = ¬x1 ∧ x2 = 0 and the literal is x2 = 1. From
+Table 1, we know that the penalty probability is 1s and the
+inaction probability is s−1
+s . To indicate the transitions, we
+have plotted the diagram showing the penalty probability.
+Note that the overall probability is u1 1s , where u1 is defined
+in Eq. (4). To illustrate the transitions of the TA, we assume
+here we find a certain T such that u1 > 0 holds.
+
+5
+I
+
+Condition: x1 = 1, x2 = 1,
+y = 1, TA4 = E.
+P
+Thus, Type I, x2 = 1,
+R
+C = ¬x1 ∧ x2 = 0.
+
+E
+
+this subsection and the following subsections, we will not
+plot the transition diagrams for “No transition”.
+
+u1 1s
+
+We here continue with analyzing another example
+shown below. In this instance, it covers the training samples:
+x1 = 1, x2 = 0, y = 0, and TA4 = E. Clearly, the training
+sample will trigger Type II feedback because y = 0. Then
+the clause becomes C3 = ¬x1 ∧ x2 = 0. Because we now
+study TA3 , the corresponding literal is x2 = 0. Based on
+the information above, we can check from Table 2 that the
+probability of “Inaction” is 1. For this reason, the transition
+diagram does not have any arrow, indicating that there is
+“No transition” for TA3 .
+I
+E
+Condition: x1 = 1, x2 = 0,
+y = 0, TA4 = E.
+P
+Thus, Type II, x2 = 0,
+R
+C = ¬x1 ∧ x2 =0.
+No transition
+
+The same analytical principle applies for all the other
+instances, and we therefore will not explain them in detail
+in the remainder of the paper.
+Condition: x1 = 0, x2 = 1,
+y = 0, TA4 =E.
+Thus, Type II, x2 = 1,
+C = ¬x1 ∧ x2 = 1.
+
+I
+
+E
+
+R
+I
+
+Condition: x1 = 1, x2 = 0,
+y = 0, TA4 = I.
+Thus, Type II, x2 = 0,
+C = ¬x1 ∧ x2 ∧ ¬x2 = 0.
+
+R
+I
+
+P
+R
+I
+
+E
+
+P
+R
+I
+
+E
+
+P
+R
+
+No transition
+
+Condition: x1 = 0, x2 = 0,
+y = 0, TA4 = I.
+Thus, Type II, x2 = 0,
+C = ¬x1 ∧ x2 ∧ ¬x2 = 0.
+
+E
+
+u1 1s
+
+No transition
+
+Condition: x1 = 0, x2 = 1,
+y = 0, TA4 = I.
+Thus, Type II, x2 = 1,
+C = ¬x1 ∧ x2 ∧ ¬x2 = 0.
+
+E
+
+P
+
+No transition
+
+Condition: x1 = 1, x2 = 1,
+y = 1, TA4 = I.
+Thus, Type I, x2 = 1,
+C = ¬x1 ∧ x2 ∧ ¬x2 = 0.
+
+I
+
+Condition: x1 = 0, x2 = 0,
+y = 0, TA4 = E.
+P
+Thus, Type II, x2 = 0,
+R
+C = ¬x1 = 1.
+Condition: x1 = 1, x2 = 1,
+y = 1, TA4 = I.
+P
+Thus, Type I, x2 = 1,
+R
+C = ¬x1 ∧ ¬x2 = 0.
+Condition: x1 = 0, x2 = 0,
+y = 0, TA4 = I.
+P
+Thus, Type II, x2 = 0,
+R
+C = ¬x1 ∧ ¬x2 = 1.
+
+E
+
+P
+R
+
+No transition
+
+I
+
+E
+
+u1 s1
+I
+
+E
+
+u2 × 1
+
+I
+
+E
+
+I
+
+E
+
+u1 s1
+u2 × 1
+
+3.1.3 Study TA4 with Action Include
+Condition: x1 = 1, x2 = 1,
+y = 1, TA3 = E.
+P
+Thus, Type I, ¬x2 = 0,
+R
+C = ¬x1 ∧ ¬x2 = 0.
+
+P
+
+No transition
+
+Condition: x1 = 0, x2 = 0,
+y = 0, TA4 =E.
+Thus, Type II, x2 = 0,
+C = ¬x1 ∧ x2 = 0.
+
+Condition: x1 = 1, x2 = 1,
+y = 1, TA4 = E.
+P
+Thus, Type I, x2 = 1,
+R
+C = ¬x1 = 0.
+
+Condition: x1 = 1, x2 = 1,
+y = 1, TA3 = I.
+P
+Thus, Type I, ¬x2 = 0,
+R
+C = ¬x1 ∧ x2 ∧ ¬x2 = 0.
+
+I
+
+E
+
+u1 1s
+
+I
+
+E
+
+u1 1s
+
+3.1.4 Study TA4 with Action Exclude
+Condition: x1 = 1, x2 = 1,
+y = 1, TA3 = E.
+P
+Thus, Type I, ¬x2 = 0,
+R
+C = ¬x1 = 0.
+Condition: x1 = 0, x2 = 1,
+y = 0, TA3 = E.
+P
+Thus, Type II, ¬x2 = 0,
+R
+C = ¬x1 = 1.
+Condition: x1 = 1, x2 = 1,
+y = 1, TA3 = I.
+P
+Thus, Type I, ¬x2 = 0,
+R
+C = ¬x1 ∧ x2 = 0.
+Condition: x1 = 0, x2 = 1,
+y = 0, TA3 = I.
+P
+Thus, Type II, ¬x2 = 0,
+R
+C = ¬x1 ∧ x2 = 1.
+
+I
+
+E
+
+I
+
+E
+
+u1 s1
+u2 × 1
+
+I
+
+E
+
+I
+
+E
+
+u1 s1
+u2 × 1
+
+3.1.2 Study TA3 with Action Exclude
+
+3.2 Case 2: Include x1
+
+Here we study the transitions of TA3 when its current
+action is Exclude, given different actions of TA4 and input
+samples. This situation has 8 instances, depending on the
+variations of the training samples and the status of TA4 . In
+
+For Case 2, we assume that the actions of the TAs for the
+first bit are frozen as TA1 = I and TA2 = E, and thus the
+overall joint action for the first bit is “x1 ”. Similar to Case 1,
+we also have 4 situations, detailed in subsections 3.2.1-3.2.4.
+
+6
+
+3.3.1 Study TA3 with Action Include
+
+3.2.1 Study TA3 with Action Include
+Condition: x1 = 1, x2 = 1,
+y = 1, TA4 = E.
+P
+Thus, Type I, x2 = 1,
+R
+C = x1 ∧ x2 =1.
+
+I
+
+E
+
+Condition: x1 = 1, x2 = 1,
+y = 1, TA4 = E.
+P
+Thus, Type I, x2 = 1,
+R
+C = x2 = 1.
+
+u1 s−1
+s
+
+Condition: x1 = 1, x2 = 1,
+y = 1, TA4 = I.
+P
+Thus, Type I, x2 = 1,
+R
+C = x1 ∧ x2 ∧ ¬x2 = 0.
+
+I
+
+Condition: x1 = 1, x2 = 1,
+y = 1, TA4 = I.
+P
+Thus, Type I, x2 = 1,
+R
+C = 0.
+
+Condition: x1 = 1, x2 = 0,
+y = 0, TA4 = E.
+P
+Thus, Type II, x2 = 0,
+R
+C = x1 = 1.
+Condition: x1 = 1, x2 = 1,
+y = 1, TA4 = I.
+P
+Thus, Type I, x2 = 1,
+R
+C = x1 ∧ ¬x2 = 0.
+Condition: x1 = 1, x2 = 0,
+y = 0, TA4 = I.
+P
+Thus, Type II, x2 = 0,
+R
+C = x1 ∧ ¬x2 = 1.
+
+I
+
+Condition: x1 = 1, x2 = 1,
+y = 1, TA4 = E.
+P
+Thus, Type I, x2 = 1,
+R
+C = 1.
+
+E
+
+u2 × 1
+
+I
+
+E
+
+Condition: x1 = 1, x2 = 0,
+y = 0, TA4 = E.
+P
+Thus, Type II, x2 = 0,
+R
+C = 1.
+
+E
+
+Condition: x1 = 0, x2 = 0,
+y = 0, TA4 = E.
+P
+Thus, Type II, x2 = 0,
+R
+C = 1.
+
+u1 s1
+I
+
+u2 × 1
+
+Condition: x1 = 1, x2 = 1,
+y = 1, TA4 = I.
+P
+Thus, Type I, x2 = 1,
+R
+C = 0.
+
+3.2.3 Study TA4 with Action Include
+Condition: x1 = 1, x2 = 1,
+y = 1, TA3 = E.
+P
+Thus, Type I, ¬x2 = 0,
+R
+C = x1 ∧ ¬x2 = 0.
+Condition: x1 = 1, x2 = 1,
+y = 1, TA3 = I.
+P
+Thus, Type I, ¬x2 = 0,
+R
+C = x1 ∧ x2 ∧ ¬x2 = 0.
+
+I
+
+Condition: x1 = 1, x2 = 0,
+y = 0, TA4 = I.
+P
+Thus, Type II, x2 = 0,
+R
+C = 1.
+
+E
+
+u1 1s
+
+I
+
+Condition: x1 = 0, x2 = 0,
+y = 0, TA4 = I.
+P
+Thus, Type II, x2 = 0,
+R
+C = 1.
+
+E
+
+u1 s1
+
+Condition: x1 = 1, x2 = 1,
+y = 1, TA3 = I.
+P
+Thus, Type I, ¬x2 = 0,
+R
+C = x1 ∧ x2 = 1.
+
+E
+
+u1 s1
+
+I
+
+E
+
+u1 s−1
+s
+
+I
+
+E
+
+u2 × 1
+
+I
+
+E
+
+u1 × 1
+
+I
+
+E
+
+I
+
+E
+
+u1 s1
+u2 × 1
+
+I
+
+E
+
+u2 × 1
+
+3.3.3 Study TA4 with Action Include
+
+3.2.4 Study TA4 with Action Exclude
+Condition: x1 = 1, x2 = 1,
+y = 1, TA3 = E.
+P
+Thus, Type I, ¬x2 = 0,
+R
+C = x1 = 1.
+
+I
+
+3.3.2 Study TA3 with Action Exclude
+
+E
+
+u1 s−1
+s
+
+I
+
+E
+
+u1 s−1
+s
+
+E
+
+u1 s1
+
+3.2.2 Study TA3 with Action Exclude
+Condition: x1 = 1, x2 = 1,
+y = 1, TA4 = E.
+P
+Thus, Type I, x2 = 1,
+R
+C = x1 =1.
+
+I
+
+I
+
+E
+
+I
+
+E
+
+Condition: x1 = 1, x2 = 1,
+y = 1, TA3 = E.
+P
+Thus, Type I, ¬x2 = 0,
+R
+C = ¬x2 = 0.
+u1 s1
+
+Condition: x1 = 1, x2 = 1,
+y = 1, TA3 = I.
+P
+Thus, Type I, ¬x2 = 0,
+R
+C = ¬x2 ∧ x2 = 0.
+
+I
+
+E
+
+u1 s1
+
+I
+
+E
+
+u1 s1
+
+u1 s1
+
+3.3 Case 3: Exclude Both ¬x1 and x1
+For Case 3, we assume that the actions of TAs for the first
+bit are frozen as TA1 = E and TA2 = E, with 4 situations,
+detailed in subsections 3.3.1-3.3.4. Note that in the training
+process, when all literals are excluded, C is assigned to 1.
+
+3.3.4 Study TA4 with Action Exclude
+Condition: x1 = 1, x2 = 1,
+y = 1, TA3 = E.
+P
+Thus, Type I, ¬x2 = 0,
+R
+C = 1.
+
+I
+
+E
+
+u1 s1
+
+7
+
+Condition: x1 = 0, x2 = 1,
+y = 0, TA3 = E.
+P
+Thus, Type II, ¬x2 = 0,
+R
+C = 1.
+Condition: x1 = 1, x2 = 1,
+y = 1, TA3 = I.
+P
+Thus, Type I, ¬x2 = 0,
+R
+C = 1.
+Condition: x1 = 0, x2 = 1,
+y = 0, TA3 = I.
+P
+Thus, Type II, ¬x2 = 0,
+R
+C = 1.
+
+I
+
+E
+
+Condition: x1 = 1, x2 = 1,
+y = 1, TA3 = I.
+P
+Thus, Type I, ¬x2 = 0,
+R
+C = 0.
+
+u2 × 1
+
+I
+
+E
+
+I
+
+E
+
+u1 s1
+
+3.4.1 Study TA3 with Action Include
+I
+
+E
+
+u1 1s
+
+I
+
+E
+
+u1 s1
+
+Condition: x1 = 1, x2 = 1,
+y = 1, TA4 = I.
+P
+Thus, Type I, x2 = 1,
+R
+C = 0.
+
+I
+
+E
+
+I
+
+E
+
+u1 s1
+
+u1 s1
+
+3.4.3 Study TA4 with Action Include
+Condition: x1 = 1, x2 = 1,
+y = 1, TA3 = E.
+P
+Thus, Type I, ¬x2 = 0,
+R
+C = 0.
+Condition: x1 = 1, x2 = 1,
+y = 1, TA3 = I.
+P
+Thus, Type I, ¬x2 = 0,
+R
+C = 0.
+
+I
+
+E
+
+u1 s1
+
+I
+
+E
+
+u1 s1
+
+3.4.4 Study TA4 with Action Exclude
+Condition: x1 = 1, x2 = 1,
+y = 1, TA3 = E.
+P
+Thus, Type I, ¬x2 = 0,
+R
+C = 0.
+
+I
+
+Based on the analysis above, we summarize here what
+happens to TA3 and TA4 , given different status (Cases) of
+TA1 and TA2 . More specifically, we will summarize here
+the directions of the transitions for the TAs. For example,
+“TA3 ⇒ E” means that TA3 will move towards the action
+“Exclude”, while “TA4 ⇒ E or I” means TA4 transits
+towards either “Exclude” or “Include”.
+Scenario 1: Study TA3 = I and TA4 = I.
+Case 3, we have:
+Case 1, we have:
+TA3 ⇒ E.
+TA3 ⇒ E.
+TA4 ⇒ E.
+TA4 ⇒ E.
+Case 4, we have:
+Case 2, we have:
+TA3 ⇒ E.
+TA3 ⇒ E.
+TA4 ⇒ E.
+TA4 ⇒ E.
+From the facts presented above, we can confirm that
+regardless the state of TA1 and TA2 , if TA3 = I and TA4
+= I, they (TA3 and TA4 ) will eventually move out of their
+states.
+
+3.4.2 Study TA3 with Action Exclude
+Condition: x1 = 1, x2 = 1,
+y = 1, TA4 = E.
+P
+Thus, Type I, x2 = 1,
+R
+C = 0.
+
+u1 s1
+
+So far, we have gone through, exhaustively, the transitions of TA3 and TA4 for all possible training samples and
+system states. In what follows, we will summarize the direction of transitions and study the convergence properties
+of the system for the given training samples.
+3.5 Summarize of the Directions of Transitions in Different Cases
+
+For Case 4, we assume that the actions of TAs for the first
+bit are frozen as TA1 = I and TA2 = I, and thus C = 0
+always. Similarly, we also have 4 situations, detailed in
+subsections 3.4.1-3.4.4.
+
+Condition: x1 = 1, x2 = 1,
+y = 1, TA4 = I.
+P
+Thus, Type I, x2 = 1,
+R
+C = 0.
+
+E
+
+u2 × 1
+
+3.4 Case 4: Include Both ¬x1 and x1
+
+Condition: x1 = 1, x2 = 1,
+y = 1, TA4 = E.
+P
+Thus, Type I, x2 = 1,
+R
+C = 0.
+
+I
+
+E
+
+u1 s1
+
+Scenario 2: Study TA3 = I and TA4 = E.
+Case 3, we have:
+Case 1, we have:
+TA3 ⇒ I.
+TA3 ⇒ E.
+TA4 ⇒ E or I.
+TA4 ⇒ E or I.
+Case 4, we have:
+Case 2, we have:
+TA3 ⇒ E.
+TA3 ⇒ I.
+TA4 ⇒ E.
+TA4 ⇒ E.
+For Scenario 2 Case 2, we can observe that if TA3 = I,
+TA4 = E, TA1 = I, and TA2 = E, TA3 will move deeper
+to “include” and TA4 will go deeper to “exclude”. It is
+not difficult to derive also that TA1 will move deeper to
+“include” and TA2 will transfer deeper to “exclude” in this
+circumstance. This tells us that the TAs in states TA3 = I,
+TA4 = E, TA1 = I, and TA2 = E, reinforce each other
+to move deeper to their corresponding directions and they
+therefore construct an absorbing state of the system. If it
+is the only absorbing state, we can conclude that the TM
+converge to the intended “AND” operation.
+In Scenario 2, we can observe for Cases 1, 3, and 4, the
+actions for TA3 and TA4 are not absorbing because the TAs
+will not be reinforced to move monotonically deeper to the
+states of the corresponding actions for difference cases.
+For Scenario 2, Case 3, TA4 has two possible directions
+to transit, I or E, depending on the input of the training
+sample. For action exclude, it will be reinforced when training sample x1 = 1 and x2 = 1 is given, based on Type I
+feedback. However, TA4 will transit towards “include” side
+when training sample x1 = 0 and x2 = 1 is given, due to
+
+8
+
+Type II feedback. Therefore, the direction of the transition
+for TA4 is I or E, depending on the training samples. In the
+following paragraphs, when “or” appears in the transition
+direction, the same concept applies.
+Scenario 3: Study TA3 = E and TA4 = I.
+Case 3, we have:
+Case 1, we have:
+TA3 ⇒ E or I.
+TA3 ⇒ E or I.
+TA4 ⇒ E.
+TA4 ⇒ E.
+Case 4, we have:
+Case 2, we can see that:
+TA3 ⇒ E.
+TA3 ⇒ E or I.
+TA4 ⇒ E.
+TA4 ⇒ E.
+
+To analyse the OR operator, we assume the training
+samples with the probability below are given.
+
+P (y = 1|x1 = 1, x2 = 1) = 1,
+P (y = 1|x1 = 0, x2 = 1) = 1,
+P (y = 1|x1 = 1, x2 = 0) = 1,
+P (y = 0|x1 = 0, x2 = 0) = 1.
+
+Clearly, there are three sub-patterns of x1 and x2 that
+will give y = 1, i.e., (x1 = 1, x2 = 1), (x1 = 1, x2 = 0), and
+(x1 = 0, x2 = 1). More specifically, Eq. (7) can be split into
+three cases, corresponding to the three sub-patterns:
+
+In Scenario 3, we can see that the actions for TA3 = E
+and TA4 = I are not absorbing because the TAs will not be
+reinforced to move deeper to the states of the corresponding
+actions.
+Scenario 4: Study TA3 = E and TA4 = E.
+Case 3, we have:
+Case 1, we have:
+TA3 ⇒ I.
+TA3 ⇒ I or E.
+TA4 ⇒ I or E.
+TA4 ⇒ I or E.
+Case 4, we have:
+Case 2, we have:
+TA3 ⇒ E.
+TA3 ⇒ I.
+TA4 ⇒ E.
+TA4 ⇒ E.
+In Scenario 4, we see that, the actions for TA3 = E and
+TA4 = E seem to be an absorbing state, because the states
+of TAs will move deeper in Case 4. After a revisit of the
+condition for Case 4, i.e., include both ¬x1 and x1 , we understand that this condition is not absorbing. In fact, when
+TA1 and TA2 both have “Include” as their actions, they
+monotonically move towards “Exclude”. Therefore, from
+the overall system’s perspective, the system state TA1 = I,
+TA2 = I, TA3 = E, and TA4 = E is not absorbing. For the
+other cases in the this scenario, there is no absorbing state.
+Based on the above analysis, we understand that there is
+only one absorbing condition in the system, namely, TA1 =
+I, TA2 = E, TA3 = I, and TA4 = E, for the given training
+samples with AND logic. The same conclusion applies when
+we freeze the transition of the two TAs for the second bit
+of the input and study behavior of the first bit of input.
+Therefore, we can conclude that the TM with only one clause
+can learn to be the intended AND operator, almost surely,
+in infinite time horizon.
+
+4
+
+C ONVERGENCE OF A NALYSIS OF THE OR O P -
+
+ERATOR
+
+Once the convergence of the AND operator is proven, it is
+self-evident that the convergence of the operator OR is also
+proven. Clearly, if there is one additional NOT gate that is
+added after the AND operator, the OR operator is achieved.
+However, this approach requires a change in the structure of
+the vanilla TM. In fact, the TM can almost surely converge
+to the intended OR operator if more clauses are given, and
+the proof is given presently.
+
+(7)
+
+P (y = 1|x1 = 1, x2 = 1) = 1,
+P (y = 0|x1 = 0, x2 = 0) = 1,
+
+(8)
+
+P (y = 1|x1 = 0, x2 = 1) = 1,
+P (y = 0|x1 = 0, x2 = 0) = 1,
+
+(9)
+
+P (y = 1|x1 = 1, x2 = 0) = 1,
+P (y = 0|x1 = 0, x2 = 0) = 1.
+
+(10)
+
+and
+
+In what follows, we will first show that the clauses are
+able to learn each individual sub-pattern shown in Eqs. (8)(10) and then we will show the system behavior when
+more sub-patterns jointly appear in the training samples
+without T . Thereafter, we conclude the convergence of the
+system when T is enabled in the learning.
+4.1 Ability to Learn All the Sub-patterns of OR Operator
+The convergence analyses of the above three sub-patterns
+can be derived by reusing the analyses of the sub-patterns
+of the XOR operator plus the AND operator. For Eq. (8), we
+can see that the TAs will converge to TA1 = I, TA2 = E,
+TA3 = I, and TA4 = E, by studying the transition diagrams
+in Subsections 3.1-3.4 when input samples of x1 = 0, x2 = 1
+and x1 = 1, x2 = 0 are removed. In more details, the
+directions of the transitions for different scenarios are summarized below. The 4 cases mentioned below, i.e., Case 1–
+Case 4, are defined in Subsections 3.1-3.4.
+Scenario 1: Study TA3 = I and TA4 = I.
+Case 3, we have:
+Case 1, we have:
+TA3 ⇒ E.
+TA3 ⇒ E.
+TA4 ⇒ E.
+TA4 ⇒ E.
+Case 4, we have:
+Case 2, we can see that:
+TA3 ⇒ E.
+TA3 ⇒ E.
+TA4 ⇒ E.
+TA4 ⇒ E.
+Scenario 2: Study TA3 = I and TA4 = E.
+Case 1, we have:
+Case 3, we have:
+TA3 ⇒ E.
+TA3 ⇒ I.
+TA4 ⇒ E.
+TA4 ⇒ E.
+Case 2, we have:
+Case 4, we have:
+TA3 ⇒ I.
+TA3 ⇒ E.
+TA4 ⇒ E.
+TA4 ⇒ E.
+Scenario 3: Study TA3 = E and TA4 = I.
+
+9
+
+Case 1, we have:
+TA3 ⇒ E or I.
+TA4 ⇒ E.
+Case 2, we have:
+TA3 ⇒ E.
+TA4 ⇒ E.
+
+Case 3, we have:
+TA3 ⇒ E or I.
+TA4 ⇒ E.
+Case 4, we have:
+TA3 ⇒ E.
+TA4 ⇒ E.
+
+Scenario 4: Study TA3 = E and TA4 = E.
+Case 1, we have:
+TA3 ⇒ I or E.
+TA4 ⇒ E.
+Case 2, we have:
+TA3 ⇒ I.
+TA4 ⇒ E.
+
+Case 3, we have:
+TA3 ⇒ I.
+TA4 ⇒ E.
+Case 4, we have:
+TA3 ⇒ E.
+TA4 ⇒ E.
+
+Comparing the analysis with the one in Subsection 3.5,
+there is apparently another possible absorbing case, which
+can be observed in Scenario 2, Case 3, where TA3 = I
+and TA4 = E, given TA1 = E and TA2 = E. However,
+given TA3 = I and TA4 = E, the TAs for the first bit,
+i.e., TA1 = E and TA2 = E, will not move only towards
+Exclude. Therefore, they do not reinforce each other to move
+to deeper states for their current actions. For this reason,
+TA3 = I and TA4 = E, TA1 = E and TA2 = E, is not an
+absorbing state. In addition, given TA3 = I, TA4 = E, TA1
+and TA2 with actions E and E will transit towards I and E,
+encouraging the overall system to move towards I, E, I, and
+E. Consequently, the system state with TA1 = I, TA2 = E,
+TA3 = I, and TA4 = E is still the only absorbing case for
+the given training samples following Eq. (8).
+For Eq. (9), similar to the proof of in Lemma 1 in [20], we
+can derive that the TAs will converge in TA1 = E, TA2 = I,
+TA3 = I, and TA4 = E. The transition diagrams for the
+samples of Eq. (9) are in fact a subset of the ones presented
+in Subsection 3.2.1 and Appendix 2 of [20], when the input
+samples of x1 = 1 and x2 = 1 are removed. We summarize
+below only the directions of transitions.
+The directions of the transitions of the TAs for the second
+input bit, i.e., x2 /¬x2 , when the TAs for the first input bit
+are frozen, are summarized as follows (based on the subset
+of the transition diagrams in Subsection 3.2.1 of [20]).
+Scenario 1: Study TA3 = I and TA4 = I.
+Case 1: we can see that
+TA3 → E
+TA4 → E
+Case 2: we can see that
+TA3 → E
+TA4 → E
+
+Case 3: we can see that
+TA3 → E
+TA4 → E
+Case 4: we can see that
+TA3 → E
+TA4 → E
+
+Scenario 2: Study TA3 = I and TA4 = E.
+Case 1: we can see that
+TA3 → I
+TA4 → E
+Case 2: we can see that
+TA3 → E
+TA4 → E
+
+Case 3: we can see that
+TA3 → I
+TA4 → E
+Case 4: we can see that
+TA3 → E
+TA4 → E
+
+Scenario 3: Study TA3 = E and TA4 = I.
+
+Case 1: we can see that
+TA3 → I, or E
+TA4 → E
+Case 2: we can see that
+TA3 → E
+TA4 → E
+
+Case 3: we can see that
+TA3 → I, or E
+TA4 → E
+Case 4: we can see that
+TA3 → E
+TA4 → E
+
+Scenario 4: Study TA3 = E and TA4 = E.
+Case 3: we can see that
+Case 1: we can see that
+TA3 →I
+TA3 → I
+TA4 → E
+TA4 → E
+Case 4: we can see that
+Case 2: we can see that
+TA3 → E
+TA3 → E
+TA4 → E
+TA4 → E
+The directions of the transitions of the TAs for the first
+input bit, i.e., x1 /¬x1 , when the TAs for the second input bit
+are frozen, are summarized as follows (based on the subset
+of the transition diagrams in Appendix 2 of [20]).
+Scenario 1: Study TA1 = I and TA2 = I.
+Case 3: we can see that
+Case 1: we can see that
+TA1 → E
+TA1 → E
+TA2 → E
+TA2 → E
+Case 4: we can see that
+Case 2: we can see that
+TA1 → E
+TA1 → E
+TA2 → E
+TA2 → E
+Scenario 2: Study TA1 = I and TA2 = E.
+Case 3: we can see that
+Case 1: we can see that
+TA1 → E
+TA1 → E
+TA2 → E
+TA2 → E
+Case 4: we can see that
+Case 2: we can see that
+TA1 → E
+TA1 → E
+TA2 → E
+TA2 → E
+Scenario 3: Study TA1 = E and TA2 = I.
+Case 3: we can see that
+Case 1: we can see that
+TA1 → I
+TA1 → I, or E
+TA2 → I
+TA2 → E
+Case 4: we can see that
+Case 2: we can see that
+TA1 → E
+TA1 → E
+TA2 → E
+TA2 → I
+Scenario 4: Study TA1 = E and TA2 = E.
+Case 3: we can see that
+Case 1: we can see that
+TA1 → E
+TA1 → I, or E
+TA2 → E
+TA2 → E
+Case 4: we can see that
+Case 2: we can see that
+TA1 → E
+TA1 → E
+TA2 → E
+TA2 → I
+By analyzing the transitions of TAs for the two input
+bits with samples following Eq. (9), we can conclude that
+TA1 = E, TA2 = I, TA3 = I, and TA4 = E is an absorbing
+state, as the actions of TA1 -TA4 reinforce each other to
+transit to deeper states for the current actions upon various
+input samples. There are still a few other cases in different
+scenarios that also seem to be absorbing. But the conditions
+for those absorbing-like states are not absorbing, making
+those states not absorbing from system’s point of view. For
+example, the status TA3 = I and TA4 = E seems also
+absorbing in Scenario 2, Case 3, i.e., when TA1 = E and
+
+10
+
+TA2 = E hold. However, to make TA1 = E and TA2 = E
+absorbing, the condition is TA3 = I and TA4 = I, or
+TA3 = E and TA4 = E. Clearly, the status TA3 = I and
+TA4 = I is not absorbing. For TA3 = E and TA4 = E to be
+absorbing, it is required to have TA1 = I and TA2 = I to be
+absorbing, or TA1 = I and TA2 = E to be absorbing, which
+are not true. Therefore, all those absorbing-like states are
+not absorbing. In fact, when TA3 = I, TA4 = E, TA1 = E,
+and TA2 = E hold, the condition TA3 = I, TA4 = E will
+reinforce TA1 and TA2 to move towards E, I, which is the
+absorbing state of the system.
+Following the same principle, the TAs will converge to
+TA1 = I, TA2 = E, TA3 = E, and TA4 = I when training
+samples from Eq. (10) are given, according to the proof of
+Lemma 2 in [20].
+4.2 System Property without T
+So far, we show that the clauses is able to converge to the
+intended operator if the training samples for an individual
+sub-pattern are given. In what follows, we will show that
+the system becomes recurrent if any sub-patterns of two
+training samples are given when u1 > 0 and u2 > 0.
+Specifically, we show that there is no absorbing state for
+
+P (y = 1|x1 = 1, x2 = 1) = 1,
+P (y = 1|x1 = 1, x2 = 0) = 1,
+P (y = 0|x1 = 0, x2 = 0) = 1,
+
+(11)
+
+P (y = 1|x1 = 1, x2 = 1) = 1,
+P (y = 1|x1 = 0, x2 = 1) = 1,
+P (y = 0|x1 = 0, x2 = 0) = 1,
+
+(12)
+
+P (y = 1|x1 = 1, x2 = 0) = 1,
+P (y = 1|x1 = 0, x2 = 1) = 1,
+P (y = 0|x1 = 0, x2 = 0) = 1.
+
+(13)
+
+and
+
+To show the recurrent property when samples following
+Eq. (11) is given, we need to show that the absorbing states
+for Eq. (8) disappears when (x1 = 1, x2 = 0, y = 1) is given
+in addition, and the same applies for Eq. (10) when (x1 =
+1, x2 = 1, y = 1) is given.
+We first show that the absorbing state for (x1 = 1, x2 =
+1, y = 1) Eq. (8), i.e., TA1 = I, TA2 = E, TA3 = I, TA4 = E,
+disappears when sub-pattern (x1 = 1, x2 = 0, y = 1) is
+given in addition. Indeed, TA3 will move toward E when
+(x1 = 1, x2 = 0, y = 1) is given, because
+Condition: x1 = 1, x2 = 0,
+y = 1, TA4 = E.
+Thus, Type I, x2 = 0,
+C = x1 ∧ x2 = 0.
+
+I
+
+E
+
+u1 s1
+P
+R
+
+Clearly, when (x1 = 1, x2 = 0, y = 1) is given in addition, TA3 has a non-zero probability to move towards
+“Exclude”. Therefore, “Include” is not the only direction
+that TA3 moves to upon the new input. In other words,
+(x1 = 1, x2 = 0, y = 1) will make the state TA1 = I,
+TA2 = E, TA3 = I, TA4 = E, not absorbing any longer.
+For other states, the newly added training sample will not
+
+remove any transition from the previous case. Therefore, the
+system will not have any new absorbing state.
+Following the same concept, we show that the absorbing
+state for (x1 = 1, x2 = 0, y = 1) shown in Eq. (10), i.e.,
+TA1 = I, TA2 = E, TA3 = E, TA4 = I, disappears when
+sub-pattern (x1 = 1, x2 = 1, y = 1) is given in addition.
+Indeed, TA4 will also move towards E when (x1 = 1, x2 =
+1, y = 1) is given, as:
+Condition: x1 = 1, x2 = 1,
+y = 1, TA3 = E.
+P
+Thus, Type I, ¬x2 = 0,
+R
+C = x1 ∧ ¬x2 = 0.
+
+I
+
+E
+
+u1 1s
+
+Understandably, because of the newly added subpatterns, the absorbing states in Eqs. (8) and (10) disappear
+and no new absorbing states are generated. In other words,
+the TM trained based on Eq. (11), becomes recurrent.
+Following the same concept, we can show that the system becomes recurrent for Eqs. (7), (12). and (13) as well.
+For sake of conciseness, we will not provide the details
+here. In general, any newly added sub-pattern will involve
+a probability for the learnt sub-pattern to move outside the
+learnt state and become recurrent.
+4.3 The Functionality of T
+To encourage the TM to learn different sub-patterns and
+become possibly absorbed in the OR operator, parameter
+T plays an important role. The functionality of T is that it
+can block the training samples for learnt sub-pattern so that
+the clauses can be guided to learn un-learnt sub-patterns.
+Theorem 1. The clausescan almost surely learn the OR logic in
+infinite time, when T ≤ m
+2 .
+
+Proof: To prove this theorem, we show that (1) T ≤
+⌊m/2⌋ is required so that the sum of the outputs of clauses
+for each sub-pattern can reach T . (2) The system is absorbed
+only when the sum of the outputs of clauses for all subpattern reaches T at the same time, i.e., fΣ (Ci (X)) = T ,
+∀X = [x1 = 0, x2 = 1] or [x1 = 0, x2 = 1] or [x1 = 0, x2 =
+1]. (3) the absorbed point can follow all sub-patterns in OR
+logic. And (4) the input sample (x1 = 0, x2 = 0) will not
+have any possibility to give the sum greater than or equal to
+T.
+To prove (1), let us look at how to configure T so that
+the sum of the outputs of clauses for each sub-pattern can
+reach T . The nature of the OR operator offers the possibility
+to represent 2 sub-patterns jointly. For example, T clauses
+in the form of x1 will result in the sum of the outputs as
+T for both (x1 = 1, x2 = 0) and (x1 = 1, x2 = 1). If there
+are other T clauses to represent the remaining sub-pattern,
+2T clauses can offer the sum of outputs as T for any subpattern. Clearly, given m clauses in total, when T = ⌊m/2⌋,
+all sub-patterns can possibly be covered. When we have
+a smaller T , different sub-patterns may be represented by
+distinct clauses, offering more flexibility. However, when
+T > ⌊m/2⌋, there will always be one or two sub-patterns
+that cannot obtain a sum of T clauses. For this reason, the
+maximum T value is T = ⌊m/2⌋.
+To prove (2), we show that the system is not absorbed
+when 0, 1 or 2 sub-patterns are blocked by T , and only
+when 3 sub-patterns are blocked by T , the system becomes
+
+11
+
+absorbed. Clearly, when no sub-pattern is blocked, the training samples given to the system follow Eq. (7). Following
+this type of training samples, it has already been shown in
+the previous subsection that the current system status is not
+absorbing.
+Now let’s look at the case when only 1 sub-pattern is
+blocked. Clearly, if any T clauses block only one sub-pattern,
+the system is updated based on Eqs. (11), (12), or (13). As
+stated in the previous subsection, the current system status
+is not absorbing.
+We look at the cases when two sub-patterns are blocked
+but the third is not blocked. In other words, the sum of
+the outputs of clauses for any two sub-patterns reaches at
+least T , and the sum for the remaining sub-pattern is less
+than T . In this case, only one type of the samples from
+Eqs. (8) or (9) or (10) will be given to the TM. Based on
+the previous analysis of the equations, we understand that
+all clauses, including the ones that follow the two blocked
+sub-patterns, will be reinforced to learn the unblocked subpattern. This is due to the fact that only the samples following the unblocked sub-pattern are given to the system,
+and in this circumstance, the system has only one absorbing
+state, which follows the given training sample. This property will encourage the clauses that have learnt the blocked
+sub-patterns move out of the current states. Once they are
+out of their current states before the sum of the third one
+also reaches T , the blocked sub-patterns will be unblocked
+and the system becomes one of three cases described by
+Eqs. (11), (12) or (13). Clearly, the system status is still not
+absorbing.
+In fact, the system will only be absorbed when all three
+sub-patterns are blocked at the same time. In this situation,
+no Type I feedback is given and only Type II feedback
+can possibly update the system. Type II feedback is only
+triggered by (x1 = 0, x2 = 0, y = 0) in OR operator. For
+Type II feedback, based on Table 2, any transition is only
+triggered as a penalty when excluded literal has 0 value and
+the clause is evaluated as 1. Specifically for OR operation,
+this only happens when C = ¬x1 ∧ ¬x2 or C = ¬x1 or
+C = ¬x2 . For C = ¬x1 ∧¬x2 , based on the Type II feedback,
+the TA with the action “excluding x1 ” and the TA with the
+action “excluding x2 ” will be penalized. In other words,
+the actions of the TAs for x1 and x2 will be encouraged
+to move from exclude to include side. As soon as any one
+of TAs for x1 or x2 (or occasionally both of them) becomes
+included, the clause will become C = ¬x1 ∧ x1 ∧ ¬x2 or
+C = ¬x1 ∧¬x2 ∧x2 (or occasionally C = ¬x1 ∧x1 ∧x2 ∧¬x2 ).
+In this case, input (x1 = 0, x2 = 0) will always result in 0
+as the output of the clause and then the Type II feedback
+will not update the system any longer. Following the same
+concept, for C = ¬x2 , the Type II feedback will encourage
+the excluded x1 to be included so that the clause becomes
+C = x1 ∧ ¬x2 . The same applies to C = ¬x1 , which will
+eventually become C = ¬x1 ∧ x2 upon Type II feedback.
+When all clauses in C = ¬x2 or C = ¬x1 are also updated
+to C = x1 ∧ ¬x2 or C = ¬x1 ∧ x2 , the system is absorbed
+because no feedback is triggered up on any input sample.
+We summarize the requirement for an absorbing state.
+•
+
+For any sample X that satisfies OR, i.e. X = [x1 =
+1, x2 = 1], or X = [x1 = 1, x2 = 0], or X = [x1 =
+
+•
+
+0, x2 = 1], the sum of the outputs of clauses, i.e.,
+fΣ (C i (X)) must be at least T . This will block any
+Type I feedback.
+There are no clauses with only negated literal, such
+as C = ¬x1 or C = ¬x2 or or C = ¬x1 ∧ ¬x2 . This
+will block any Type II feedback.
+
+(3) Now we prove that all the absorbed points can cover
+all three sub-patterns in OR logic.
+Here we employ proof by contradiction. Suppose there
+is an absorbing state that does not include all sub-patterns
+in the OR logic. Let’s name the not-included sub-pattern2 as
+sub-pattern A. For this reason, for any input samples belong
+to sub-pattern A, the clauses in the absorbing state will not
+output 1. Therefore, the sum of the clauses for sub-pattern A
+will not reach T , which is a conflict with the requirement for
+the absorbing state, where the TM needs a sum of at least T
+clauses for any sub-pattern.
+(4) We now show that input sample (x1 = 0, x2 = 0) will
+not give a sum of clause outputs greater than or equal to T .
+This is to avoid any possible false positive case upon input
+(x1 = 0, x2 = 0) in the testing phase. Obviously, to have a
+positive output, the clause should be in the form of C = ¬x1
+or C = ¬x2 or C = ¬x1 ∧ ¬x2 . It has already shown in (2)
+that Type II feedback will eliminate such clauses. For this
+reason, (x1 = 0, x2 = 0) will never result in a sum of clause
+outputs greater than or equal to T .
+Before the system is absorbed, the system moves back
+and forth in the intermediate states. As long as T ≤ ⌊m/2⌋
+holds, the system will eventually be absorbed. We thus have
+the OR logic almost surely and conclude the proof.
+
+Now let us take a look at one example where m = 7, T =
+3. Due to the randomness of the learning nature, the system
+may be absorbed in one of numerous absorbing states. Here
+we list 3 representative ones.
+•
+•
+
+•
+
+C1 = C2 = C3 = x1 , C4 = C5 = C6 = x2 , C7 = ∗.
+C1 = C2 = C3 = x1 , C4 = C5 = C6 = ¬x1 ∧ x2 ,
+C7 = ∗.
+C1 = C2 = x1 , C3 = x1 ∧ ¬x2 C3 = C4 = ¬x1 ∧ x2 ,
+C6 = x2 , C7 = ∗.
+
+Here ∗ means the clause can be in any form other than ¬x1 ,
+¬x2 , or ¬x1 ∧ ¬x2 . Note that all above examples can sum
+up to at least T for any input X in OR logic.
+Remark 1. When T is greater than half of the number of the
+clauses, i.e., T > ⌊m/2⌋, the system will not have an absorbing
+state. We conjuncture that the system can still learn the subpatterns in a balanced manner, as long as T is not configured too
+close to the total number of clauses m, s is large, and the number
+of states in the TAs is also large.
+Given T > ⌊m/2⌋ the system will oscillate. Nevertheless, with high probability, the system will have at least
+m − T clauses that follow each sub-pattern, especially when
+s is large. First of all, when s is large, the clause is less
+likely to get out of the learnt sub-pattern due to a training
+sample from the conflicting sub-pattern. This is because of
+the nature of TM. In more detail, the probability for an
+2. There might be more than 1 not-included sub-patterns, but the
+analysis concept is the same.
+
+12
+
+included literal in a clause that has learnt a certain subpattern to change towards the other sub-pattern is u1 /s,
+which only happens when a training sample of the other
+sub-pattern is given. On the contrary, the reward is u1 s−1
+s
+if a training sample of the same sub-pattern is received.
+s−1
+> 1s holds if s is large. Similarly, when the number
+s
+of TA states is large, the probability of being in the include
+1
+side of the TAs is also large given s−1
+s > s.
+4.4 Revisit the XOR Operator
+Let us revisit the proof of XOR operator. As stated in [20],
+when the system is absorbed, the clauses follow the format
+C = x1 ∧ ¬x2 or C = ¬x1 ∧ x2 precisely. In other words, a
+clause with just one literal, such as C = x1 , cannot absorb
+the system. The main reason is that the sub-patterns in XOR
+operator are mutual exclusive, i.e., the sub-patterns cannot
+be merged in any way. Although Type I feedback can be
+blocked when T clauses follow one sub-pattern using one
+literal, the Type II feedback can reinforce the other missing
+literal to be included. For example, when T clauses happens
+to converge to C = x1 , the Type I feedback from any input
+samples of (x1 = 1, x2 = 0, y = 1) will be blocked. In
+this situation, the unblocked Type II feedback from (x1 =
+1, x2 = 1, y = 0) will encourage the clause to include ¬x2 .
+This is because upon a sample (x1 = 1, x2 = 1, y = 0), we
+have Type II feedback, C = x1 = 1, and the studied literal
+is ¬x2 = 0. When the TA for excluding ¬x2 is considered,
+a big penalty is given to the TA, making it moving towards
+action Included, and thus C = x1 eventually becomes C =
+x1 ∧ ¬x2 . Following the same concept, we can analyze the
+development for C = ¬x1 , C = x2 , and C = ¬x2 , which
+will eventually converge to C = ¬x1 ∧ x2 or C = x1 ∧ ¬x2 ,
+upon Type II feedback.
+
+5
+
+C ONCLUSIONS
+
+In this article, we prove the convergence of the TM for the
+AND and the OR operators. Together with the proofs in [19]
+and [20], we complete the convergence analyses of TM for
+the fundamental digital operators, which lay the foundation
+for future applications and analytical studies of TM.
+
+ACKNOWLEDGEMENTS
+This work is supported in part by the project Spacetime
+Vision: Towards Unsupervised Learning in the 4D World
+financed by the EEA and Norway Grants 2014-2021 under
+the grant number EEA-RO-NO-2018-04. This work was also
+supported by the Research Council of Norway through
+the AI4Citizen project (320783) and the AIEverywhere
+project (312434).
+
+R EFERENCES
+[1]
+[2]
+[3]
+
+O.-C. Granmo, “The Tsetlin Machine - A Game Theoretic Bandit
+Driven Approach to Optimal Pattern Recognition with Propositional Logic,” arXiv:1804.01508, Apr 2018.
+M. L. Tsetlin, “On Behaviour of Finite Automata in Random
+Medium,” Avtomat. i Telemekh, vol. 22, no. 10, pp. 1345–1354, 1961.
+X. Zhang, L. Jiao, B. J. Oommen, and O.-C. Granmo, “A Conclusive
+Analysis of the Finite-time Behavior of the Discretized Pursuit
+Learning Automaton,” IEEE Trans. Neural Netw. Learn. Sys., vol. 31,
+no. 1, pp. 284–294, 2020.
+
+[4]
+
+A. Yazidi, X. Zhang, L. Jiao, and B. J. Oommen, “The hierarchical
+continuous pursuit learning automation: a novel scheme for environments with large numbers of actions,” IEEE Trans. Neural Netw.
+Learn. Sys., vol. 31, no. 2, pp. 512–526, 2019.
+[5] M. T. Ribeiro, S. Singh, and C. Guestrin, “Why Should I Trust
+You?: Explaining the Predictions of Any Classifier,” in ACM
+SIGKDD, 2016, pp. 1135–1144.
+[6] S. Jain and B. C. Wallace, “Attention is not explanation,” in
+NAACL-HLT (1), 2019.
+[7] R. Reiter, “Nonmonotonic reasoning,” Exploring artificial intelligence, pp. 439–481, 1988.
+[8] A. Wheeldon, R. Shafik, T. Rahman, J. Lei, A. Yakovlev, and
+O.-C. Granmo, “Learning Automata based Energy-efficient AI
+Hardware Design for IoT,” Philosophical Transactions of the Royal
+Society A, vol. 378, no. 2182, 2020.
+[9] O.-C. Granmo, S. Glimsdal, L. Jiao, M. Goodwin, C. W. Omlin, and
+G. T. Berge, “The Convolutional Tsetlin Machine,” arXiv preprint
+arXiv:1905.09688, 2019.
+[10] K. Darshana Abeyrathna, O.-C. Granmo, X. Zhang, L. Jiao,
+and M. Goodwin, “The Regression Tsetlin Machine - A Novel
+Approach to Interpretable Non-Linear Regression,” Philosophical
+Transactions of the Royal Society A, vol. 378, no. 2164, 2020.
+[11] K. D. Abeyrathna, O.-C. Granmo, and M. Goodwin, “A Regression Tsetlin Machine with Integer Weighted Clauses for Compact
+Pattern Representation,” in IEA/AIE, 2020.
+[12] R. Yadav, L. Jiao, O.-C. Granmo, and M. Goodwin, “Interpretability in Word Sense Disambiguation Using Tsetlin Machine,” in
+ICAART, 2021, pp. 402–409.
+[13] ——, “Human-Level Interpretable Learning for Aspect-Based Sentiment Analysis,” in AAAI, 2021.
+[14] B. Bhattarai, O. Granmo, and L. Jiao, “Measuring the Novelty of
+Natural Language Text using the Conjunctive Clauses of a Tsetlin
+Machine Text Classifier,” in ICAART, 2021, pp. 410–417.
+[15] R. Yadav, L. Jiao, O.-C. Granmo, and M. Goodwin, “Enhancing
+interpretable clauses semantically using pretrained word representation,” in the 4th BlackboxNLP Workshop on Analyzing and
+Interpreting Neural Networks for NLP, 2021.
+[16] R. K. Yadav, L. Jiao, O. C. Granmo, and M. Goodwin, “Robust Interpretable Text Classification against Spurious Correlations Using
+AND-rules with Negation,” in IJCAI, 2022.
+[17] R. Seraj, J. Sharma, and O. C. Granmo, “Tsetlin Machine for
+Solving Contextual Bandit Problems,” in NeurIPS, accepted, 2022.
+[18] K. D. Abeyrathna, B. Bhattarai, M. Goodwin, S. Gorji, O.-C.
+Granmo, L. Jiao, R. Saha, and R. K. Yadav, “Massively Parallel and
+Asynchronous Tsetlin Machine Architecture Supporting Almost
+Constant-Time Scaling,” in ICML, 2021.
+[19] X. Zhang, L. Jiao, O.-C. Granmo, and M. Goodwin, “On the
+Convergence of Tsetlin Machines for the IDENTITY- and NOT
+Operators,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 44, no. 10,
+pp. 6345–6359, 2022.
+[20] L. Jiao, X. Zhang, O.-C. Granmo, and K. D. Abeyrathna, “On the
+Convergence of Tsetlin Machines for the XOR Operator,” IEEE
+Trans. Pattern Anal. Mach. Intell., accepted, Aug. 2022.
+
+

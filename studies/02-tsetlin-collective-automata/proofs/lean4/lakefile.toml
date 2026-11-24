@@ -1,0 +1,7 @@
+name = "remath_tsetlin"
+version = "0.1.0"
+defaultTargets = ["ReMathTsetlin"]
+
+[[lean_lib]]
+name = "ReMathTsetlin"
+roots = ["ArchitectureHierarchy", "EscapeGeometry", "FairGameCancellation", "StagHuntMirage", "CommonFundCutoff", "Main"]

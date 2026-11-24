@@ -1,0 +1,660 @@
+arXiv:1801.05582v3 [math-ph] 25 Sep 2018
+
+Attractors for two dimensional waves with
+homogeneous Hamiltonians of degree 0
+Yves Colin de Verdière ∗ &
+Laure Saint-Raymond †
+September 26, 2018
+
+Abstract
+In domains with topography, inertial and internal waves exhibit interesting features. In particular, numerical and lab experiments show that,
+in two dimensions, for generic forcing frequencies, these waves concentrate
+on attractors. The goal of this paper is to analyze mathematically this
+behavior, using tools from spectral theory and microlocal analysis.
+
+1
+
+Physical background
+
+The mathematical problem which will be discussed in this paper is motivated
+by the physical observation that, in presence of topography, forcing inertial
+or internal waves leads to the formation of singular geometric patterns, which
+accumulate most of the energy.
+
+1.1
+
+Inertial and internal waves
+
+Inertial and internal waves are of upmost importance in oceanic flows. They
+describe small departures from equilibrium in an incompressible fluid submitted
+respectively to the Coriolis force (due to the Earth rotation), or to the combination of density stratification and gravity. These waves are very well described
+when the effect of boundaries is neglected, assuming for instance that the fluid
+is contained in a parallelelipedic box with zero flux condition at the boundary
+(or equivalently in a periodic box). For the sake of completeness, we recall
+here the equations governing these waves, and their usual decomposition as a
+superposition of plane waves using the Fourier transform.
+∗ Université
+Grenoble-Alpes
+Institut
+Fourier,
+Unité
+mixte
+de
+recherche
+CNRS-UGA
+5582,
+BP
+74,
+38402-Saint
+Martin
+d’Hères
+Cedex
+(France);
+yves.colin-de-verdiere@univ-grenoble-alpes.fr
+† Ecole Normale Supérieure de Lyon, UMPA, UMR CNRS-ENSL 5669, 46, allée d’Italie,
+69364-Lyon Cedex 07 (France) laure.saint-raymond@ens-lyon.fr
+
+1
+
+• Let us first consider the case of inertial waves, assuming that the density of
+the fluid is homogeneous ρ(t, x) = ρ0 . The incompressibility constraint states
+div u = 0, where u is the bulk velocity of the fluid.
+The (linearized) conservation of momentum provides
+ρ0 (∂t u + u ∧ Ω) + ∇p = 0
+denoting by p the pressure, and by Ω the rotation vector. Note that there
+is no convection term u · ∇u here as it is expected to be negligible for small
+fluctuations. Assuming for the sake of simplicity that ρ0 = 1 and taking the
+divergence of this equation, we get
+div(u ∧ Ω) + ∆p = 0
+from which we deduce that the pressure is given by
+p = (−∆)−1 div(u ∧ Ω) .
+We therefore end up with the dynamical equation
+∂t u + (I + ∇(−∆)−1 div)(u ∧ Ω) = 0 .
+
+(1.1)
+
+If the rotation is constant (say in the vertical direction Ω = e3 ), we rewrite
+the incompressibility constraint in Fourier variables
+ph · ûp,h + p3 ûp,3 = 0,
+using the subscript h to denote the horizontal component, and take the Fourier
+transform of (1.1) to get
+∂t ûp,h +
+
+p2
+
+p1 p2
+|p|2
+
+1 − |p|12
+p2
+
+1 p2
+− p|p|
+2
+
+−1 + |p|22
+
+!
+ûp,h = 0 .
+
+The matrix has eigenvalues ±i|p3 |/|p|. In other words, the solution to the wave
+equation can be obtained as a superposition of plane waves exp(i(p · x − ωt))
+with dispersion relation
+|p3 |
+ω=±
+.
+|p|
+• The model leading to internal waves is a little bit more complicated. It
+describes an incompressible fluid which at equilibrium is stratified in density
+with stable profile ρ̄(x) = ρ̄(x3 ) with ρ̄0 (x3 ) < 0. Small perturbations will
+create both a velocity field u and a fluctuation of the density ρ = ρ̄ + η.
+The incompressibility constraint states as previously div u = 0. If the fluctuation around equilibrium is small, the conservation of mass
+∂t ρ + div(ρu) = 0
+
+2
+
+gives at leading order
+∂t η + u · ∇ρ̄ = 0 .
+The (linearized) conservation of momentum states
+ρ̄∂t u + ηge3 + ∇p = 0
+denoting by g the gravity constant, and by p the pressure. As previously, the
+pressure is computed thanks to the incompressibility condition
+
+
+1
+η
+− div
+∇p = g∂3 .
+ρ̄
+ρ̄
+In most physical systems, the variations of ρ̄ are very small compared to its
+average ρ0 , and count only for the buoyancy term. The pressure is then given
+by
+p = (−∆)−1 (g∂3 η) .
+The system of equations can be therefore reduced to get the Boussinesq approximation
+
+∂t η + u3 ρ̄0 (x3 ) = 0,
+
+
+
+
+g
+
+∂t uh + ∇h (−∆)−1 ∂3 η = 0,
+ρ
+0
+
+
+g
+
+
+ ∂t u3 + (I + ∂33 (−∆)−1 )η = 0 .
+ρ0
+Assuming in addition that the stratification is affine so that ρ̄0 is a constant,
+and taking the Fourier transform of this system, we obtain that
+!
+
+
+
+0 
+η̂p
+η̂p
+ 0 2  ρ̄
+∂t
+= 0.
++ g
+p3
+û3,h
+ûp,3
+0
+ρ0 1 − |p|2
+The solution can be expressed as a sum of plane waves with dispersion relation
+ω = ±N
+
+|ph |
+,
+|p|
+
+where N = (−g ρ̄0 /ρ0 )1/2 denotes the Brunt-Väisälä frequency.
+Remark 1.1. In both cases, the pressure is obtained by solving the Laplace
+equation. In a non periodic domain, we expect the solution to depend on the
+boundary conditions. The Leray projection onto divergence free vector fields
+defined by
+P = (I + ∇(−∆)−1 div)
+is a non local (pseudo-differential) operator.
+
+3
+
+1.2
+
+The effect of topography
+
+When the domain is not periodic (or when the rotation or the Brunt-Väisälä
+frequency are not constant), the previous analysis fails because we cannot use the
+Fourier transform, and it becomes complicated to handle the Leray projection.
+In general, the zero-flux condition on the boundary is incompatible with any
+decomposition on special functions. Actually we will see that the waves exhibit
+a very different behaviour.
+The lab experiments conducted by physicists, especially in the groups of
+Maas and Dauxois [16, 12, 5], consist in analyzing the response of a stratified
+fluid to some monochromatic forcing in different geometries. In [5] for instance,
+the domain is a 2D trapezium and the symmetry breaking is obtained by introducing a sloping boundary.
+Internal wave attractors in experiments and 3D numerical simulations
+
+113
+
+(a)
+z
+x
+
+(b)
+
+0
+–100
+–200
+
+H
+
+z (mm)
+
+y
+
+–300
+0 10 20 30
+
+L
+
+F IGURE 1. (Colour online) (a) Experimental set-up. A sloping wall is inserted inside a
+tank of size L ⇥ W ⇥ H = 800 ⇥ 170 ⇥ 425 mm3 . The working bottom length L of the
+section, the depth H, and the sloping angle ↵ can be clearly identified in this picture.
+A wave maker located on the left of the tank generates a mode 1 forcing at a tunable
+frequency !0 . The flow is mostly 2D as demonstrated within the text and, therefore,
+essentially independent of the transversal variable y except for narrow boundary layers
+at lateral walls and weak nearly horizontal secondary currents in the wave beams. The
+schematic attractor is depicted with the dotted quadrilateral in the working domain. The
+longitudinal (respectively transversal) variable ⇠ (respectively ⌘) of the most energetic
+branch of the attractor are also defined on the picture. (b) Example of a stratification
+measured with the conductivity probe before one experiment. The density difference with
+fresh water, 1⇢, is plotted as a function of the depth z.
+
+Figure 1: Experimental setup in [5].
+
+• In the absence of topography (i.e. in a rectangular box which can be seen as
+a torus T2 ), the system is completely integrable and the response to the forcing
+can be predicted using Fourier analysis as previously.
+in figure 1(a). A Cartesian coordinate system is introduced, with the horizontal x
+• If the forcing
+is znon
+resonant,
+i.e.
+if the
+forcing
+ω0 is differand vertical
+axes located
+in the vertical
+midplane
+of the test
+tank. The frequency
+y axis
+is perpendicular to the (x, z) plane and directed from the observer/camera towards
+ent from ±|ph ||/|p|
+for
+all
+p
+which
+are
+excited,
+then
+the
+system
+will
+oscillate
+the tank. The rectangular test tank of size 800 ⇥ 170 ⇥ 425 mm is filled with
+salt-stratified fluid using the conventional double-bucket technique. The density
+according to theadistribution
+following
+equation
+as a function of the vertical coordinate z is measured prior and after
+3
+
+experiments by a conductivity probe driven by a vertical traverse mechanism. The
+value of the buoyancy frequency N = [( g/ ¯
+⇢)(d⇢/dz)]1/2 is inferred from the linear fit
+to the measured density profile. An example of such a profile is shown on figure 1(b).
+t
+p,±
+p,±
+p
+0
+A sliding sloping wall, inclined at the angle ↵, is carefully inserted into the fluid once
+the filling procedure is over. The sloping wall delimits a trapezoidal fluid domain of
+length L (measured along the bottom) and depth H.
+The input forcing is introduced into the system by an internal wave pgenerator
+(Gostiaux et al. 2007; Mercier et al. 2010; Joubaud et al. 2012; Scolan et al. 2013)
+with the time-dependent vertical profile given by
+
+∂ v̂
+
+= fˆ
+
+exp(i(±ω − ω )t)
+
+where v̂p,± is the amplitude of the wave exp(i(p · x ∓ ω t)). We then obtain
+
+
+exp(i(±ω
+p − ω0 )t) − 1 (2.1)
+⇣ (z, t) = a sin(!
+t) cos(pz/H),
+v̂p,± = fˆp,±
+.
+where a and ! are the amplitude and frequency
+oscillations,
+i(±ωofp −
+ω0 ) respectively. The
+0
+
+0
+
+profile is reproduced in discrete form by the motion of a stack of 47 horizontal plates
+driven by the rotation of a vertical shaft. The stack of moving plates is confined
+between lateral walls of a vertical box-like support frame. Each lateral wall of the
+frame is 15 mm thick. Therefore, the inner size of the frame, W 0 , which coincides
+
+Generically, if the forcing is regularly distributed over the domain (i.e. f ∈
+C ∞ (T2 )), the solution will be regular: it is typically the case under the diophantine condition
+∀ωp 6= ω0 , |ωp − ω0 | ≥ C|p|−α
+which is satisfied for almost all tori.
+• If the forcing is resonant, i.e. if the forcing frequency ω0 = ±|ph ||/|p| for
+some p which is excited, the fluid pumps some energy and the amplitude of the
+4
+
+resonant mode has a linear growth in time
+v̂p,± = fˆp,± t .
+But, under the same generic condition, the solution is still regular in x since the
+resonant mode has a nice oscillating structure exp(i(p · x)).
+For the sake of completeness, we give in appendix the detailed computations
+leading to these regularity results.
+• What is observed in the presence of topography is completely different. By
+PIV methods (following the displacements of small markers in the fluid), one
+can get a measurement of the velocity field. It happens that this velocity field
+is very singular with respect to the spatial variable x, which is unexpected
+from the simple model in the periodic box. The energy concentrates on some
+geometric patterns, which are broken lines in the 2D trapezoidal geometry with
+affine stratification.
+Furthermore, some branches of these attractors are more energetic than others, which seems to indicate that there is a focusing mechanism due to the reflection on the slope. The geometry of these attractors, especially the number
+of branches, depends on the forcing frequency and on the slope.
+(| ∂ ρ ′ /∂ x| 2 + | ∂ ρ ′ /∂ z | 2 ) 1 / 2 [ kg/m 4 ]
+
+z [ cm]
+
+80
+
+( a)
+
+(d)
+
+(b)
+
+(e)
+
+60
+40
+20
+
+20
+
+0
+
+z [ cm]
+
+80
+
+15
+
+60
+10
+
+40
+20
+
+5
+0
+(c)
+
+z [ cm]
+
+80
+
+(f )
+
+0
+
+60
+40
+20
+0
+0
+
+40
+
+80
+
+120
+
+0
+
+40
+
+x [ cm]
+
+80
+
+120
+
+x [ cm]
+
+Figure 2: Experimental observation of attractors.
+From the PhD thesis of C. Brouzet [5], under the supervision of T. Dauxois
+(ENS Lyon, 2016)
+
+Remark 1.2. In lab experiments, the effect of viscous dissipation is not negligible, which is important to explain that the energy varies also along each single
+branch. But we will not consider this effect here.
+
+1.3
+
+Classification of attractors
+
+• The geometric pattern observed in the lab experiments coincide with the limit
+cycles obtained from the following geometric ray tracing
+• start from any point x0 in the domain,
+5
+
+• draw the ray of direction φ such that sin φ = ω0 /N ,
+• when the ray hits the boundary, make a reflection preserving | sin φ|,
+• continue this construction to obtain the limit cycle (or limit point).
+This procedure is the counterpart of the geometric optics for electromagnetic or
+acoustic waves, the crucial difference here being that the frequency ω0 prescribes
+the direction of the propagation instead of the modulus of the wavelength.
+Without entering into the details of this geometric approximation, let us just
+explain the intuition behind it. The idea is to look at the propagation of a wave
+packet, i.e. to seek for a solution in the form
+
+
+p(t) · x 1
+2
+− (x − x(t))
+exp i
+ε
+2
+which is localized both in space (around x(t)) and in frequency (around p(t)).
+Unlike the plane waves obtained in the first paragraph, the time frequency in
+this Ansatz is not quantified, and the amplitude now depends both on t and x.
+Remark 1.3. Of course, it is impossible to prescribe both the localization in
+x and the localization in p (which is the well-known uncertainty principle in
+quantum physics). The main assumption behind the geometric approximation
+is that there is a scale separation (measured here by the factor ε), and p is the
+Fourier variable corresponding to x/ε.
+Plugging this Ansatz in the dynamical equations, we find that the propagation of the wave packet is given at leading order by the Hamiltonian equations
+dxi
+∂h
+=
+,
+dt
+∂pi
+
+∂h
+dpi
+=−
+,
+dt
+∂xi
+
+where the Hamiltonian is defined by the dispersion relation h(x, p) = ω(x, p).
+For internal waves in 2D with an affine stratification (say N = 1), we find
+that
+
+p2
+dp1
+dx1
+
+
+= 33 ,
+= 0,
+
+dt
+|p|
+dt
+
+dx
+p p
+dp3
+
+ 3 = − 3 1,
+= 0.
+3
+dt
+|p|
+dt
+Note that the group velocity is orthogonal to the wavenumber p, and that its
+modulus is conversely proportional to |p|, which are typical features from dynamics with Hamiltonian homogeneous of degree 0 (i.e. invariant by the homotheties p 7→ λp). This means that, on the energy level ω = ω0 , we have that the
+wavenumber p satisfies
+|p1 |
+= ω0
+|p|
+and the direction of propagation, which is orthogonal to p, makes an angle
+φ = ± arcsin ω0 with respect to the horizontal.
+6
+
+• Using this ray tracing method, it is possible to construct numerically the
+trajectories, and investigate systematically their long time behavior.
+Three scenarios appear depending on the slope α and on the forcing frequency ω0 = sin φ, which are
+• convergence to a limit cycle
+• concentration in a corner,
+• no emergence of a pattern
+Note that, both at the experimental and numerical levels, one cannot observe
+very long patterns because they will be generically rather dense in the domain
+and the accuracy of the measurements is finite.
+6
+
+0
+
+τ
+
+−1
+5
+−2
+
+τ
+−3
+
+4
+
+(1,2)
+
+−4
+(1,3)
+
+3
+
+−5
+−6
+(2,3)
+
+2
+(1,1)
+
+1
+
+o
+•o
+•
+•
+•
+•
+•
+o
+
+−7
+−8
+(2,1)
+
+−9
+
+(3,1)
+
+corner
+
+−10
+
+0
+−1
+
+−0.5
+
+0
+
+d
+
+0.5
+d
+
+1
+
+Figure 3: Greyscale: Lyapunov exponent of the trajectories.
+White regions: attractors.
+Black regions: no pattern emerges from the ray tracing.
+From L. Maas, D. Benielli, J. Sommeria, F. Lam [16]
+
+At the theoretical level, the long time behavior of the Hamiltonian dynamics can be characterized by exhibiting a Poincaré section, and looking at the
+Poincaré return map. If φ > α, a Poincaré section is x3 = 0 and it is easy to see
+that all trajectories will focus on a corner. If φ < α, a Poincaré section is the
+lateral boundary x1 = x+
+1 (x3 ). The Poincaré return map πα,φ is a continuous
+map on the circle S1 (an homeomorphism) preserving the orientation. Such a
+map π admits a crucial dynamical invariant ρ(π) ∈ T, referred to as the rotation
+number, which has been introduced by Poincaré. It can be defined for instance
+as follows: for any c, c0 ∈ S1
+ρ(π) = lim
+
+1
+
+n→∞ n
+
+|{j ∈ [0, n − 1] / π j (c0 ) ∈ [c, π(c)[}.
+
+(we refer to the first chapter of [7] for a brief presentation of the combinatorial
+theory of Poincaré). Let us state the main properties of the rotation number
+ρ(π).
+• When the rotation number ρ(π) is rational, π has periodic points (having
+all the same period) and any orbit is asymptotic to a periodic orbit.
+7
+
+• When the rotation number ρ = ρ(π) is irrational, π is semi-conjugated to
+the rotation Rρ : θ 7→ θ + ρ, i.e. there exists a monotone map h such that
+h ◦ π = Rρ ◦ h. Note that, in general h is not a bijection: the inverse image
+of some point may be an interval.
+In [8], Denjoy proved that, as soon as π is smooth enough, the map h is a
+nice continuous change of variables and π = h−1 ◦ Rρ ◦ h.
+For generic families of C 2 circle diffeomorphisms depending on one parameter, it has been proved by Arnold and Hermann (see Chapter 4 of [7]) that the
+rotation number is locally constant (as a function of this parameter), precisely
+when it is rational: this phenomenon is known as frequency locking. The set of
+parameters for which the rotation number is irrational is a Cantor set possibly
+with non zero Lebesgue measure (devil’s staircase). This provides bifurcation
+diagrams with Arnold’s tongues very similar to Fig 3. Unfortunately this theory
+does not apply here as the Poincaré return map is only piecewise affine. However it is clear that fixed points of the (iterated) return map are stable under
+small perturbations of α or φ. We therefore preserve the band structure of the
+bifurcation diagram for rational rotation numbers.
+
+2
+
+The mathematical scenario for the formation
+of geometric patterns
+
+The goal of the present paper is to provide a mathematical description of the
+mechanisms leading to the formation of these geometric patterns, beyond the
+ray approximation which is not valid here since there is no scale separation.
+
+2.1
+
+Quasi-resonant forcing
+
+The first important remark is that the response to the forcing does not correspond to the usual picture when the wave operator has discrete eigenmodes. A
+natural question is therefore to understand the response to the forcing when the
+wave operator has some continuous spectrum.
+A very simple example which can illustrate this mechanism is the 1D Schrödinger
+equation in the whole space with a monochromatic forcing (although it is not
+really relevant from the physical point of view):
+∂t ψ − i∆ψ = f exp(−iω0 t) .
+The interest in looking at this model is that we know explicitly the spectrum R
+and the generalized eigenfunctions eξ : x 7→ exp(ix · ξ) of the Laplacian, as well
+as the spectral decomposition: for any φ ∈ L2 (R),
+Z
+1
+φ̂(ξ) exp(ix · ξ)dξ
+φ(x) =
+2π R
+
+8
+
+

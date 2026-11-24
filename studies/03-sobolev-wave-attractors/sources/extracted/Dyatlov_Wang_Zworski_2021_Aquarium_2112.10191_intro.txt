@@ -1,0 +1,509 @@
+MATHEMATICS OF INTERNAL WAVES IN A 2D AQUARIUM
+
+arXiv:2112.10191v3 [math.AP] 12 Sep 2023
+
+SEMYON DYATLOV, JIAN WANG, AND MACIEJ ZWORSKI
+Abstract. Following theoretical and experimental work of Maas et al [23] we consider a linearized model for internal waves in effectively two dimensional aquaria. We
+provide a precise description of singular profiles appearing in long time wave evolution
+and associate them to classical attractors. That is done by microlocal analysis of the
+spectral Poincaré problem, leading in particular to a limiting absorption principle.
+Some aspects of the paper (for instance §6) can be considered as a natural microlocal continuation of the work of John [20] on the Dirichlet problem for hyperbolic
+equations in two dimensions.
+
+1. Introduction
+Internal waves are a central topic in oceanography and the theory of rotating fluids – see [22] and [30] for reviews and references. They can be described by linear
+perturbations of the initial state of rest of a stable-stratified fluid (dense fluid lies everywhere below less-dense fluid and the isodensity surfaces are all horizontal). Forcing
+
+Figure 1. Contour plots of a numerical solution to (1.1) for Ω given by
+2
+0 2
+a unit square tilted by π/10 (see §2.5), with f (x) = e−5π (x−x ) , where
+x0 is the center and λ = 0.8. In that case the rotation number of the
+billiard ball map is 21 (see Figure 9) and the classical attractor is given
+by a parallelogram on which u develops a singularity – see Theorem 1.
+1
+
+2
+
+SEMYON DYATLOV, JIAN WANG, AND MACIEJ ZWORSKI
+
+Figure 2. Experimental results of Hazewinkel et al [17]: horizontal
+component of the observed perturbation buoyancy gradient projected
+onto a field that oscillates at the forcing frequency, thus reducing the
+time series to an amplitude field (left) and a phase field (right). In terms
+of our Theorem 1 this corresponds to amplitude and phase of u+ . The
+arrows indicate directions of phase propagation in agreement with our
+analysis, shown on Figure 4.
+can take place at linear level by pushing fluid away from this equilibrium state either mechanically, by wind, a piston, a moving boundary, or thermodynamically, by
+spatially differential heating or evaporation/rain.
+The mechanism behind formation of internal waves comes from ray dynamics of the
+classical system which underlies wave equations – see §1.1 for the case of nonlinear ray
+dynamics relevant to the case we consider. When parameters of the system produce
+hyperbolic dynamics, attractors are observed in wave evolution – see Figure 1. This
+phenomenon is both physically and theoretically more accessible in dimension two. The
+analysis in the physics literature, see [22], [35], has focused on constructions of standing
+and propagating waves and did not address the evolution problem analytically. (See
+however [2] for an analysis of a numerical approach to the evolution problem.) In this
+paper we prove the emergence of singular profiles in the long time evolution of linear
+waves for two dimensional domains.
+The model we consider is described as follows. Let Ω ⊂ R2 = {x = (x1 , x2 ) : xj ∈ R}
+be a bounded simply connected open set with C ∞ boundary ∂Ω. Following the fluid
+mechanics literature we consider the following evolution problem, sometimes referred
+to as the Poincaré problem:
+(∂t2 ∆ + ∂x22 )u = f (x) cos λt, u|t=0 = ∂t u|t=0 = 0, u|∂Ω = 0,
+
+(1.1)
+
+where λ ∈ (0, 1) and ∆ := ∂x21 + ∂x22 , see Sobolev [32, equation (48)], Ralston [28,
+p.374], Maas et al [23], Brouzet [4, §§1.1.2–3], Dauxois et al [8], Colin de Verdière–
+Saint-Raymond [6], Sibgatullin–Ermanyuk [31], and references given there. It models
+internal waves in a stratified fluid in an effectively two-dimensional aquarium Ω with an
+
+MATHEMATICS OF INTERNAL WAVES IN A 2D AQUARIUM
+
+3
+
+oscillatory forcing term (here we follow [6] rather than change the boundary condition).
+The geometry of Ω and the forcing frequency λ can produce concentration of the fluid
+velocity v = (∂x2 u, −∂x1 u) on attractors. This phenomenon was predicted by Maas–
+Lam [24] and was then observed experimentally by Maas–Benielli–Sommeria–Lam [23],
+see Figure 2 for experimental data from the more recent [17]. (See also the earlier work
+of Wunsch [40] which studied the case of an internal wave converging to a corner, along
+a trajectory of the type pictured on Figure 7.) In this paper we provide a mathematical
+explanation: as mentioned above the physics papers concentrated on the analysis of
+modes and classical dynamics rather than on the long time behaviour of solutions
+to (1.1).
+1.1. Assumptions on Ω and λ. The assumptions on Ω and λ which guarantee existence of singular profiles (internal waves) in long time evolution of (1.1) are formulated
+using a “chess billiard” – see [27], [21] for recent studies and references. It was first
+considered in similar context by John [20] (see also the later work of Aleksandrjan [1])
+and was the basis of the analysis in [24]. It is defined as the reflected bicharacteristic flow for (1 − λ2 )ξ22 − λ2 ξ12 , which is the Hamiltonian for the
+√ 1 + 1 wave equation
+with x2 corresponding to time and the speed given by c = λ/ 1 − λ2 – see Figure 3
+and §2.1. This flow has a simple reduction to the boundary which we describe using a
+factorization of the quadratic form dual to (1 − λ2 )ξ22 − λ2 ξ12 :
+x22
+x21
+= ℓ+ (x, λ)ℓ− (x, λ),
+− 2+
+2
+λ
+1−λ
+
+ℓ± (x, λ) := ±
+
+x1
+x2
++√
+.
+λ
+1 − λ2
+
+(1.2)
+
+We often suppress the dependence on λ, writing simply ℓ± (x). Same applies to other
+λ-dependent objects introduced below.
+Definition 1. Let 0 < λ < 1. We say that Ω is λ-simple if each of the functions
+∂Ω ∋ x 7→ ℓ± (x, λ) has only two critical points, which are both nondegenerate. We
+±
+denote these minimum/maximum points by x±
+min (λ), xmax (λ).
+Under the assumption of λ-simplicity we define the following two smooth orientation
+reversing involutions on the boundary (see §2.1 for more details):
+γ ± (•, λ) : ∂Ω → ∂Ω,
+
+ℓ± (x) = ℓ± (γ ± (x)).
+
+(1.3)
+
+These maps correspond to interchanging intersections of the boundary with lines with
+slopes ∓1/c, respectively – see Figure 3. The chess billiard map b(•, λ) is defined as
+the composition
+b := γ + ◦ γ −
+(1.4)
+and is a C ∞ orientation preserving diffeomorphism of ∂Ω.
+Denoting by bn the n-th iterate of b, we consider the set of periodic points
+Σλ := {x ∈ ∂Ω | bn (x, λ) = x for some n ≥ 1}.
+
+(1.5)
+
+4
+
+SEMYON DYATLOV, JIAN WANG, AND MACIEJ ZWORSKI
+
+b(x)
+b(x)
+x+
+max
+
+x−
+max
+
+γ − (x)
+
+∂Ω
+γ − (x)
+st
+
++
+
+γ (x)
+
+on
+
+ℓ+
+=c
+o
+
+c
+− =
+ℓ
+
+ns
+t
+
+x+
+min
+
+x
+
+x−
+min
+
+x
+
+b2 (x)
+
+Figure 3. Left: the involutions γ ± and the chess billiard map b. Right:
+a forward trajectory of the map b on a trapezium with rounded corners, converging to a periodic trajectory. We remark that the effect of
+smoothed corner on classical dynamics was investigated by Manders–
+Duistermaat–Maas [25], see also §2.4.
+If Σλ ̸= ∅, then all the periodic points in Σλ have the same minimal period, see §2.1.
+We are now ready to state the dynamical assumptions on the chess billiard:
+Definition 2. Let 0 < λ < 1. We say that λ satisfies the Morse–Smale conditions if:
+(1) Ω is λ-simple;
+(2) the map b has periodic points, that is Σλ ̸= ∅;
+(3) the periodic points are hyperbolic, that is ∂x bn (x, λ) ̸= 1 for all x ∈ Σλ where n
+is the minimal period.
+−
++
+−
+Under the Morse–Smale conditions we have Σλ = Σ+
+λ ⊔ Σλ where Σλ , Σλ are the
+sets of attractive, respectively repulsive, periodic points of b:
+n
+Σ+
+λ := {x ∈ Σλ | ∂x b (x, λ) < 1},
+
+n
+Σ−
+λ := {x ∈ Σλ | ∂x b (x, λ) > 1}.
+
+(1.6)
+
+−
+Moreover, each of the involutions γ ± exchanges Σ+
+λ with Σλ , see (2.2).
+
+For y ∈ ∂Ω, let
+±
+±
+Γ±
+λ (y) := {x ∈ Ω | ℓ (x, λ) = ℓ (y, λ)}
+±
+
+(1.7)
+
+−
+(y, λ). Denote Γλ (y) := Γ+
+λ (y) ∪ Γλ (y).
+
+be the open line segment connecting y with γ
+Then Γλ (Σλ ) gives the closed trajectories of the chess billiard inside Ω.
+
+For y ∈ ∂Ω which is not a critical point of ℓ+ , we split the conormal bundle N ∗ Γ+
+λ (y)
+into the positive/negative directions:
+∗ +
+∗ +
+N ∗ Γ+
+λ (y) \ 0 = N+ Γλ (y) ⊔ N− Γλ (y),
++
++
++
+N±∗ Γ+
+λ (y) := {(x, τ dℓ (x)) | x ∈ Γλ (y), ±(∂θ ℓ (y))τ > 0}
+
+(1.8)
+
+MATHEMATICS OF INTERNAL WAVES IN A 2D AQUARIUM
+∗ +
+N−
+Σλ
+
+5
+
+∗ +
+N+
+Σλ
+
+∗ −
+N+
+Σλ
+
+∗ −
+N−
+Σλ
+
+Λ+ (λ)
+
+Λ− (λ)
+∗ −
+N+
+Σλ
+
+∗ +
+N−
+Σλ
+
+∗ −
+N−
+Σλ
+
+∗ +
+N+
+Σλ
+
+Figure 4. A visualization of the Lagrangian submanifolds (1.9) corresponding to attractive and repulsive cycles of b given in (1.4). The
+parallelogram represents the projection of the attractive (+) and repulsive (−) Lagrangians Λ± (λ) and the arrows perpendicular to the sides
+represent the conormal directions distinguishing the two Lagrangians.
+We also indicate the corresponding sets on the boundary: Σ±
+λ are the
+attractive (+) and repulsive (−) periodic points of b given by (1.4) and
+the arrows indicate the sign of the conormal directions.
+and similarly for N ∗ Γ−
+λ (y). Here ∂θ is the derivative with respect to a positively oriented
+(that is, counterclockwise when Ω is convex) parametrization of the boundary ∂Ω.
+Note that the orientation depends on the choice of y and not just on Γ±
+λ (y): we have
+±
+∗ ±
+Γ
+N+∗ Γ±
+(γ
+(y))
+=
+N
+(y).
+− λ
+λ
+We now define Lagrangian submanifolds Λ± (λ) ⊂ T ∗ Ω \ 0 by
+±
+∓
+∗ +
+Λ± (λ) := N+∗ Γ−
+λ (Σλ ) ⊔ N− Γλ (Σλ ),
+
+(1.9)
+
++
+−
+∗ ±
+see Figure 4. We note that π(Λ± (λ)) = Γλ (Σλ ) and N−∗ Γ±
+λ (Σλ ) = N+ Γλ (Σλ ).
+
+1.2. Statement of results. The main result of this paper is formulated using the
+concept of wave front set, see [18, §8.1] and [19, Theorem 18.1.27]. The wave front
+set of a distribution, WF(u), is a closed subspace of the cotangent bundle of T ∗ Ω \ 0
+and it provides phase space information about singularities. Its projection to the base,
+π(WF(u)), is the singular support, sing supp u.
+Theorem 1. Suppose that Ω and λ ∈ (0, 1) satisfy the Morse–Smale conditions of
+Definition 2. Assume that f ∈ Cc∞ (Ω; R). Then the solution to (1.1) is decomposed as
+
+1
+u(t) = Re eiλt u+ + r(t) + e(t), u+ ∈ H 2 − (Ω), WF(u+ ) ⊂ Λ+ (λ),
+(1.10)
+r(t) ∈ H 1 (Ω), ∥r(t)∥H 1 (Ω) ≤ C, ∥e(t)∥H 12 − (Ω) → 0 as t → ∞,
+
+6
+
+SEMYON DYATLOV, JIAN WANG, AND MACIEJ ZWORSKI
+
+where Λ+ (λ) ⊂ T ∗ Ω \ 0 is the attracting Lagrangian – see (1.9) and Figure 4. In
+particular, sing supp u+ is contained in the union of closed orbits of the chess billiard
+flow. In addition, u+ is a Lagrangian distribution, u+ ∈ I −1 (Ω, Λ+ (λ)) (see §3.2) and
+u+ |∂Ω = 0 (well defined because of the wave front set condition).
+For a numerical illustration of (1.10), see Figure 1. We remark that numerically it is
+easier to consider polygonal domains – see §2.4 for a discussion of the stability of our
+assumptions for smoothed out polygonal domains.
+Theorem 1 is proved using spectral properties of a self-adjoint operator associated
+to the evolution equation (1.1). To define it, let ∆Ω be the (negative definite) Dirichlet
+−1
+Laplacian of Ω with the inverse denoted by ∆−1
+(Ω) → H01 (Ω). Then
+Ω : H
+−1
+P := ∂x22 ∆−1
+(Ω) → H −1 (Ω),
+Ω : H
+
+−1
+⟨u, w⟩H −1 (Ω) := ⟨∇∆−1
+Ω u, ∇∆Ω w⟩L2 (Ω) , (1.11)
+
+is a bounded non-negative (hence self-adjoint) operator studied by Aleksandrjan [1]
+and Ralston [28] – see §7.1. Studying the spectrum of P is referred to as a Poincaré
+problem.
+The evolution equation (1.1) is equivalent to
+(∂t2 + P )w = f cos λt,
+
+w|t=0 = ∂t w|t=0 = 0, f ∈ Cc∞ (Ω; R),
+
+u = ∆−1
+Ω w.
+
+This equation is easily solved using the functional calculus of P :
+
+w(t) = Re eiλt Wt,λ (P )f
+where
+√
+√ 
+Z t
+X 1 − e−it(λ± z)
+sin s z −iλs
+√ √
+√
+e
+ds =
+.
+Wt,λ (z) =
+z
+2
+z( z ± λ)
+0
+±
+
+(1.12)
+
+(1.13)
+
+Using the Fourier transform of the Heaviside function (see (3.26)), we see that for any
+φ ∈ Cc∞ (R) we have
+Z
+Z t
+Z ∞
+Z
+1 − e−itζ
+t→∞
+φ(ζ) dζ = i
+φ(η) dη −−−→ i
+b
+φ(η) dη = (ζ − i0)−1 φ(ζ) dζ
+b
+ζ
+R
+0
+0
+R
+and thus for any λ ∈ (0, 1) we have the distributional limit
+Wt,λ (z) → (z − λ2 + i0)−1
+
+as t → ∞ in Dz′ ((0, ∞)).
+
+(1.14)
+
+This suggests that, as long as we only look at the spectrum of P near λ2 (the rest of
+the spectrum contributing the term r(t) in Theorem 1), if the spectral measure of P
+applied to f is smooth in the spectral parameter z, then Wt,λ (P )f → (P − λ2 + i0)−1 f
+as t → ∞. By Stone’s Formula, it suffices to establish the limiting absorption principle
+for the operator P near λ2 and that is the content of
+Theorem 2. Suppose that J ⊂ (0, 1) is an open interval such that each λ ∈ J satisfies
+the Morse–Smale conditions of Definition 2. Then for each f ∈ Cc∞ (Ω) and λ ∈ J the
+
+MATHEMATICS OF INTERNAL WAVES IN A 2D AQUARIUM
+
+7
+
+Figure 5. Numerical illustration of Theorem 2: contour plots of |u(x)|
+1 1 2
+for u = (∂x22 − (λ2 + iε)∆Ω )−1 f where ε = 0.005 and f (x) = e−10(x−( 2 , 2 ))
+and Ω = T0.5 (see §2.5). On the left, the rotation number is given by 31
+and we see concentration on an attractor; on the right, the rotation number is (nearly) irrational and, as ε → 0+, u is expected to be uniformly
+distributed [22]. Morse–Smale assumptions do not hold, at least not on
+scales relevant to numerical calculations and trajectories are uniformly
+distributed in the trapezium. In the contour plots of |u(x)| black corresponds to 0.
+limits
+(P − λ2 ± i0)−1 f = lim (P − (λ ∓ iε)2 )−1 f
+
+in D′ (Ω)
+
+ε→0+
+
+(1.15)
+
+exist and the spectrum of P is purely absolutely continuous in J 2 := {λ2 | λ ∈ J }:
+σ(P ) ∩ J 2 = σac (P ) ∩ J 2 .
+
+(1.16)
+
+Moreover,
+3
+
+(P − λ2 ± i0)−1 f ∈ I 1 (Ω, Λ± (λ)) ⊂ H − 2 − (Ω),
+
+(1.17)
+
+where Λ± (λ) are given in (1.9) and the definition of the conormal spaces I 1 (Ω, Λ± (λ))
+is reviewed in §3.2.
+
+8
+
+SEMYON DYATLOV, JIAN WANG, AND MACIEJ ZWORSKI
+
+Remarks. 1. The proof provides a more precise statement based on a reduction to
+the boundary – see §7. We also have smooth dependence on λ which plays a crucial
+role in proving Theorem 1 as in [13, §5] – see §8. This precise information is important
+1
+in obtaining the H 2 − remainder in (1.10). The singular profile in Theorem 1 satisfies
+2
+−1
+u+ = ∆−1
+Ω (P − λ + i0) f,
+
+which agrees with the heuristic argument following (1.14).
+2. As noted in [28], σ(P ) = [0, 1] but as emphasized there and in numerous physics
+papers the structure of the spectrum of P is far from clear. Here we only characterize
+the spectrum (1.16) under the Morse–Smale assumptions of Definition 2.
+Rather than working with P , we consider the closely related stationary Poincaré
+problem
+(∂x22 − ω 2 ∆)uω = f ∈ Cc∞ ,
+
+uω |∂Ω = 0,
+
+Re ω ∈ (0, 1),
+
+Im ω > 0.
+
+Then uλ+iε ∈ C ∞ (Ω) has a limit in D′ (Ω) which satisfies uλ+i0 ∈ I −1 (Ω, Λ− (λ)), and
+we have (P − λ2 − i0)−1 f = ∆uλ+i0 .
+1.3. Related mathematical work. Motivated by the study of internal waves results
+similar to Theorems 1 and 2 were obtained for self-adjoint 0th order pseudodifferential
+operators on 2D tori with dynamical conditions in Definitions 1 and 2 replaced by
+demanding that a naturally defined flow is Morse–Smale. That was done first by Colin
+de Verdière–Saint Raymond [6, 5], with different proofs provided by Dyatlov–Zworski
+[13]. The question of modes of viscosity limits in such models (addressing physics
+questions formulated for domains with boundary – see Rieutord–Valdettaro [29] and
+references given there) were investigated by Galkowski–Zworski [15] and Wang [38].
+Finer questions related to spectral theory were also answered in [39]. Unlike in the
+situation considered in this paper, embedded eigenvalues are possible in the case of 0th
+order pseudodifferential operators [34].
+The dynamical system (1.4) was recently studied by Nogueira–Troubetzkoy [27] and
+by Lenci et al [21]. We refer to those papers for additional references and dynamical
+results.
+1.4. Organization of the paper. In §2 we provide a self-contained analysis of the
+dynamical system given by the diffeomorphism (1.4). We emphasize properties needed
+in the analysis of the operator (1.11): properties of pushforwards by ℓ± and existence of suitable escape/Lyapounov functions. §3 is devoted to a review of microlocal
+analysis used in this paper and in particular to definitions and properties of conormal/Lagrangian spaces used in the formulations of Theorems 1 and 2. In §4 we describe
+reduction to the boundary using 1+1 Feynman propagators which arise naturally in
+the limiting absorption principles. Despite the presence of characteristic points, the
+
+

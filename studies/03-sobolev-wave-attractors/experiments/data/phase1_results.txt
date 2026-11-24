@@ -1,0 +1,309 @@
+Exact square checks: rho(s=1/2)=2/3 CCW; tan(phi)=1/5, s=1 has multiplier 16/81.
+15 degree square, per step log multiplier: -1.098612288668109691395245236922525704647490557822749452
+Mirror theorem, numerical residual checks: (N,q)=(8,2),(12,3),(20,5),(28,7).
+Tilt 15 degrees, R=1; clockwise label, angle in degrees, physical frequency.
+1/4 upper edge 22.01396157264278192641133481924147 0.92709254462491205450774020906535945306875044319697064
+1/3 standing mode 24.67577458833756874409994379876165 0.9086847760270456904326067410372998745829218590132473
+2/5 standing mode 28.56642368921298115099069066471177 0.87826334630493429934769987768551487191471452204969118
+1/2 lower edge 30.0 0.86602540378443864676372317075293618347140262690519031
+Hexagon vertices (xi,eta): (0,-1) (1/2,-1/2) (25/36,1/12) (1/4,3/4) (0,1) (-1,0)
+Period-two rectangle: xi in [-3/4,7/12], eta in [-1/4,1/4].
+Interior roots and b^2 multipliers in CCW edge coordinates: 10/7: 2, 9/4: 1/2, 19/4: 2, 21/4: 1/2
+Sharp observation example: field norm 2, attractor trace norm 1, Dirichlet energy 256.
+Antipodally symmetric octagon: neutral intervals and full-circuit factors 1/4 and 4.
+Central polygons with 10, 12 and 18 sides attain the mixed period-two bound with 2, 3 and 6 independently set attracting rates.
+Four-corner chamfer: s=3/5, CCW 2/3, two attracting and two repelling cycles, multipliers 1/16 and 16.
+Four-corner chamfer: s=7/18, CCW 3/4, two attracting and two repelling cycles, multipliers 121/625 and 625/121.
+Four-corner chamfer: s=5/17, CCW 4/5, two attracting and two repelling cycles, multipliers 36/121 and 121/36.
+Characteristic triangles: midpoint maps have global periods 2 and 3; both PDE kernels are zero.
+
+phase1_pde.py
+Tilted square, tan(phi)=1/3, physical slopes ±1.
+Exact affine cells of b²: 12
+  t=1/3, b(t)=7/3, derivative of b²=1/16
+  t=4/3, b(t)=10/3, derivative of b²=16
+  t=7/3, b(t)=1/3, derivative of b²=1/16
+  t=10/3, b(t)=4/3, derivative of b²=16
+Fixed intervals: []
+Critical diamond: midpoint extension gives b²=id on all four edges.
+Each whole edge is characteristic, so its common trace is constant.
+Single corner cut at s=5/8: b³ has two cycles, multipliers 3/13 and 13/3.
+1/16 corner cut: 2/5 plateau [2/5,32/79], interior multiplier 95/223.
+  ε=1/32: 153 plateaus below s=1, λ-measure=0.16712255, angular fraction=0.15986775
+  ε=1/128: 2478 plateaus below s=1, λ-measure=0.17495240, angular fraction=0.16701113
+  ε=1/512: 39797 plateaus below s=1, λ-measure=0.17727853, angular fraction=0.16912629
+  limiting λ-measure of certified plateaus: 0.17805772566595943151385617460880659505230955554623750825979068005
+  limiting angular fraction of certified plateaus: 0.16983318996038799593363209135269517874449294409615040475162164581
+L triomino: sin(3πx) sin(2πz) has eigenvalue 4/13.
+
+phase1_rectangle.py
+122 exact polygon checks at neutral parameters, tongue edges and interiors.
+15-degree square at 45 degrees: full multiplier 1/9; per step -1.0986122886681096913952452369225257046474905578227494517346943336
+tan(phi)=1/2 square: normalized slopes and multiplier at theta=pi/4, 1/3 3 1/81
+Square primary union: phi radians, number of tongues, angular measure, frequency measure
+0.1 9 0.5096574972163464520984718627137 0.3261859829779408734339902218209
+0.01 99 0.09750289324920039956844217381767 0.05684338872970307803172220641308
+0.001 999 0.01435622543532226223155260579337 0.007996369369470995806706638087852
+0.0001 9999 0.001896140629606252464792795555534 0.001029986043162858515273078244652
+Six individual tongue widths agree with 2 phi/(mn) at phi=1e-12 radians.
+
+phase1_parity.py
+Exact conjugacy at 544 rational slope and initial-height combinations.
+5-degree square, alternating continued-fraction digits
+depth | cylinder width in log(sqrt(ab)) | gap fraction
+1 | 0.86391650457757698325 | 0.026084267863674461182
+2 | 0.161234363003279503 | 0.043993074719250020773
+4 | 0.0043296802551682440553 | 0.040960050761156419251
+8 | 3.1429863177369815741e-6 | 0.0408864013620666376
+12 | 2.281070521819031339e-9 | 0.040886351828214031539
+
+phase1_measure.py
+Maximum section discrepancy against direct cell crossings 1.498e-95
+Square tilted 5 degrees, lower primary edge 40 degrees
+ N       edge distance (radians)          distance / predicted asymptotic
+ 1      0.238275004388567632498492       2.270183649994784099
+ 2      0.120614279933473246182026       1.641173333820267385
+ 4     0.0443458599033006235695284      1.2307086135642799557
+ 8    0.00904117997878697100503129      1.0438068592678995992
+16    0.00050149805175840741774366      1.0019591751915413421
+32  0.00000167127950396015107538065      1.0000031146473837945
+64   1.86339427224432634404716e-11     0.99999999995819138427
+Tilt     periodic frequency measure              corner frequency measure
+ 1°      0.9823952887191077263375925803  0.0176047112808922736624074197
+ 5°      0.9090389553440873587369461316  0.09096104465591264126305386836
+15°      0.7071067811865475244008443621  0.2928932188134524755991556379
+30°      0.3660254037844386467637231708  0.6339745962155613532362768292
+
+phase1_canonical.py
+upright     rho=1/2  global identity
+right       rho=1/2  regular attracting multiplier 3/5
+isosceles   rho=1/2  global identity
+shear       rho=1/2  regular attracting multiplier 9/25
+u=1/6, v=1/2  rho=1/4  regular attracting multiplier 1/9
+u=2/3, v=2  rho=1/2  regular attracting multiplier 1/9
+u=4/3, v=4  rho=2/3  global identity
+u=3/2, v=9/2  rho=7/10  regular attracting multiplier 1/9
+primary endpoint delta=1/4  displacement range [-1/2, 0]
+primary endpoint delta=3/4  displacement range [0, 1/2]
+a=1/4  checked both 1/(2k) endpoints and all 1/(2k+1) identities, k=1,...,4, and 2/5
+a=3/8  checked both 1/(2k) endpoints and all 1/(2k+1) identities, k=1,...,4, and 2/5
+15-degree dimension certificate: t=9/10 bound 0.990179874 (rounded), exactly < 991/1000
+
+phase1_coexistence.py
+{
+  "hexagon_vertices_st": [
+    [
+      "-1",
+      "0"
+    ],
+    [
+      "0",
+      "-1"
+    ],
+    [
+      "1/2",
+      "-1/2"
+    ],
+    [
+      "25/36",
+      "1/12"
+    ],
+    [
+      "1/4",
+      "3/4"
+    ],
+    [
+      "0",
+      "1"
+    ]
+  ],
+  "isolated_half_height": "1/4",
+  "neutral_half_heights": [
+    "3/4",
+    "1"
+  ],
+  "phase_fractions_neutral_interior_endpoint": [
+    "1/4",
+    "1/2",
+    "1/4"
+  ],
+  "per_billiard_step_exponent": "-0.346573590279972654708616060729088284037750067180127627060340004746696810985",
+  "sharp_examples_checked_k": [
+    6,
+    7,
+    8,
+    10,
+    13,
+    18
+  ],
+  "sharp_examples_without_cylinder_k": [
+    4,
+    5,
+    6,
+    8,
+    11,
+    16
+  ],
+  "independent_prescribed_radii_and_rates": [
+    [
+      "1/100",
+      "16/17"
+    ],
+    [
+      "7/12",
+      "1/83"
+    ],
+    [
+      "2/3",
+      "7/11"
+    ]
+  ]
+}
+
+phase1_multiple.py
+Sharp rational family, k=4,...,11: all rectangles exhaustively verified.
+Regular 5-gon, tilt=0 degrees from vertex-up, s=.9
+  (2, 3, 0, 1): -1.11913972068106929769761170715296178646360428878940039
+    M = 0.106641830144675700370893646179503262831855710140017724
+    dLambda/dphi = -8.16104294632652274526277993478617716340318682895678910
+  (2, 3, 4, 1): -1.11913972068106929769761170715296178646360428878940039
+    M = 0.106641830144675700370893646179503262831855710140017724
+    dLambda/dphi = 8.16104294632652274526277993478617716340318682895678910
+Regular 5-gon, tilt=5 degrees from vertex-up, s=.9
+  (2, 3, 0, 1): -2.31591597250394203622612003471988940335538945555073288
+    M = 0.00973690527870694665368264412307033268969980809613224253
+    dLambda/dphi = -32.4423121417096322098841224328930271349689022892691483
+    edge fractions = 0.57080177477959, 0.45005188984821, 0.29265441015227, 0.012888273529978
+  (2, 3, 4, 1): -0.517344809399604176008066328760086788938532522678158056
+    M = 0.355336653628017582495166291139356851605566771029453989
+    dLambda/dphi = 6.09304130735030027095866795885930932106682857857310188
+    edge fractions = 0.081273213180903, 0.96336541571154, 0.16813740559007, 0.85945078427665
+Regular 6-gon, tilt=0 degrees from vertex-up, s=.9
+  (3, 4, 0, 1): -1.52143809342190600099439744568356604352791404344149121
+  (2, 4, 5, 1): -1.52143809342190600099439744568356604352791404344149121
+Regular 6-gon, tilt=5 degrees from vertex-up, s=.9
+  (3, 4, 0, 1): -2.23841574039250265421859311836026542720330840637006618
+  (2, 4, 5, 1): -0.989725581478645889241071113988050023067215548639030879
+Regular 8-gon, tilt=5 degrees from vertex-up, s=.95
+  (4, 5, 0, 1): -0.612922878872247558682612270737162110324294789259114212
+  (3, 5, 7, 1): -1.30792407452292582528717037455599170387757006408358900
+  (3, 6, 7, 2): -0.394192177914974827944732357667331925053372671989303308
+Regular 9-gon, tilt=0 degrees from vertex-up, s=.98
+  (5, 6, 0, 1): -0.853185884156802976292539696803478149990934677414398437
+  (4, 6, 0, 1): -0.425836072341394122828272629601518334401586407651442508
+  (4, 6, 0, 2): -0.390044045175979791069235699592201639543841975617497311
+  (4, 6, 8, 2): -0.390044045175979791069235699592201639543841975617497311
+  (4, 7, 8, 2): -0.425836072341394122828272629601518334401586407651442508
+  (3, 7, 8, 2): -0.853185884156802976292539696803478149990934677414398437
+Regular 10-gon, tilt=0 degrees from vertex-up, s=.95
+  (5, 6, 0, 1): -0.983975699538259970646647473565398209617387368756263132
+  (5, 7, 0, 2): -0.712758344752123373985483966178930113622595761360639583
+  (4, 7, 9, 2): -0.712758344752123373985483966178930113622595761360639583
+  (4, 8, 9, 3): -0.983975699538259970646647473565398209617387368756263132
+All listed edge fractions lie strictly inside (0,1).
+Even regular polygons, N=4,6,8,10,12,16,32: radial multipliers verified.
+Octagon one-sided limiting per-step exponent = -1.76274717403908605046521864995958461805632065652327082
+Odd regular polygons, N=5,7,9,11,15,25,51: all N-3 cycles verified.
+
+phase1_regular.py
+Corner widths, vertex phase 5 degrees (N, angular fraction, frequency length)
+3 1.0 1.0
+4 0.88888888888889 0.87674316656756
+5 0.6 0.59453322145761
+6 0.33333333333333 0.42642356364895
+7 0.42857142857143 0.40188402976126
+8 0.38888888888889 0.34698884875605
+10 0.2 0.22875635625212
+12 0.22222222222222 0.18884042465472
+20 0.088888888888889 0.072192423484301
+N=4m+2, theta=45 degrees, vertex on x-axis
+N, number attracting, strongest per-step factor, weakest, mean log per step
+6 2 0.26794919243112 0.26794919243112 -1.3169578969248
+10 4 0.31084696648949 0.50952544949443 -0.92136501735056
+14 6 0.32200076238253 0.62834164536721 -0.72775533137683
+22 10 0.32877862280095 0.74859062328804 -0.52755168235026
+42 20 0.3320882555316 0.86056958506478 -0.32856205096082
+102 50 0.33312247542433 0.9402223866476 -0.16693244202625
+1002 500 0.33333114882928 0.99374893460061 -0.025832679028672
+General rational grid, vertex phase 5 degrees unless shown
+9 3 3 grid cycles 4 affine census unresolved
+12 4 3 grid cycles 6 affine census unresolved
+15 6 5 grid cycles 4 affine census unresolved
+16 4 4 grid cycles 6 affine census (0, 24, 0)
+15 5 3 grid cycles 8 affine census unresolved
+18 3 6 grid cycles 4 affine census (0, 24, 0)
+24 4 6 grid cycles 6 affine census (0, 36, 0)
+8 4 2 grid cycles 6 affine census (0, 12, 0)
+PDE quasimode, N, correction energy divided by 2pi, relative residual upper bound
+10 0.033996788115955 0.23971463570674
+22 0.0031461073985658 0.047517042442994
+42 0.00044689793355363 0.016298524637674
+102 3.0907579752934e-5 0.0041081463310767
+1002 3.2386598225905e-8 0.00013063775861825
+Half-period open-cell hull in degrees, noncritical angles, vertex phase 5 degrees
+3 hull () total degrees 0.0 isolated event degrees [] unresolved event degrees ['25.0', '35.0', '85.0']
+4 hull ('40.0', '50.0') total degrees 10.0 isolated event degrees [] unresolved event degrees []
+5 hull ('44.496034327575', '49.0') total degrees 4.5039656724255 isolated event degrees [] unresolved event degrees ['13.0', '23.0', '59.0']
+6 hull ('41.390985384984', '55.0') total degrees 13.609014615016 isolated event degrees [] unresolved event degrees ['65.0']
+7 hull ('43.571428571429', '45.193040295358') total degrees 1.621611723929 isolated event degrees [] unresolved event degrees ['33.571428571429', '59.285714285714', '69.285714285714']
+8 hull ('40.0', '50.0') total degrees 10.0 isolated event degrees [] unresolved event degrees ['27.5', '62.5']
+10 hull ('41.0', '46.226384915811') total degrees 5.2263849158115 isolated event degrees [] unresolved event degrees ['31.0']
+12 hull ('40.0', '50.0') total degrees 10.0 isolated event degrees [] unresolved event degrees []
+20 hull ('41.0', '49.0') total degrees 8.0 isolated event degrees [] unresolved event degrees ['40.0', '50.0']
+
+Regular polygon resonance (16, 4, 5)
+period 4 affine census (neutral pieces, interior fixed points, boundary roots) (0, 24, 0)
+grid cycle 1 multiplier 8.257796750796265977223277936534226594723996771521317173
+grid cycle 2 multiplier 0.1647211359881070047736899461208947237944611261835282072
+grid cycle 3 multiplier 8.257796750796265977223277936534226594723996771521317173
+grid cycle 5 multiplier 0.121097676556833884321142226191704421369232023285887442
+grid cycle 6 multiplier 6.070866340262495423807107822037560610493650394673069108
+grid cycle 7 multiplier 0.121097676556833884321142226191704421369232023285887442
+tongue within the noncritical component, degrees (numerical) 21.103309696978 24.526954126521
+tongue width in degrees (numerical) 3.4236444295437
+
+Regular polygon resonance (9, 3, 5)
+period 3 affine census (neutral pieces, interior fixed points, boundary roots) unresolved
+grid cycle 1 multiplier 1.0
+grid cycle 2 multiplier 1.0
+grid cycle 4 multiplier 1.0
+grid cycle 5 multiplier 1.0
+tongue within the noncritical component, degrees (numerical) 30.0 30.800650994012
+tongue width in degrees (numerical) 0.80065099401209
+
+Regular polygon resonance (15, 6, 5)
+period 5 affine census (neutral pieces, interior fixed points, boundary roots) unresolved
+grid cycle 1 multiplier 1.0
+grid cycle 2 multiplier 1.0
+grid cycle 4 multiplier 1.0
+grid cycle 5 multiplier 1.0
+tongue within the noncritical component, degrees (numerical) 36.0 36.165790116149
+tongue width in degrees (numerical) 0.16579011614905
+
+Regular polygon resonance (24, 4, 3)
+period 6 affine census (neutral pieces, interior fixed points, boundary roots) (0, 36, 0)
+grid cycle 1 multiplier 6.51525105285826340769574423026977697072962061285325872
+grid cycle 2 multiplier 0.1410188798799711900126094510473128794440434740238779893
+grid cycle 3 multiplier 6.51525105285826340769574423026977697072962061285325872
+grid cycle 5 multiplier 0.1534860271518311646639196706289637281206981257935065148
+grid cycle 6 multiplier 7.091249064317871383706003096737582101296126316125799488
+grid cycle 7 multiplier 0.1534860271518311646639196706289637281206981257935065148
+tongue within the noncritical component, degrees (numerical) 14.51472954975 15.750636077044
+tongue width in degrees (numerical) 1.2359065272933
+.............................................
+----------------------------------------------------------------------
+Ran 45 tests in 18.451s
+
+OK
+Audit regression suite passed.
+Grid: 120 midpoint angles, degrees (j+1/2)*90/120, candidate q<=12
+N,corner,isolated_low_period,all_periodic_low_period,mixed_or_endpoint,unresolved,critical
+3,120,0,0,0,0,0
+4,106,14,0,0,0,0
+5,72,45,0,0,3,0
+6,40,49,0,0,31,0
+7,52,58,0,0,10,0
+8,46,60,0,0,14,0
+10,24,60,0,0,36,0
+12,26,72,0,0,22,0
+20,10,44,0,0,66,0

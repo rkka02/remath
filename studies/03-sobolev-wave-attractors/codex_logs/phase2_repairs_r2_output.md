@@ -1,0 +1,5 @@
+**CLEAN — READY TO PITCH.** The independent read-only audit closed all eight repair items with **zero open blockers**. A separate Astra session performed the review after the standalone CLI could not initialize in the sandbox. [Verification certificate](/Users/mw/Desktop/math/remath/studies/03-sobolev-wave-attractors/codex_logs/phase2_verify_r2_output.md)
+
+Both requested commands exited **0** under the project’s Miniconda Python. All **45 regression tests** and **eight chapter programs** passed. All nine scan rows matched the published table. Of 1,080 samples, 496 had corner capture, 402 had isolated low-period orbits, and 182 remained unresolved by the finite scan. [Scan transcript](/Users/mw/Desktop/math/remath/studies/03-sobolev-wave-attractors/experiments/data/phase1_results.txt)
+
+The 15-digit tangent now requires an explicit enclosure at 72 digits. The convexity check rejects the notched hexagon’s fictitious orbit, and the octagon bisection resolves the **\(2\times10^{-40}\)-degree** tongue width. [Repair details](/Users/mw/Desktop/math/remath/studies/03-sobolev-wave-attractors/codex_logs/phase2_repairs_r2_output.md)
